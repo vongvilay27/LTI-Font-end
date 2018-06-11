@@ -1,0 +1,39 @@
+
+#pic1{
+    height: 50%;
+    background: url(../../assets/mpic/mdesign1.jpg) no-repeat center center fixed;
+    /*background-color: #ffeb3b;*/
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
+}
+
+#pic2{
+    height: 50%;
+    /*  background: url(../assets/mpic/mdesign2.jpg) no-repeat center center fixed;*/
+    /*background-color: #03a9f4;*/
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
+}
+
+#pic3{
+    height: 50%;
+    background: url(../../assets/mpic/mdesign2.jpg) no-repeat center center fixed;
+    /*background-color: #FF9800;*/
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
+}
+
+
+
+
+
+

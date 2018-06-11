@@ -1,0 +1,14 @@
+.nearbyTitle{
+    top: 5em;
+    width: 100%;
+}
+.nearbyMenu {
+    position: sticky;
+    top: 4.9em;
+    z-index: 1;
+    margin-left: 0.5em;
+}
+
+.tableList {
+    cursor: pointer;
+}

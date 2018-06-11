@@ -1,0 +1,98 @@
+<ng-progress
+        [positionUsing]="'marginLeft'" [minimum]="0.15" [maximum]="1"
+        [speed]="200" [showSpinner]="false" [direction]="'rightToLeftIncreased'"
+        [color]="'red'" [trickleSpeed]="250" [thick]="false" [ease]="'linear'"
+></ng-progress>
+<!--Navbar-->
+<header>
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
+    <div class="btn-group">
+      <button class="navbar-toggler" (click)="opencNav()" type="button">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand pl-2" href="#">LaoTourInfo</a>
+    </div>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['']">ໜ້າຫຼັັກ</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['attractionmain']">ສະຖານທີ່ທ່ອງທ່ຽວ</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['allinfo']">ຂໍ້ມູນທັງໝົດ</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['contact']">ຕິດຕໍ່</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['about']">ກ່ຽວກັບ</a>
+        </li>
+      </ul>
+    </div>
+    <div class="bmd-form-group bmd-collapse-inline">
+      <button class="btn bmd-btn-icon" for="search" data-toggle="collapse" data-target="#collapse-search" aria-expanded="false" aria-controls="collapse-search">
+        <i class="fa fa-search text-white"></i>
+      </button>
+      <span id="collapse-search" class="collapse">
+        <form>
+          <input class="form-control" type="search" id="search" placeholder="ຄົ້ນຫາ">
+        </form>
+      </span>
+      <a [routerLink]="['/search']">Search</a>
+    </div>
+
+  </nav>
+</header>
+<div *ngIf="mySidenav" class="sidenav">
+  <a class="closebtn" (click)="opencNav()">&times;</a>
+  <a routerLink="['home']" (click)="opencNav()">ໜ້າຫຼັັກ</a>
+  <a [routerLink]="['allinfo']" (click)="opencNav()">ສະຖານທີ່ທ່ອງທ່ຽວ</a>
+  <a [routerLink]="['allinfo']" (click)="opencNav()">ຂໍ້ມູນທັງໝົດ</a>
+  <a [routerLink]="['contact']" (click)="opencNav()">ຕິດຕໍ່</a>
+  <a [routerLink]="['about']" (click)="opencNav()">ກ່ຽວກັບ</a>
+</div>
+
+
+  <router-outlet></router-outlet>
+
+
+  <!--Footer-->
+  <footer class="page-footer pt-4 mt-4">
+    <!--Footer Links-->
+    <div class="container-fluid text-center text-md-left">
+      <div class="row">
+
+        <!--First column-->
+        <div class="col-md-6">
+          <h3 class="text-uppercase ml-4"><b>Lao Tour Info</b></h3>
+          <p class="ml-4">ເກີດເປັນຄົນຢ່າ ລອບກັດ ເພາະມັນເປັນນິໄສຂອງສັດ ບໍ່ແມ່ນຂອງຄົນ</p>
+        </div>
+        <!--/.First column-->
+
+        <!--Second column-->
+        <div class="col-md-6">
+          <h5 class="text-uppercase">Links</h5>
+          <div class="list-group">
+            <a [routerLink]="['home']" class="list-group-item">
+              ໜັາຫຼັກ
+            </a>
+            <a [routerLink]="['attractionmain']" class="list-group-item">ສະຖານທີ່ທ່ອງທ່ຽວ</a>
+            <a [routerLink]="['allinfo']" class="list-group-item">ຂໍ້ມູນທັງໝົດ</a>
+            <a [routerLink]="['about']" class="list-group-item">ກ່ຽວກັບ</a>
+            <a [routerLink]="['contact']" class="list-group-item">ຕິດຕໍ່</a>
+          </div>
+        </div>
+        <!--/.Second column-->
+      </div>
+    </div>
+    <!--/.Footer Links-->
+
+    <!--Copyright-->
+    <div class="py-3 text-center">
+      © 2018 Copyright:
+      <a href="#"> MISSION SUCCESS 25-1% </a>
+    </div>
+    <!--/.Copyright-->
+  </footer>

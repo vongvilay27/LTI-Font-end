@@ -1,0 +1,24 @@
+
+<table class="table table-hover tableList">
+  <thead>
+  <th><button class="btn btn-info" data-toggle="collapse" data-target="#collapse-map"><i class="fa fa-map"></i></button></th>
+  </thead>
+  <tr class="collapse" id="collapse-map">
+    <iframe
+            width="600"
+            height="450"
+            frameborder="0" style="border:0"
+            src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBYBMMN0dbUiPgZvbvevJg23HRvTjdjIB0
+    &q=Space+Needle,Seattle+WA" allowfullscreen>
+    </iframe>
+  </tr>
+  <tr class="card" *ngFor="let rest of restaulists">
+    <td (click)="showAttracdetail(rest.id)">
+      <img [src]="rest.img" width="30%" class="rounded float-right" alt="">
+      <h5 class="{{hD}}"><b>{{rest.name}}</b></h5>
+      <p class="card-subtitle">ປະເພດ: <b>{{rest.type}}</b></p>
+      <p class="{{hideText}}">{{rest.story}}</p>
+    </td>
+  </tr>
+
+</table>

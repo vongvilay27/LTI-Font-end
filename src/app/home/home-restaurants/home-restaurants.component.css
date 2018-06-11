@@ -1,0 +1,17 @@
+
+/*View card button*/
+.btncard {
+    position: absolute;
+    bottom: 15%;
+    right: 0;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: #555;
+    color: white;
+    cursor: pointer;
+
+}
+
+.btncard:hover {
+    background-color: black;
+}

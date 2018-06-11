@@ -1,0 +1,75 @@
+/*.navbar .transparent .navbar-inverse .navbar-inner {
+    background-color: rgba(92, 184, 92, 0.8);
+}*/
+.navbar {
+    z-index: 2;
+}
+/*Sidenav bar*/
+.sidenav {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    background-color: #1A237E;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    animation: fade 0.3s;
+}
+
+@keyframes fade {
+    0%,30% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 28px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+    cursor: pointer;
+
+}
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
+
+/*fix carousel on navbar*/
+.carousel-indicators{
+    /*  z-index: -1;*/
+
+}
+
+
+
+
+/*Footer*/
+.page-footer{
+    background-color: #2196F3;
+    color: white;
+}
+
+.list-group .list-group-item{
+    color: white;
+}
+.list-group-item:hover {
+    background-color: #BBDEFB;
+}
+

@@ -1,0 +1,151 @@
+
+<gallery class="gallery-slide img-fluid" [items]="items" [thumb]="false"></gallery>
+<div>
+  <div class="card text-white bg-primary">
+    <div class="card-header mt-3">
+      <h1 class="card-title">ຊື່ຮ້ານອາຫານ</h1>
+      <p class="card-subtitle">ປະເພດ: <b>ຮ້ານອາຫານປະຈຳຊາດ</b></p>
+    </div>
+  </div>
+  <ul class="nav nav-tabs nav-pills nav-justified bg-primary" id="shelterTab" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" id="att-overview" data-toggle="tab" href="#overviewT" role="tab" aria-controls="overviewT" aria-selected="true">Overview</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="shel-room" data-toggle="tab" href="#roomT" role="tab" aria-controls="roomT" aria-selected="false">ຫ້ອງພັກ</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="shel-photo" data-toggle="tab" href="#photoT" role="tab" aria-controls="photoT" aria-selected="false">ຮູບພາບ</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="shel-about" data-toggle="tab" href="#aboutT" role="tab" aria-controls="aboutT" aria-selected="false">ກ່ຽວກັບ</a>
+    </li>
+  </ul>
+  <div class="tab-content" id="shelterContent">
+    <div class="tab-pane fade show active mb-3" id="overviewT" role="tabpanel" aria-labelledby="overviewT">
+      <div class="row d-flex justify-content-center">
+        <button class="col-5 btn btn-primary btn-lg p-3">
+          <i class="fa fa-map-pin"></i> ນຳທາງ
+        </button>
+        <button class="col-5 btn btn-primary btn-lg 9-3" data-toggle="modal" data-target="#sheareModal">
+          <i class="fa fa-share"></i> ແຊ
+        </button>
+      </div>
+      <h5>ສື່ອອນລາຍ</h5>
+      <table class="table table-hover">
+        <tr>
+          <td><i class="fa fa-facebook"></i> </td>
+          <td><a href="#">Facebook.com/ddddd</a></td>
+        </tr>
+        <tr>
+          <td><i class="fa fa-twitter"></i></td>
+          <td><a href="#">twitter.com/dsfjkdjf</a></td>
+        </tr>
+      </table>
+      <h5>ຕິດຕໍ່</h5>
+      <table class="table">
+        <tr>
+          <td><i class="fa fa-phone"></i> </td>
+          <td>020 545458485</td>
+        </tr>
+        <tr>
+          <td><i class="fa fa-file-text"></i></td>
+          <td>adsf@gmail.com</td>
+        </tr>
+      </table>
+      <h5>ທີ່ຢູ່</h5>
+      <table class="table">
+        <tr>
+          <td><i class="fa fa-address-card"></i> ບ້ານ : <b>ມາເສຍໝາ</b></td>
+
+        </tr>
+        <tr>
+          <td><i class="fa fa-map-signs"></i> ເມືອງ : <b>ມາເສຍໝາ</b></td>
+
+        </tr>
+        <tr>
+          <td><i class="fa fa-map-marker"></i> ແຂວງ : <b>ມາເສຍໝາ</b></td>
+
+        </tr>
+      </table>
+      <h5>Map</h5>
+      <iframe class="col-12"
+              width="600"
+              height="450"
+              frameborder="0" style="border:0"
+              src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBYBMMN0dbUiPgZvbvevJg23HRvTjdjIB0
+    &q=Space+Needle,Seattle+WA" allowfullscreen>
+      </iframe>
+    </div>
+    <div class="tab-pane fade mb-3 m-1" id="roomT" role="tabpanel" aria-labelledby="contact-tab">
+      <span class="m-1"></span>
+      <h5><b>ຫ້ອງພັກ</b></h5>
+      <div class="grid mt-3 {{cTainer}}">
+        <table class="table table-hover">
+          <tr class="grid-item col-md-4 col-sm-6"
+              *ngFor="let item of rooms; let i = index"
+              (click)="openMenubox(i)">
+            <td>
+              <img [src]="item.data.src" class="img-fluid m-1 float-right rounded-top" width="30%">
+              <h5 class="{{hD}}"><b>ປະເພດ: <b>ຫ້ອງຕຽງຄູ່</b></b></h5>
+              <p class="{{hP}}">ລາຄາ: <b>50,000 ກີບ</b></p>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+    </div>
+    <div class="tab-pane fade mb-3 m-1" id="photoT" role="tabpanel" aria-labelledby="contact-tab">
+      <span class="m-1"></span>
+      <h5><b>ຮູບພາບ</b></h5>
+      <div class="grid row mt-3">
+        <div class="grid-item col-md-4 col-sm-6"
+             *ngFor="let item of items; let i = index"
+             (click)="openLightbox(i)">
+          <img [src]="item.data.src" class="img-fluid m-1">
+        </div>
+      </div>
+      <span class="m-1"></span>
+      <h5><b>ວີດີໂອ</b></h5>
+      <div class="row">
+        <iframe class="col-12 mt-3" height="540px" src="https://www.youtube.com/embed/IYhMgDA-KGg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div>
+    </div>
+    <div class="tab-pane fade mb-3" id="aboutT" role="tabpanel" aria-labelledby="contact-tab">
+      <span class="m-1"></span>
+      <h5><b>ປະຫວັດຄວາມເປັນມາ</b></h5>
+      <div class="m-1">
+        <p class="col-12">ຕາມຂໍ້ມູນຈາກສື່ທາງການ ໜັງສືພິມປະຊາຊົນ ແລະໜັງສືພິມວຽງຈັນໃໝ່ໂດຍອ້າງອີງຂໍ້ມູນຈາກຄະນະກວດກາສູນກາງພັກໃຫ້ຮູ້ວ່າ: ໃນປີ 2017 ຄະນະກວດກາສູນກາງພັກ ສາມາດກວດເຫັນ ການເອົາທີ່ດິນລັດແລກປ່ຽນ ແລະຊຳລະ ໂຄງການພື້ນຖານໂຄງລ່າງໂດຍບໍ່ມີການປະເມີນລາຄາເຮັດໃຫ້ລັດເສຍຫາຍ ຈຳນວນ 266 ຕື້ກີບ.</p>
+      </div>
+      <span class="m-1"></span>
+      <h5><b>ກົດລະບຽບ</b></h5>
+      <div class="m-1 row">
+        <p class="col-12">ຕາມຂໍ້ມູນຈາກສື່ທາງການ ໜັງສືພິມປະຊາຊົນ ແລະໜັງສືພິມວຽງຈັນໃໝ່ໂດຍອ້າງອີງຂໍ້ມູນຈາກຄະນະກວດກາສູນກາງພັກໃຫ້ຮູ້ວ່າ: ໃນປີ 2017 ຄະນະກວດກາສູນກາງພັກ ສາມາດກວດເຫັນ ການເອົາທີ່ດິນລັດແລກປ່ຽນ ແລະຊຳລະ ໂຄງການພື້ນຖານໂຄງລ່າງໂດຍບໍ່ມີການປະເມີນລາຄາເຮັດໃຫ້ລັດເສຍຫາຍ ຈຳນວນ 266 ຕື້ກີບ.</p>
+      </div>
+    </div>
+  </div>
+
+
+  <!--Sheare Social Modal-->
+  <div class="modal fade" id="sheareModal" tabindex="-1" role="dialog" aria-labelledby="sheareModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="sheareModalLabel">ແຊອອນລາຍ</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body d-flex justify-content-center">
+          <a href="http://www.facebook.com" class="btn bmd-btn-fab fa fa-facebook fa-facebookc faShares" target="_blank"></a>
+          <a href="#" class="btn bmd-btn-fab fa fa-twitter fa-twitterc faShares" target="_blank"></a>
+          <a href="#" class="btn bmd-btn-fab fa fa-youtube fa-youtubec faShares" target="_blank"></a>
+          <a href="#" class="btn bmd-btn-fab fa fa-instagram fa-instagramc faShares" target="_blank"></a>
+          <a href="#" class="btn bmd-btn-fab fa fa-google fa-googlec faShares" target="_blank"></a>
+          <a href="#" class="btn bmd-btn-fab fa fa-skype fa-skypec faShares" target="_blank"></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

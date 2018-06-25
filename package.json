@@ -24,6 +24,7 @@
     "@ngx-gallery/core": "^2.1.1",
     "@ngx-gallery/gallerize": "^2.1.1",
     "@ngx-gallery/lightbox": "^2.1.1",
+    "bcryptjs": "^2.4.3",
     "bootstrap-material-design": "^4.1.1",
     "core-js": "^2.5.4",
     "flickity": "^2.1.1",

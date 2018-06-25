@@ -2,17 +2,24 @@
   <div class="row nearbyMenu">
     <div class="dropdown">
       <button class="btn btn-raised btn-success dropdown-toggle" type="button" id="ex1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Ntype
+        ຄົ້ນຫາທັງໝົດ
       </button>
       <div class="dropdown-menu dropdown-menu-left" aria-labelledby="ex1">
-        <button class="dropdown-item" type="button">Action</button>
-        <button class="dropdown-item disabled" type="button">Another action</button>
-        <button class="dropdown-item" type="button">Another action</button>
+        <div class=" dropdown-item btn-group-toggle" data-toggle="buttons">
+          <label class="btn">
+            <input type="checkbox" checked autocomplete="off"> ຄົ້ນຫາແບບ Global
+          </label>
+        </div>
+        <div class="dropdown-divider"></div>
+        <button class="dropdown-item" type="button">ສະຖານທີ່ທ່ອງທ່ຽວ</button>
+        <button class="dropdown-item" type="button">ຮ້ານອາຫານ</button>
+        <button class="dropdown-item" type="button">ທີ່ພັກແຮມ</button>
+        <button class="dropdown-item" type="button">ສະຖານີຂົນສົ່ງໂດຍສານ</button>
       </div>
     </div>
   </div>
   <div class="nearbyTitle ml-2 alert alert-light" role="alert">
-    <h5 class="mt-2">ຄົ້ນຫາ : <b>ສະຸຖານທາຫກ່ດາສ່ຫກາສດ່ຫກສາດ່ສຫາກ່ດສາຫກ່ດສຫກ່ດສາຫກ່ີ່ໃກ້ຄຽງ</b></h5>
+    <h5 class="mt-2">ຄົ້ນຫາ : <b>ທຳມະຊາດ</b></h5>
   </div>
   <span class="m-1"></span>
 
@@ -34,17 +41,18 @@
         </tr>
         <tr class="card">
           <td (click)="alertz()">
-            <img src="assets/1240x720.png" width="30%" class="rounded float-right" alt="">
-            <h5 class="{{hD}}"><b>ຊື່ສະຖານທີ່ທ່ອງທ່ຽວ</b></h5>
-            <p class="card-subtitle">ປະເພດ: <b>ສະຖານທີ່ທ່ອງທ່ຽວວັດທະນະທຳ</b></p>
+            <img src="assets/ສະຖານທີ່ທ່ອງທ່ຽວຕາດກວາງຊີ.jpg" width="30%" class="rounded float-right" alt="">
+            <h5 class="{{hD}}"><b>ສະຖານທີ່ທ່ອງທ່ຽວຕາດກວາງຊີ</b></h5>
+            <p class="card-subtitle">ປະເພດ: <b>ສະຖານທີ່ທ່ອງທ່ຽວທາງທຳມະຊາດ</b></p>
+            <p class="{{hideText}}" data-toggle="collapse" aria-expanded="true">ນ້ຳຕົກຕາດກວາງຊີ ເປັນນ້ຳຕົກຫີນປູນຂະໜາດໃຫຍ່ສູງປະມານ 7 0 ແມັດ ມີສາຍນ້ຳໄຫລອາບມາຕາມໜ້າຜາຜ່ານໂຂດຫີນນ້ອຍໃຫຍ່</p>
           </td>
         </tr>
         <tr class="card">
-          <td>
-            <img src="assets/1240x720.png" width="30%" class="rounded float-right" alt="">
-            <h5>Name</h5>
-            <p>sdkfsdjfksjdflsjdflsldk</p>
-            <p class="{{hideText}}" data-toggle="collapse" aria-expanded="true">sdfsdfsdfsdfsdfsdfsdfsdfsdfssdfsdfsdfsdfsdfsdfsdfsdfsdfsddf</p>
+          <td (click)="alertz()">
+            <img src="assets/ສະຖານທີ່ທ່ອງທ່ຽວນ້ຳກັດຢໍລະປາ.jpg" width="30%" class="rounded float-right" alt="">
+            <h5 class="{{hD}}"><b>ສະຖານທີ່ທ່ອງທ່ຽວນ້ຳກັດຢໍລະປາ</b></h5>
+            <p class="card-subtitle">ປະເພດ: <b>ສະຖານທີ່ທ່ອງທ່ຽວທາງທຳມະຊາດ</b></p>
+            <p class="{{hideText}}" data-toggle="collapse" aria-expanded="true">ສະຖານທີ່ທ່ອງທ່ຽວນ້ຳກັດຢໍລະປາເປັນນ້ຳຕົກມີສາຍນ້ຳໄຫລອາບມາຕາມໜ້າຜາຜ່ານໂຂດຫີນນ້ອຍໃຫຍ່</p>
           </td>
         </tr>
       </table>

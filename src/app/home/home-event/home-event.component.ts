@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home-event.component.css']
 })
 export class HomeEventComponent implements OnInit {
+  public innerWidth: any;
+  public hideText: string;
   constructor() { }
 
   ngOnInit() {
-
+    this.innerWidth = window.innerWidth;
+    if (this.innerWidth <= 560) {
+      this.hideText = 'text-hide';
+    }
   }
 
 }

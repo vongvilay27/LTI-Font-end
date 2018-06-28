@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   ANONYMOUS_SECRET: 'laotourapi@nuol.fns.edu.la',
-  SERVER_ADDRESS: 'http://localhost:3000'
+  SERVER_ADDRESS: 'http://localhost:3000',
+  API_ADDRESS: 'https://api.wunderground.com//api/b7e4ea3b9ecdbe54'
 };
 
 /*

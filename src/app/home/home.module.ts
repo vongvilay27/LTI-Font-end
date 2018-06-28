@@ -10,6 +10,7 @@ import { HomeSheltersComponent } from './home-shelters/home-shelters.component';
 import { HomeCompaniesComponent } from './home-companies/home-companies.component';
 import { HomeAdditionalComponent } from './home-additional/home-additional.component';
 import {RouterModule} from '@angular/router';
+import { HomeTransportationsComponent } from './home-transportations/home-transportations.component';
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import {RouterModule} from '@angular/router';
       HomeRestaurantsComponent,
       HomeSheltersComponent,
       HomeCompaniesComponent,
-      HomeAdditionalComponent
+      HomeAdditionalComponent,
+      HomeTransportationsComponent
   ],
     exports: []
 })

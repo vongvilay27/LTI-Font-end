@@ -4,6 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import {HomeModule} from './home/home.module';
 
 import { NgProgressModule } from 'ngx-progressbar';
+import { AgmCoreModule } from '@agm/core';
 //Components
 import { AppComponent } from './app.component';
 
@@ -27,6 +28,7 @@ import {SearchComponent} from './search/search.component';
     BrowserAnimationsModule,
     AppRoutingModule,
     HomeModule,
+
   ],
   providers: [
       {provide: APP_BASE_HREF, useValue: '/'}

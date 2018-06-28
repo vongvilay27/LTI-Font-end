@@ -32,6 +32,16 @@
 
 }
 
+#pic4{
+    height: 50%;
+    background: url(../../assets/mpic/mdsign4.png) no-repeat center center fixed;
+    /*background-color: #FF9800;*/
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
+}
 
 
 

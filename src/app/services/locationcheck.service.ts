@@ -7,8 +7,22 @@ import 'rxjs/add/observable/throw';
 @Injectable({
   providedIn: 'root'
 })
-export class LocationcheckService {
+export class LocationcheckService  {
+  server: string;
+  query: string;
 
-  constructor(private http: Http) { }
+  constructor(public httpService: Http) {
+    this.server = 'https://api.wunderground.com';
+  }
 
+  getLocaWeater(lat: number, long: number) {
+    this.query = '/api/b7e4ea3b9ecdbe54/conditions/q/' + lat + ',' + long + '.json';
+    return this.httpService.get(this.server + this.query)
+      .map((res) => {
+        return res.json();
+      })
+      .catch((error) => {
+        return Observable.throw(error.json() || 'Server error');
+      });
+  }
 }

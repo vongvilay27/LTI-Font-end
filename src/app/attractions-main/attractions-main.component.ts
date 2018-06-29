@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import {NgProgress} from 'ngx-progressbar';
 @Component({
   selector: 'app-attractions-main',
   templateUrl: './attractions-main.component.html',
@@ -8,12 +8,19 @@ import { Component, OnInit } from '@angular/core';
 export class AttractionsMainComponent implements OnInit {
     public hTc = 'h4'
     public innerWidth: any;
-    constructor() { }
+    constructor(private ngProgress: NgProgress) { }
 
     ngOnInit() {
+        this.ngProgress.start();
+
         this.innerWidth = window.innerWidth;
         if (this.innerWidth <= 560) {
             this.hTc = 'h5';
         }
+
+
+
+
+        this.ngProgress.done();
     }
 }

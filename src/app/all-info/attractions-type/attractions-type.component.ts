@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,8 +7,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./attractions-type.component.css']
 })
 export class AttractionsTypeComponent implements OnInit {
-    public hTc = 'h4'
-    public innerWidth: any;
+
+  @Input() types: Array<Object>;
+  public hTc = 'h4';
+  public innerWidth: any;
   constructor(private route: Router) { }
 
   ngOnInit() {

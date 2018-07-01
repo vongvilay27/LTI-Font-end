@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-restaurants-type',
@@ -6,7 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./restaurants-type.component.css']
 })
 export class RestaurantsTypeComponent implements OnInit {
-    public hTc = 'h4'
+
+    @Input() types: Array<Object>;
+
+    public hTc = 'h4';
     public innerWidth: any;
     constructor() { }
 

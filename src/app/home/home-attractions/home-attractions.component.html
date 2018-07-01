@@ -5,61 +5,61 @@
   </div>
 
   <div class="container">
-    <div class="row mb-5">
+    <div class="row mb-5" *ngIf="attractionses.length">
 
-      <div class="col-lg-6">
+      <div class="col-lg-6" *ngIf="attractionses[0]">
         <div class="card mb-3">
-          <img class="card-img-top" src="../assets/ສະຖານທີ່ທ່ອງທ່ຽວວັດພູຈຳປາສັກ.jpg"alt="Card image cap">
+          <img class="card-img-top" [src]="attractionses[0]['images'][0]" alt="Card image cap">
           <div class="card-body">
-            <h5 class="card-title">ວັດພູຈຳປາສັກ</h5>
-            <p class="card-text">ເປັນສະຖາປັດຕະຍະກຳພິເສດແຫ່ງໜື່ງ ທີ່ມີຄວາມເກົ່າແກ່ ຊຶ່ງເປັນອາຄານກົກເຄົ້າ ສ້າງຂຶ້ນໃນສັດຕະວັດທີ 6, ຈາກນັ້ນກໍ່ມີ ການຕໍ່ເຕີມຕາມຍຸກສະໄໝຕໍ່ມາ ຈົນມາເຖິງສັດຕະວັດທີ 15</p>
-            <p class="card-text"><small class="text-muted">ປະເພດ: ສະຖານທີ່ທ່ທ່ອງທ່ຽວວັດທະນະທຳ</small></p>
-            <button [routerLink]="['/attraction/detail','id:???']" class="btn btn-raised btn-primary float-right bg-success text-white">ອ່ານເພີ່ມ</button>
+            <h5 class="card-title">{{attractionses[0]['name']}}</h5>
+            <p class="card-text">{{attractionses[0]['details']}}</p>
+            <p class="card-text"><small class="text-muted">{{attractionses[0]['attractions_type']['name']}}</small></p>
+            <button [routerLink]="['/attraction','detail',attractionses[0]['_id']]" class="btn btn-raised btn-primary float-right bg-success text-white">ອ່ານເພີ່ມ</button>
           </div>
         </div>
       </div>
       <div class="col-lg-6">
         <div class="row">
-          <div class="col-lg-6 col-md-6">
+          <div class="col-lg-6 col-md-6" *ngIf="attractionses[1]">
             <div class="card mb-3">
-              <img class="card-img-top" src="../assets/ສະຖານທີ່ທ່ອງທ່ຽວຕາດກວາງຊີ.jpg" alt="Card image cap">
+              <img class="card-img-top" [src]="attractionses[1]['images'][0]" alt="Card image cap">
               <div class="card-body">
-                <h5 class="card-title">ຕາດກວາງຊີ</h5>
-                <p class="card-text"><small class="text-muted">ປະເພດ: ສະຖານທີ່ທ່ທ່ອງທ່ຽວທຳມະຊາດ</small></p>
+                <h5 class="card-title">{{attractionses[1]['name']}}</h5>
+                <p class="card-text"><small class="text-muted">{{attractionses[1]['attractions_type']['name']}}</small></p>
               </div>
-              <button class="btn bmd-btn-fab btncard bg-success" [routerLink]="['/attraction/detail','id:???']"><i class="fa  fa-chevron-right"></i></button>
+              <button class="btn bmd-btn-fab btncard bg-success" [routerLink]="['/attraction','detail',attractionses[1]['_id']]"><i class="fa  fa-chevron-right"></i></button>
             </div>
           </div>
-          <div class="col-lg-6 col-md-6">
+          <div class="col-lg-6 col-md-6" *ngIf="attractionses[2]">
             <div class="card mb-3">
-              <img class="card-img-top" src="../assets/ສະຖານທີ່ທ່ອງທ່ຽວທົ່ງໄຫຫີນຊຽງຂວາງ.jpg" alt="Card image cap">
+              <img class="card-img-top" [src]="attractionses[2]['images'][0]" alt="Card image cap">
               <div class="card-body">
-                <h5 class="card-title">ທົ່ງໄຫຫີນຊຽງຂວາງ</h5>
-                <p class="card-text"><small class="text-muted">ປະເພດ: ສະຖານທີ່ທ່ທ່ອງທ່ຽວທຳມະຊາດ</small></p>
+                <h5 class="card-title">{{attractionses[2]['name']}}</h5>
+                <p class="card-text"><small class="text-muted">{{attractionses[2]['attractions_type']['name']}}</small></p>
               </div>
-              <button class="btn bmd-btn-fab btncard bg-success"><i class="fa  fa-chevron-right"></i></button>
+              <button class="btn bmd-btn-fab btncard bg-success" [routerLink]="['/attraction','detail',attractionses[2]['_id']]"><i class="fa  fa-chevron-right"></i></button>
             </div>
           </div>
         </div>
         <div class="row">
-          <div class="col-lg-6 col-md-6">
+          <div class="col-lg-6 col-md-6" *ngIf="attractionses[3]">
             <div class="card mb-3">
-              <img class="card-img-top" src="../assets/ສະຖານທີ່ທ່ອງທ່ຽວນ້ຳກັດຢໍລະປາ.jpg" alt="Card image cap">
+              <img class="card-img-top" [src]="attractionses[3]['images'][0]" alt="Card image cap">
               <div class="card-body">
-                <h5 class="card-title">ນ້ຳກັດຢໍລະປາ</h5>
-                <p class="card-text"><small class="text-muted">ປະເພດ: ສະຖານທີ່ທ່ທ່ອງທ່ຽວທຳມະຊາດ</small></p>
+                <h5 class="card-title">{{attractionses[3]['name']}}</h5>
+                <p class="card-text"><small class="text-muted">{{attractionses[3]['attractions_type']['name']}}</small></p>
               </div>
-              <button class="btn bmd-btn-fab btncard bg-success"><i class="fa  fa-chevron-right"></i></button>
+              <button class="btn bmd-btn-fab btncard bg-success" [routerLink]="['/attraction','detail',attractionses[3]['_id']]"><i class="fa  fa-chevron-right"></i></button>
             </div>
           </div>
-          <div class="col-lg-6 col-md-6">
+          <div class="col-lg-6 col-md-6" *ngIf="attractionses[4]">
             <div class="card mb-3">
-              <img class="card-img-top" src="../assets/ສະຖານທີ່ທ່ອງທ່ຽວວັດພູຈຳປາສັກ.jpg" alt="Card image cap">
+              <img class="card-img-top" [src]="attractionses[4]['images'][0]" alt="Card image cap">
               <div class="card-body">
-                <h5 class="card-title">ວັດພູຈຳປາສັກ</h5>
-                <p class="card-text"><small class="text-muted">ປະເພດ: ສະຖານທີ່ທ່ທ່ອງທ່ຽວວັດທະນະທຳ</small></p>
+                <h5 class="card-title">{{attractionses[4]['name']}}</h5>
+                <p class="card-text"><small class="text-muted">{{attractionses[4]['attractions_type']['name']}}</small></p>
               </div>
-              <button class="btn bmd-btn-fab btncard bg-success"><i class="fa  fa-chevron-right"></i></button>
+              <button class="btn bmd-btn-fab btncard bg-success" [routerLink]="['/attraction','detail',attractionses[3]['_id']]"><i class="fa  fa-chevron-right"></i></button>
             </div>
           </div>
         </div>

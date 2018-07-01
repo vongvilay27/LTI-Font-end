@@ -19,7 +19,7 @@ const routes: Routes = [{
         component: RestaurantsDetailComponent
     },
         {
-            path: ':typeid',
+            path: 'type/:typeid',
             component: RestaurantsListComponent
         }
     ]

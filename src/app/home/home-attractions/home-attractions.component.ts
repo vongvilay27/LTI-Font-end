@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-home-attractions',
@@ -7,7 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeAttractionsComponent implements OnInit {
 
-  constructor() { }
+  @Input() attractionses: Array<Object>;
+
+  constructor() {
+  }
 
   ngOnInit() {
   }

@@ -6,7 +6,6 @@ import { SheltersDetailComponent } from './shelters-detail/shelters-detail.compo
 
 import {ShelterRoutingModule} from './shelter-routing.module';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GalleryModule } from '@ngx-gallery/core';
 import { LightboxModule } from '@ngx-gallery/lightbox';
 import { GallerizeModule } from '@ngx-gallery/gallerize';

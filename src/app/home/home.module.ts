@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-//Components
+// Components
 import { HomeComponent } from './home.component';
 import { HomeEventComponent } from './home-event/home-event.component';
 import { HomeAttractionsComponent } from './home-attractions/home-attractions.component';
@@ -11,11 +11,14 @@ import { HomeCompaniesComponent } from './home-companies/home-companies.componen
 import { HomeAdditionalComponent } from './home-additional/home-additional.component';
 import {RouterModule} from '@angular/router';
 import { HomeTransportationsComponent } from './home-transportations/home-transportations.component';
+import { MainService } from '../services/main.service';
+import { HttpModule } from '@angular/http';
 
 @NgModule({
   imports: [
     CommonModule,
-      RouterModule
+    HttpModule,
+    RouterModule
   ],
   declarations: [
       HomeComponent,
@@ -27,6 +30,7 @@ import { HomeTransportationsComponent } from './home-transportations/home-transp
       HomeAdditionalComponent,
       HomeTransportationsComponent
   ],
-    exports: []
+  exports: [],
+  providers: [ MainService ]
 })
 export class HomeModule { }

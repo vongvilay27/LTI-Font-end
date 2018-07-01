@@ -1,5 +1,7 @@
+import { TypeService } from './../services/type.service';
 import { Component, OnInit } from '@angular/core';
 import { NgProgress } from 'ngx-progressbar';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-all-info',
   templateUrl: './all-info.component.html',
@@ -7,17 +9,23 @@ import { NgProgress } from 'ngx-progressbar';
 })
 export class AllInfoComponent implements OnInit {
 
-  constructor(public ngProgress: NgProgress) { }
+  types: Object = {};
+  constructor(
+    public ngProgress: NgProgress,
+    private typeService: TypeService
+  ) { }
 
   ngOnInit() {
-      /*Progressstatus*/
-      /** request started */
       this.ngProgress.start();
-      /*        this.http.get(url).subscribe(res){
-                  /!** request completed *!/
-                  this.ngProgress.done();
-              }*/
-      this.ngProgress.done();
+      const subscription: Subscription = this.typeService.getTypes().subscribe((res) => {
+        this.types = res.json()['data'];
+        console.log(this.types);
+        this.ngProgress.done();
+        subscription.unsubscribe();
+      }, (error) => {
+        this.ngProgress.done();
+        subscription.unsubscribe();
+      });
   }
 
 }

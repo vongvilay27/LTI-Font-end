@@ -6,7 +6,6 @@ import { RestaurantsDetailComponent } from './restaurants-detail/restaurants-det
 
 import {RestaurantsRoutingModule} from './restaurants-routing.module';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GalleryModule } from '@ngx-gallery/core';
 import { LightboxModule } from '@ngx-gallery/lightbox';
 import { GallerizeModule } from '@ngx-gallery/gallerize';

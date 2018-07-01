@@ -6,7 +6,6 @@ import { AttractionsDetailComponent } from './attractions-detail/attractions-det
 
 import {AttractionsRoutingModule} from './attractions-routing.module';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GalleryModule } from '@ngx-gallery/core';
 import { LightboxModule } from '@ngx-gallery/lightbox';
 import { GallerizeModule } from '@ngx-gallery/gallerize';

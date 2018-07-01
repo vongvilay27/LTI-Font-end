@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-home-event',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home-event.component.css']
 })
 export class HomeEventComponent implements OnInit {
+
+  @Input() attractionses: Array<Object>;
   public innerWidth: any;
   public hideText: string;
   constructor() { }
@@ -15,6 +17,13 @@ export class HomeEventComponent implements OnInit {
     if (this.innerWidth <= 560) {
       this.hideText = 'text-hide';
     }
+  }
+
+  getImage(imageUrl) {
+    if (navigator.onLine) {
+      return imageUrl;
+    }
+    return 'assets/ic_image.png';
   }
 
 }

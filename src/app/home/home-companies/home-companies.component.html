@@ -6,34 +6,13 @@
 <div class="container mb-5">
   <div class="row d-flex justify-content-center">
 
-      <div class="card companyCard">
-        <img class="card-img-top" src="../assets/1280x720.jpg" alt="Card image cap">
+      <div class="card companyCard" *ngFor="let company of companies">
+        <img class="card-img-top" [src]="company['images'][0]" alt="Card image cap">
         <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <a href="#" class="btn btn-primary float-right bg-warning text-white" [routerLink]="['/company/detail','id:ddfs']">ອ່ານເພີ່ມ</a>
+          <h5 class="card-title">{{company['name']}}</h5>
+          <a class="btn btn-primary float-right bg-warning text-white" [routerLink]="['/company/detail',company['_id']]">ລາຍລະອຽດ</a>
         </div>
       </div>
-
-
-      <div class="card companyCard">
-        <img class="card-img-top" src="../assets/1280x720.jpg" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <a href="#" class="btn btn-primary float-right bg-warning text-white" [routerLink]="['/company/detail','id:ddfs']">ອ່ານເພີ່ມ</a>
-        </div>
-      </div>
-
-
-      <div class="card companyCard">
-        <img class="card-img-top" src="../assets/1280x720.jpg" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <a href="#" class="btn btn-primary float-right bg-warning text-white" [routerLink]="['/company/detail','id:ddfs']">ອ່ານເພີ່ມ</a>
-        </div>
-      </div>
-
-
-
 
   </div>
   <div class="row d-flex justify-content-end">

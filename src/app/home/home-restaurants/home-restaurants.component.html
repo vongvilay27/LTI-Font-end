@@ -8,46 +8,46 @@
 
       <div class="col-lg-6">
         <div class="row">
-          <div class="col-lg-6 col-md-6">
+          <div class="col-lg-6 col-md-6" *ngIf="restaurants[4]">
             <div class="card mb-3">
-              <img class="card-img-top" src="../assets/ຮ້ານອາຫານຂອບໃຈເດີ.jpg" alt="Card image cap">
+              <img class="card-img-top" [src]="restaurants[4]['images'][0]" alt="Card image cap">
               <div class="card-body">
-                <h5 class="card-title">ຮ້ານອາຫານຂອບໃຈເດີ</h5>
-                <p class="card-text"><small class="text-muted">ປະເພດ: ຮ້ານອາຫານຕາມສັ່ງ</small></p>
+                <h5 class="card-title">{{restaurants[4]['name']}}</h5>
+                <p class="card-text"><small class="text-muted">{{restaurants[4]['restaurant_type']['name']}}</small></p>
               </div>
-              <button class="btn bmd-btn-fab btncard bg-danger" [routerLink]="['/restaurant/detail','id:???']"><i class="fa  fa-chevron-right"></i></button>
+              <button class="btn bmd-btn-fab btncard bg-danger" [routerLink]="['/restaurant','detail',restaurants[4]['_id']]"><i class="fa  fa-chevron-right"></i></button>
             </div>
           </div>
-          <div class="col-lg-6 col-md-6">
+          <div class="col-lg-6 col-md-6" *ngIf="restaurants[3]">
             <div class="card mb-3">
-              <img class="card-img-top" src="../assets/ຮ້ານອາຫານຄົວລາວ.jpg" alt="Card image cap">
+              <img class="card-img-top" [src]="restaurants[3]['images'][0]" alt="Card image cap">
               <div class="card-body">
-                <h5 class="card-title">ຮ້ານອາຫານຄົວລາວ</h5>
-                <p class="card-text"><small class="text-muted">ປະເພດ: ຮ້ານອາຫານລາວ</small></p>
+                <h5 class="card-title">{{restaurants[3]['name']}}</h5>
+                <p class="card-text"><small class="text-muted">{{restaurants[3]['restaurant_type']['name']}}</small></p>
               </div>
-              <button class="btn bmd-btn-fab btncard bg-danger" [routerLink]="['/restaurant/detail','id:???']"><i class="fa  fa-chevron-right"></i></button>
+              <button class="btn bmd-btn-fab btncard bg-danger" [routerLink]="['/restaurant','detail',restaurants[3]['_id']]"><i class="fa  fa-chevron-right"></i></button>
             </div>
           </div>
         </div>
         <div class="row">
-          <div class="col-lg-6 col-md-6">
+          <div class="col-lg-6 col-md-6" *ngIf="restaurants[2]">
             <div class="card mb-3">
-              <img class="card-img-top" src="../assets/ຮ້ານອາຫານຊ້າງຄູ່.JPG" alt="Card image cap">
+              <img class="card-img-top" [src]="restaurants[2]['images'][0]" alt="Card image cap">
               <div class="card-body">
-                <h5 class="card-title">ຮ້ານອາຫານຊ້າງຄູ່</h5>
-                <p class="card-text"><small class="text-muted">ປະເພດ: ຮ້ານອາຫານຕ່າງປະເທດ</small></p>
+                <h5 class="card-title">{{restaurants[2]['name']}}</h5>
+                <p class="card-text"><small class="text-muted">{{restaurants[2]['restaurant_type']['name']}}</small></p>
               </div>
-              <button class="btn bmd-btn-fab btncard bg-danger" [routerLink]="['/restaurant/detail','id:???']"><i class="fa  fa-chevron-right"></i></button>
+              <button class="btn bmd-btn-fab btncard bg-danger" [routerLink]="['/restaurant','detail',restaurants[2]['_id']]"><i class="fa  fa-chevron-right"></i></button>
             </div>
           </div>
-          <div class="col-lg-6 col-md-6">
+          <div class="col-lg-6 col-md-6" *ngIf="restaurants[1]">
             <div class="card mb-3">
-              <img class="card-img-top" src="../assets/ຮ້ານອາຫານອຳພອນ.jpg" alt="Card image cap">
+              <img class="card-img-top" [src]="restaurants[1]['images'][0]" alt="Card image cap">
               <div class="card-body">
-                <h5 class="card-title">ຮ້ານອາຫານອຳພອນ</h5>
-                <p class="card-text"><small class="text-muted">ປະເພດ: ຮ້ານອາຫານຄອບຄົວ</small></p>
+                <h5 class="card-title">{{restaurants[1]['name']}}</h5>
+                <p class="card-text"><small class="text-muted">{{restaurants[1]['restaurant_type']['name']}}</small></p>
               </div>
-              <button class="btn bmd-btn-fab btncard bg-danger" [routerLink]="['/restaurant/detail','id:???']"><i class="fa  fa-chevron-right"></i></button>
+              <button class="btn bmd-btn-fab btncard bg-danger" [routerLink]="['/restaurant','detail',restaurants[1]['_id']]"><i class="fa  fa-chevron-right"></i></button>
 
             </div>
           </div>
@@ -55,14 +55,14 @@
         </div>
       </div>
 
-      <div class="col-lg-6">
+      <div class="col-lg-6" *ngIf="restaurants[0]">
         <div class="card mb-3">
-          <img class="card-img-top" src="../assets/ຮ້ານອາຫານລາວເດີມ.jpg"alt="Card image cap">
+          <img class="card-img-top" [src]="restaurants[0]['images'][0]" alt="Card image cap">
           <div class="card-body">
-            <h5 class="card-title">ຮ້ານອາຫານລາວເດີມ</h5>
-            <p class="card-text">ຮ້ານອາຫານອີກແຫ່ງໜຶ່ງ ທີ່ຢູ່ໃຈກາງເມືອງ ເຖິງບໍ່ແມ່ນຮ້ານອາຫານເປີດໃໝ່ ແຕ່ກໍຢາກໃຫ້ຊອກຫາໂອກາດໄປລອງຊີມ. ເພາະມີອາຫານລາວໄວ້ຄອຍເອົາໃຈທຸກທ່ານ ຮ້ານນີ້ມີຊື່ວ່າ: “ຮ້ານອາຫານລາວເດີມ”</p>
-            <p class="card-text"><small class="text-muted">ປະເພດ: ຮ້ານອາຫານປະຈຳຊາດ</small></p>
-            <button class="btn btn-raised bg-danger float-right text-white" [routerLink]="['/restaurant/detail','id:???']">ອ່ານເພີ່ມ</button>
+            <h5 class="card-title">{{restaurants[0]['name']}}</h5>
+            <p class="card-text">{{restaurants[0]['detail']}}</p>
+            <p class="card-text"><small class="text-muted">{{restaurants[0]['restaurant_type']['name']}}</small></p>
+            <button class="btn btn-raised bg-danger float-right text-white" [routerLink]="['/restaurant/detail',restaurants[0]['_id']]">ລາຍລະອຽດ</button>
           </div>
         </div>
       </div>

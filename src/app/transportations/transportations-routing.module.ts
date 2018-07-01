@@ -12,15 +12,15 @@ import {TransportationsDetailComponent} from './transportations-detail/transport
 const routes: Routes = [{
     path: '',
     component: TransportationsComponent,
-    children: [{
-        path: '',
-        component: TransportationsListComponent
-    }, {
-        path: 'detail/:id',
-        component: TransportationsDetailComponent
-    },
+    children: [
         {
-            path: ':typeid',
+            path: '',
+            component: TransportationsListComponent
+        }, {
+            path: 'detail/:id',
+            component: TransportationsDetailComponent
+        }, {
+            path: 'type/:typeid',
             component: TransportationsListComponent
         }
     ]

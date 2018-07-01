@@ -18,7 +18,7 @@ const routes: Routes = [{
             component : AttractionsDetailComponent
         },
         {
-            path: ':typeid',
+            path: 'type/:typeid',
             component : AttractionsListComponent
         }
     ]

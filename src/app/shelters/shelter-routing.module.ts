@@ -17,7 +17,7 @@ const routes: Routes = [{
         component: SheltersDetailComponent
     },
         {
-            path: ':typeid',
+            path: 'type/:typeid',
             component: SheltersListComponent
         },
     ]

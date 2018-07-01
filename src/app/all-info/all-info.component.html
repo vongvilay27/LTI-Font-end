@@ -1,14 +1,12 @@
-<div class="mt-5">
-  <app-attractions-type></app-attractions-type>
+<div class="mt-5" *ngIf="types['attractions_types']">
+  <app-attractions-type [types]="types['attractions_types']"></app-attractions-type>
 
-  <app-restaurants-type></app-restaurants-type>
+  <app-restaurants-type [types]="types['restaurant_types']"></app-restaurants-type>
 
 
-  <app-shelters-type></app-shelters-type>
+  <app-shelters-type [types]="types['shelter_types']"></app-shelters-type>
 
-  <app-transportations-type></app-transportations-type>
-
-  <app-companies-type></app-companies-type>
+  <app-transportations-type [types]="types['transportation_types']"></app-transportations-type>
 
   <app-otherplace-type></app-otherplace-type>
 </div>

@@ -15,10 +15,10 @@ const Companies_component = [
 @NgModule({
   imports: [
     CommonModule,
-      CompaniesRoutingModule,
-      GalleryModule.forRoot(),
-      LightboxModule.forRoot(),
-      GallerizeModule
+    CompaniesRoutingModule,
+    GalleryModule.forRoot(),
+    LightboxModule.forRoot(),
+    GallerizeModule
   ],
   declarations: [
       ...Companies_component

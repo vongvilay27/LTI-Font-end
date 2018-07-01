@@ -37,12 +37,12 @@ export class SearchComponent implements OnInit {
           this.lng = lng;
           console.log(lat,lng);
 
-          this.LocaService.getLocaWeater(this.lat, this.lng).subscribe(res => {
-            this.locaData = res.current_observation;
-            console.log(this.locaData);
-          }, error => {
-            console.log(error);
-          });
+          // this.LocaService.getLocaWeater(this.lat, this.lng).subscribe(res => {
+          //   this.locaData = res.current_observation;
+          //   console.log(this.locaData);
+          // }, error => {
+          //   console.log(error);
+          // });
 /*          this.http.get(`https://api.wunderground.com/api/b7e4ea3b9ecdbe54/conditions/q/${this.lat},${this.lng}.json`)
             .subscribe((res:any)=>{
             console.log(res)

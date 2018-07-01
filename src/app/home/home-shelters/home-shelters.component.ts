@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-home-shelters',
@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeSheltersComponent implements OnInit {
 
+  @Input() shelters: Array<Object>;
   constructor() { }
 
   ngOnInit() {

@@ -73,3 +73,10 @@
     background-color: #BBDEFB;
 }
 
+
+
+
+/*Attraction Dropdown*/
+.dropdown:hover .dropdown-menu {
+    display: block;
+}

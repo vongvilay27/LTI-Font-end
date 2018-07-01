@@ -1,13 +1,5 @@
 <div class="spaceEm"></div>
 <div id="myCarousel" class="carousel slide mt-5" data-ride="carousel">
-  <!-- <ol class="carousel-indicators">
-    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-    <li data-target="#myCarousel" data-slide-to="1"></li>
-    <li data-target="#myCarousel" data-slide-to="2"></li>
-    <li data-target="#myCarousel" data-slide-to="3"></li>
-    <li data-target="#myCarousel" data-slide-to="4"></li>
-    <li data-target="#myCarousel" data-slide-to="5"></li>
-  </ol> -->
   <div class="carousel-inner">
     <div class="carousel-item active">
       <img class="first-slide" [src]="attractionses[0]['images'][0]" width="100%" alt="First slide">
@@ -19,11 +11,10 @@
       </div>
     </div>
     <div class="carousel-item" *ngFor="let attractions of attractionses | slice:1; let i=index">
-      <img class="second-slide" [src]="attractions['images'][1]" width="100%" alt="Second slide">
+      <img class="second-slide" [src]="attractions['images'][0]" width="100%" alt="Second slide">
       <div class="container">
         <div class="carousel-caption">
           <h1>{{attractions['name']}}</h1>
-          <!-- <p>ເປັນສະຖາປັດຕະຍະກຳພິເສດແຫ່ງໜື່ງ ທີ່ມີຄວາມເກົ່າແກ່ ຊຶ່ງເປັນອາຄານກົກເຄົ້າ ສ້າງຂຶ້ນໃນສັດຕະວັດທີ 6, ຈາກນັ້ນກໍ່ມີ ການຕໍ່ເຕີມຕາມຍຸກສະໄໝຕໍ່ມາ ຈົນມາເຖິງສັດຕະວັດທີ 15. ວັດພູເປັນບູຮານສະຖານ ທີ່ໄດ້ອິດທິພົນທາງດ້ານວັດທະນະທຳ ມາຈາກຫຼາຍແຫ່ງຊຶ່ງລວມມີສິລະປະຂອມ, ອິນດູ ແລະ ພຸດ ຕາມ ຮ່ອງຮອຍຫຼັກຖານ ທີ່ສະແດງໃຫ້ເຫັນໃນລວດລາຍສິລະປະ ຕາມສະຖານທີ່ຕ່າງໆ  ໃນຂົງເຂດວັດແຫ່ງນີ້ ບໍ່ວ່າຈະເປັນຮີດຄອງ ຫຼື ການເຊື່ອຖື</p> -->
           <p><a class="btn btn-lg btn-primary btn-raised" [routerLink]="['/attraction','detail',attractions['_id']]" role="button">ລາຍລະອຽດ</a></p>
         </div>
       </div>
@@ -38,14 +29,3 @@
     <span class="sr-only">Next</span>
   </a>
 </div>
-
-<!--
-
-<div class="carousel"
-     data-flickity='{ "draggable": true }'>
-  <div class="carousel-cell"></div>
-  <div class="carousel-cell"></div>
-  <div class="carousel-cell"></div>
-  <div class="carousel-cell"></div>
-  <div class="carousel-cell"></div>
-</div>-->

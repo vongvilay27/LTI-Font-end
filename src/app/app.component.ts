@@ -1,3 +1,5 @@
+import { Subscription } from 'rxjs';
+import { TypeService } from './services/type.service';
 import { Component } from '@angular/core';
 import { NgProgress } from 'ngx-progressbar';
 @Component({
@@ -6,20 +8,24 @@ import { NgProgress } from 'ngx-progressbar';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+    types: Array<Object> = [];
 
     public mySidenav = false;
-    constructor(public ngProgress: NgProgress){}
+    constructor(
+        public ngProgress: NgProgress,
+        private typeService: TypeService
+    ) {
+        const subscription: Subscription = this.typeService.getAttractionsTypes().subscribe((res) => {
+            this.types = res.json()['data'];
+            this.ngProgress.done();
+            subscription.unsubscribe();
+          }, (error) => {
+            this.ngProgress.done();
+            subscription.unsubscribe();
+          });
+    }
 
-    inOninit(){
-        /*Progressstatus*/
-        /** request started */
-        this.ngProgress.start();
-        /*        this.http.get(url).subscribe(res){
-                    /!** request completed *!/
-                    this.ngProgress.done();
-                }*/
-        this.ngProgress.done();
+    inOninit() {
     }
 //Sidenavbar script
     opencNav() {

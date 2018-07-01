@@ -1,3 +1,4 @@
+import { TypeService } from './services/type.service';
 import { LocationcheckService } from './services/locationcheck.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -30,7 +31,8 @@ import {SearchComponent} from './search/search.component';
   ],
   providers: [
       {provide: APP_BASE_HREF, useValue: '/'},
-      LocationcheckService
+      LocationcheckService,
+      TypeService
   ],
   bootstrap: [AppComponent]
 })

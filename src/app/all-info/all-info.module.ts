@@ -11,7 +11,6 @@ import { SheltersTypeComponent } from './shelters-type/shelters-type.component';
 import { TransportationsTypeComponent } from './transportations-type/transportations-type.component';
 
 import { OtherplaceTypeComponent } from './otherplace-type/otherplace-type.component';
-import { TypeService } from '../services/type.service';
 
 const AllInfo_component = [
     AllInfoComponent,
@@ -30,6 +29,6 @@ const AllInfo_component = [
       ...AllInfo_component,
   ],
     exports: [ AllInfo_component ],
-    providers: [ TypeService ]
+    providers: [  ]
 })
 export class AllInfoModule { }

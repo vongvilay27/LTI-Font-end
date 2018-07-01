@@ -45,10 +45,6 @@ const routes: Routes = [
         loadChildren: './all-info/all-info.module#AllInfoModule'
     },
     {
-        path: 'attractionmain',
-        loadChildren: './attractions-main/attractions-main.module#AttractionsMainModule'
-    },
-    {
         path: 'contact',
         component: ContactComponent
     },

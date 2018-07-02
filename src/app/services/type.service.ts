@@ -62,7 +62,7 @@ export class TypeService {
       + '/' + country_code + '/' + latlng, option);
   }
 
-  getTypeTransportation(type_id: string, country_code: string, latlng: string) {
+  getTypeTransportations(type_id: string, country_code: string, latlng: string) {
     // console.log(bcrypt.hashSync(environment.ANONYMOUS_SECRET, 10));
     const header: Headers = new Headers();
     header.append('lttoken',  environment.RAMDOM_KEY );

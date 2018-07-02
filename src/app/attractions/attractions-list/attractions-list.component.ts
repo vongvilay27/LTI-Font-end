@@ -1,3 +1,8 @@
+import { AllService } from './../../services/all.service';
+import { NgProgress } from 'ngx-progressbar';
+import { Subscription } from 'rxjs';
+import { TypeService } from './../../services/type.service';
+import { LocationcheckService } from './../../services/locationcheck.service';
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 
@@ -10,56 +15,92 @@ export class AttractionsListComponent implements OnInit {
     public innerWidth: any;
     public hideText: string;
     public hD = 'h3';
-    attraclists: any[];
+    attractionses: Array<Object> = [];
     typeid: any;
-  constructor(private router: Router, private route: ActivatedRoute) { }
+  constructor(
+      private router: Router,
+      private route: ActivatedRoute,
+      public ngProgress: NgProgress,
+      private locationService: LocationcheckService,
+      private typeService: TypeService,
+      private allService: AllService
+    ) {
+        this.route.params.subscribe((params: Params) => {
+            this.typeid = params['typeid'];
+            if (this.typeid) {
+                if (navigator.geolocation) {
+                  navigator.geolocation.getCurrentPosition(position => {
+                    const lat = position.coords.latitude;
+                    const lng = position.coords.longitude;
+                    const subscript: Subscription = this.locationService.getLocalWeater(lat, lng).subscribe((res) => {
+                      const api_data = res.json()['current_observation']['observation_location'];
+                      const attSubscript: Subscription = this.typeService.getTypeAttractionses(
+                          this.typeid,
+                          api_data['country'],
+                          lat + ',' + lng
+                      ).subscribe((att_res) => {
+                        this.attractionses = att_res.json()['data'];
+                        this.ngProgress.done();
+                        attSubscript.unsubscribe();
+                      }, (att_error) => {
+                        this.ngProgress.done();
+                        attSubscript.unsubscribe();
+                      });
+                      subscript.unsubscribe();
+                    }, (error) => {
+                      this.ngProgress.done();
+                      subscript.unsubscribe();
+                    });
+                  });
+                } else {
+                  const subscript: Subscription = this.typeService.getTypeAttractionses(this.typeid, 'CTC', '0,0').subscribe((res) => {
+                    this.attractionses = res.json()['data'];
+                    this.ngProgress.done();
+                    subscript.unsubscribe();
+                  }, (error) => {
+                    this.ngProgress.done();
+                    subscript.unsubscribe();
+                  });
+                }
+            } else {
+              if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(position => {
+                  const lat = position.coords.latitude;
+                  const lng = position.coords.longitude;
+                  const subscript: Subscription = this.locationService.getLocalWeater(lat, lng).subscribe((res) => {
+                    const api_data = res.json()['current_observation']['observation_location'];
+                    const attSubscript: Subscription = this.allService.getAttractionses(
+                        api_data['country'],
+                        lat + ',' + lng
+                    ).subscribe((att_res) => {
+                      this.attractionses = att_res.json()['data'];
+                      this.ngProgress.done();
+                      attSubscript.unsubscribe();
+                    }, (att_error) => {
+                      this.ngProgress.done();
+                      attSubscript.unsubscribe();
+                    });
+                    subscript.unsubscribe();
+                  }, (error) => {
+                    this.ngProgress.done();
+                    subscript.unsubscribe();
+                  });
+                });
+              } else {
+                const subscript: Subscription = this.allService.getAttractionses('CTC', '0,0').subscribe((res) => {
+                  this.attractionses = res.json()['data'];
+                  this.ngProgress.done();
+                  subscript.unsubscribe();
+                }, (error) => {
+                  this.ngProgress.done();
+                  subscript.unsubscribe();
+                });
+              }
+            }
+        });
+     }
 
   ngOnInit() {
-      this.route.params.subscribe((params: Params) => {
-          this.typeid = params['typeid'];
-          if (this.typeid) {
-              console.log('Has params');
-              this.attraclists = [
-                  {
-                      id: 1,
-                      name: 'ນຳ້ຕົກຕາດນາມີ',
-                      typeid: 1,
-                      type: 'ສະຖານທີ່ທ່ອງທ່ຽວທຳມະຊາດ',
-                      story: 'ນ້ຳຕົກຕາດ ນ້ຳຕົກຕາດ ນ້ຳຕົກຕາດ ນ້ຳຕົກຕາດ ນ້ຳຕົກຕາດ ນ້ຳຕົກຕາດ ນ້ຳຕົກຕາດ',
-                      img: 'assets/1240x720.png'
-                  },
-                  {
-                      id: 2,
-                      name: 'ວັດສີນາເມືອງ',
-                      typeid: 1,
-                      type: 'ສະຖານທີ່ທ່ອງທ່ຽວວັດທະນະທຳ',
-                      story: 'ວັດວັດວັດ ວັດວັດວັດ ວັດວັດວັດ ວັດວັດວັດ ວັດວັດວັດ',
-                      img: 'assets/1280x720.jpg'
-                  }
-              ];
-          } else {
-              console.log('No has params');
-              this.attraclists = [
-                  {
-                      id: 1,
-                      name: 'ທ່ານ້ຳແມ່ນນາກ',
-                      typeid: 2,
-                      type: 'ສະຖານທີ່ທ່ອງທ່ຽວວິນຍານ',
-                      story: 'ພີ່ມາກ ພີ່ມາກ ພີມາກຈາ ພີ່ມາກ ພີ່ມາກ ພີມາກຈາ',
-                      img: 'assets/1240x720.png'
-                  },
-                  {
-                      id: 2,
-                      name: 'ວັດເຈັດປ່າຊ້າ',
-                      typeid: 2,
-                      type: 'ສະຖານທີ່ທ່ອງທ່ຽວວິນຍານ',
-                      story: 'ວັດວັດວັດ ວັດວັດວັດ ວັດວັດວັດ ວັດວັດວັດ ວັດວັດວັດ',
-                      img: 'assets/1000x540.jpg'
-                  }
-              ];
-          }
-          console.log(this.typeid);
-      });
     this.innerWidth = window.innerWidth;
     if (this.innerWidth <= 560) {
       this.hideText = 'text-hide';
@@ -68,6 +109,6 @@ export class AttractionsListComponent implements OnInit {
 
   }
   showAttracdetail(attracid) {
-    this.router.navigate(['attraction/detail', attracid]);
+    this.router.navigate(['/attraction', 'detail', attracid]);
   }
 }

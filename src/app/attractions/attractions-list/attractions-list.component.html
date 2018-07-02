@@ -12,12 +12,12 @@
     &q=Space+Needle,Seattle+WA" allowfullscreen>
     </iframe>
   </tr>
-  <tr class="card" *ngFor="let attrac of attraclists">
-    <td (click)="showAttracdetail(attrac.id)">
-      <img [src]="attrac.img" width="30%" class="rounded float-right" alt="">
-      <h5 class="{{hD}}"><b>{{attrac.name}}</b></h5>
-      <p class="card-subtitle">ປະເພດ: <b>{{attrac.type}}</b></p>
-      <p class="{{hideText}}">{{attrac.story}}</p>
+  <tr class="card" *ngFor="let attrac of attractionses">
+    <td (click)="showAttracdetail(attrac['_id'])">
+      <img [src]="attrac['images'][0]" width="30%" class="rounded float-right" alt="">
+      <h5 class="{{hD}}"><b>{{attrac['name']}}</b></h5>
+      <p class="card-subtitle">ປະເພດ: <b>{{attrac['attractions_type']['name']}}</b></p>
+      <p class="{{hideText}}">{{attrac['details']}}</p>
     </td>
   </tr>
 

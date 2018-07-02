@@ -1,3 +1,8 @@
+import { Subscription } from 'rxjs';
+import { AllService } from './../../services/all.service';
+import { TypeService } from './../../services/type.service';
+import { LocationcheckService } from './../../services/locationcheck.service';
+import { NgProgress } from 'ngx-progressbar';
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router, Params} from '@angular/router';
 
@@ -10,56 +15,95 @@ export class SheltersListComponent implements OnInit {
     public innerWidth: any;
     public hideText: string;
     public hD = 'h3';
-    sheltlists: any[];
+    shelters: Array<Object> = [];
     typeid: any;
-    constructor(private router: Router, private route: ActivatedRoute) { }
-
-    ngOnInit() {
+    constructor(
+      private router: Router,
+      private route: ActivatedRoute,
+      public ngProgress: NgProgress,
+      private locationService: LocationcheckService,
+      private typeService: TypeService,
+      private allService: AllService
+    ) {
+        this.ngProgress.start();
         this.route.params.subscribe((params: Params) => {
             this.typeid = params['typeid'];
             if (this.typeid) {
-                console.log('Has params');
-                this.sheltlists = [
-                    {
-                        id: 1,
-                        name: 'ບ້ານພັກນາດີ',
-                        typeid: 1,
-                        type: 'ບ້ານພັກ',
-                        story: 'ນ້ຳຕົກຕາດ ນ້ຳຕົກຕາດ ນ້ຳຕົກຕາດ ນ້ຳຕົກຕາດ ນ້ຳຕົກຕາດ ນ້ຳຕົກຕາດ ນ້ຳຕົກຕາດ',
-                        img: 'assets/1240x720.png'
-                    },
-                    {
-                        id: 2,
-                        name: 'ໂຮງແຮມພູສີ',
-                        typeid: 1,
-                        type: 'ໂຮງແຮມ',
-                        story: 'ວັດວັດວັດ ວັດວັດວັດ ວັດວັດວັດ ວັດວັດວັດ ວັດວັດວັດ',
-                        img: 'assets/1280x720.jpg'
-                    }
-                ];
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(position => {
+                      const lat = position.coords.latitude;
+                      const lng = position.coords.longitude;
+                      const subscript: Subscription = this.locationService.getLocalWeater(lat, lng).subscribe((res) => {
+                        const api_data = res.json();
+                        const sheltSubscript: Subscription = this.typeService.getTypeShelters(
+                            this.typeid,
+                            api_data[''],
+                            lat + ',' + lng
+                        ).subscribe((shelt_res) => {
+                          this.shelters = shelt_res.json()['data'];
+                          this.ngProgress.done();
+                          sheltSubscript.unsubscribe();
+                        }, (shelt_error) => {
+                          this.ngProgress.done();
+                          sheltSubscript.unsubscribe();
+                        });
+                        subscript.unsubscribe();
+                      }, (error) => {
+                        this.ngProgress.done();
+                        subscript.unsubscribe();
+                      });
+                    });
+                  } else {
+                    const sheltSubscript: Subscription = this.typeService.getTypeShelters(this.typeid, 'CTC', '0,0')
+                    .subscribe((shelt_res) => {
+                        this.shelters = shelt_res.json()['data'];
+                        this.ngProgress.done();
+                        sheltSubscript.unsubscribe();
+                      }, (shelt_error) => {
+                        this.ngProgress.done();
+                        sheltSubscript.unsubscribe();
+                      });
+                  }
             } else {
-                console.log('No has params');
-                this.sheltlists = [
-                    {
-                        id: 1,
-                        name: 'ຫ້ອງແຖວ',
-                        typeid: 2,
-                        type: 'ຫ້ອງແຖວ',
-                        story: 'ພີ່ມາກ ພີ່ມາກ ພີມາກຈາ ພີ່ມາກ ພີ່ມາກ ພີມາກຈາ',
-                        img: 'assets/1240x720.png'
-                    },
-                    {
-                        id: 2,
-                        name: 'ຫ້ອງແຖວ',
-                        typeid: 2,
-                        type: 'ຫ້ອງແຖວ',
-                        story: 'ວັດວັດວັດ ວັດວັດວັດ ວັດວັດວັດ ວັດວັດວັດ ວັດວັດວັດ',
-                        img: 'assets/1000x540.jpg'
-                    }
-                ];
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(position => {
+                      const lat = position.coords.latitude;
+                      const lng = position.coords.longitude;
+                      const subscript: Subscription = this.locationService.getLocalWeater(lat, lng).subscribe((res) => {
+                        const api_data = res.json();
+                        const sheltSubscript: Subscription = this.allService.getShelters(
+                            api_data[''],
+                            lat + ',' + lng
+                        ).subscribe((shelt_res) => {
+                            this.shelters = shelt_res.json()['data'];
+                            this.ngProgress.done();
+                            sheltSubscript.unsubscribe();
+                          }, (shelt_error) => {
+                            this.ngProgress.done();
+                            sheltSubscript.unsubscribe();
+                          });
+                        subscript.unsubscribe();
+                      }, (error) => {
+                        this.ngProgress.done();
+                        subscript.unsubscribe();
+                      });
+                    });
+                  } else {
+                    const sheltSubscript: Subscription = this.allService.getShelters('CTC', '0,0')
+                    .subscribe((shelt_res) => {
+                        this.shelters = shelt_res.json()['data'];
+                        this.ngProgress.done();
+                        sheltSubscript.unsubscribe();
+                      }, (shelt_error) => {
+                        this.ngProgress.done();
+                        sheltSubscript.unsubscribe();
+                      });
+                  }
             }
-            console.log(this.typeid);
         });
+     }
+
+    ngOnInit() {
         this.innerWidth = window.innerWidth;
         if (this.innerWidth <= 560) {
             this.hideText = 'text-hide';

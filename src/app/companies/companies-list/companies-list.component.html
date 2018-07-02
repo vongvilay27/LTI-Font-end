@@ -12,11 +12,11 @@
     &q=Space+Needle,Seattle+WA" allowfullscreen>
     </iframe>
   </tr>
-  <tr class="card" *ngFor="let compa of compalists">
-    <td (click)="showCompadetail(compa.id)">
-      <img [src]="compa.img" width="30%" class="rounded float-right" alt="">
-      <h5 class="{{hD}}"><b>{{compa.name}}</b></h5>
-      <p class="{{hideText}}">{{compa.detail}}</p>
+  <tr class="card" *ngFor="let company of tour_companies">
+    <td (click)="showCompadetail(company['_id'])">
+      <img [src]="company['images'][0]" width="30%" class="rounded float-right" alt="">
+      <h5 class="{{hD}}"><b>{{company['name']}}</b></h5>
+      <p class="{{hideText}}">{{company['about']}}</p>
     </td>
   </tr>
 

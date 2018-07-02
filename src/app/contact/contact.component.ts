@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {NgProgress} from 'ngx-progressbar';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-contact',
@@ -8,7 +9,13 @@ import {NgProgress} from 'ngx-progressbar';
 })
 export class ContactComponent implements OnInit {
 
-    constructor(public ngProgress: NgProgress) { }
+  contactForm: FormGroup;
+  constructor(
+    public ngProgress: NgProgress,
+    private formBuilder: FormBuilder
+  ) {
+    this.contactForm = this.formBuilder.group({});
+  }
 
   ngOnInit() {
       /*Progressstatus*/

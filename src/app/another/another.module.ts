@@ -1,3 +1,4 @@
+import { AgmCoreModule } from '@agm/core';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AnotherComponent } from './another.component';
@@ -10,7 +11,10 @@ import { AnotherDetailComponent } from './another-detail/another-detail.componen
 @NgModule({
   imports: [
     CommonModule,
-      AnotherRoutingModule
+      AnotherRoutingModule,
+      AgmCoreModule.forRoot({
+        apiKey: 'AIzaSyBXoeOmRRzSl0b4iUBadAz8M-_Zva0DpfQ'
+      })
   ],
   declarations: [AnotherComponent, InternetListComponent, InternetDetailComponent, AnotherListComponent, AnotherDetailComponent]
 })

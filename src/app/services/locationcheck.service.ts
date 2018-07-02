@@ -9,7 +9,7 @@ export class LocationcheckService  {
   constructor(public httpService: Http) {
   }
 
-  getLocaWeater(lat: number, long: number) {
+  getLocalWeater(lat: number, long: number) {
     const query = environment.API_ADDRESS + lat + ',' + long + '.json';
     return this.httpService.get(query);
   }

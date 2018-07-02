@@ -42,11 +42,10 @@
         <i class="fa fa-search text-white"></i>
       </button>
       <span id="collapse-search" class="collapse">
-        <form>
-          <input class="form-control" type="search" id="search" placeholder="ຄົ້ນຫາ">
+        <form novalidate [formGroup]="searchForm" (ngSubmit)="doSearch()">
+          <input class="form-control" type="search" formControlName="search_keyword" id="search" placeholder="ຄົ້ນຫາ">
         </form>
       </span>
-      <a [routerLink]="['/search']">Search</a>
     </div>
 
   </nav>

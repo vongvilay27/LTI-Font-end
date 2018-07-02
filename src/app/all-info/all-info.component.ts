@@ -19,7 +19,6 @@ export class AllInfoComponent implements OnInit {
       this.ngProgress.start();
       const subscription: Subscription = this.typeService.getTypes().subscribe((res) => {
         this.types = res.json()['data'];
-        console.log(this.types);
         this.ngProgress.done();
         subscription.unsubscribe();
       }, (error) => {

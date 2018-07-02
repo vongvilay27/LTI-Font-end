@@ -1,3 +1,5 @@
+import { AllService } from './../services/all.service';
+import { AgmCoreModule } from '@agm/core';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AttractionsComponent } from './attractions.component';
@@ -23,12 +25,14 @@ const Attractions_component = [
       AttractionsRoutingModule,
       GalleryModule.forRoot(),
       LightboxModule.forRoot(),
-      GallerizeModule
-
+      GallerizeModule,
+      AgmCoreModule.forRoot({
+        apiKey: 'AIzaSyBXoeOmRRzSl0b4iUBadAz8M-_Zva0DpfQ'
+      })
   ],
   declarations: [
       ...Attractions_component
   ],
-    exports: [AttractionsComponent]
+  exports: [AttractionsComponent]
 })
 export class AttractionsModule { }

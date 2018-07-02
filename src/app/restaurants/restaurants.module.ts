@@ -1,3 +1,4 @@
+import { AgmCoreModule } from '@agm/core';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RestaurantsComponent } from './restaurants.component';
@@ -23,7 +24,10 @@ const Restaurants_component = [
       RestaurantsRoutingModule,
       GalleryModule.forRoot(),
       LightboxModule.forRoot(),
-      GallerizeModule
+      GallerizeModule,
+      AgmCoreModule.forRoot({
+        apiKey: 'AIzaSyBXoeOmRRzSl0b4iUBadAz8M-_Zva0DpfQ'
+      })
   ],
   declarations: [
       ...Restaurants_component

@@ -2,7 +2,7 @@
 <div id="myCarousel" class="carousel slide mt-5" data-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img class="first-slide" [src]="attractionses[0]['images'][0]" width="100%" alt="First slide">
+      <img class="first-slide" [src]="attractionses[0]['images'][0]" width="100%" alt="Slide 1">
       <div class="container">
         <div class="carousel-caption">
           <h1>{{attractionses[0]['name']}}</h1>
@@ -11,7 +11,7 @@
       </div>
     </div>
     <div class="carousel-item" *ngFor="let attractions of attractionses | slice:1; let i=index">
-      <img class="second-slide" [src]="attractions['images'][0]" width="100%" alt="Second slide">
+      <img class="second-slide" [src]="attractions['images'][0]" width="100%" alt="Slide {{i + 2}}">
       <div class="container">
         <div class="carousel-caption">
           <h1>{{attractions['name']}}</h1>

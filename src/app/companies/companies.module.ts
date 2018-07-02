@@ -1,3 +1,4 @@
+import { AgmCoreModule } from '@agm/core';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CompaniesComponent } from './companies.component';
@@ -18,7 +19,10 @@ const Companies_component = [
     CompaniesRoutingModule,
     GalleryModule.forRoot(),
     LightboxModule.forRoot(),
-    GallerizeModule
+    GallerizeModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBXoeOmRRzSl0b4iUBadAz8M-_Zva0DpfQ'
+    })
   ],
   declarations: [
       ...Companies_component

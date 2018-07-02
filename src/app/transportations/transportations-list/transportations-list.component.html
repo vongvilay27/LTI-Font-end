@@ -12,12 +12,12 @@
     &q=Space+Needle,Seattle+WA" allowfullscreen>
     </iframe>
   </tr>
-  <tr class="card" *ngFor="let transpor of transporlists">
-    <td (click)="showTranspordetail(transpor.id)">
+  <tr class="card" *ngFor="let transportation of transportations">
+    <td (click)="showTranspordetail(transportation['_id'])">
       <img [src]="transpor.img" width="30%" class="rounded float-right" alt="">
-      <h5 class="{{hD}}"><b>{{transpor.name}}</b></h5>
-      <p class="card-subtitle">ປະເພດ: <b>{{transpor.type}}</b></p>
-      <p class="{{hideText}}">{{transpor.story}}</p>
+      <h5 class="{{hD}}"><b>{{transportation['name']}}</b></h5>
+      <p class="card-subtitle">ປະເພດ: <b>{{transportation['transportation_type']['name']}}</b></p>
+      <p class="{{hideText}}">{{transportation['detail']}}</p>
     </td>
   </tr>
 

@@ -8,17 +8,9 @@ import {NgProgress} from 'ngx-progressbar';
 })
 export class AnotherComponent implements OnInit {
 
-    constructor(public ngProgress: NgProgress) { }
+    constructor() { }
 
   ngOnInit() {
-    /*Progressstatus*/
-    /** request started */
-    this.ngProgress.start();
-    /*        this.http.get(url).subscribe(res){
-                /!** request completed *!/
-                this.ngProgress.done();
-            }*/
-    this.ngProgress.done();
   }
 
 }

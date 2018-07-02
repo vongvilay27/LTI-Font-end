@@ -12,12 +12,12 @@
     &q=Space+Needle,Seattle+WA" allowfullscreen>
     </iframe>
   </tr>
-  <tr class="card" *ngFor="let rest of restaulists">
-    <td (click)="showAttracdetail(rest.id)">
+  <tr class="card" *ngFor="let restaurant of restaurants">
+    <td (click)="showAttracdetail(restaurant['_id'])">
       <img [src]="rest.img" width="30%" class="rounded float-right" alt="">
-      <h5 class="{{hD}}"><b>{{rest.name}}</b></h5>
-      <p class="card-subtitle">ປະເພດ: <b>{{rest.type}}</b></p>
-      <p class="{{hideText}}">{{rest.story}}</p>
+      <h5 class="{{hD}}"><b>{{restaurant['name']}}</b></h5>
+      <p class="card-subtitle">ປະເພດ: <b>{{restaurant['restaurant_type']['name']'}}</b></p>
+      <p class="{{hideText}}">{{restaurant['detail']}}</p>
     </td>
   </tr>
 

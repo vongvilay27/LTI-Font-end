@@ -1,5 +1,10 @@
+import { Subscription } from 'rxjs';
+import { AllService } from './../../services/all.service';
+import { TypeService } from './../../services/type.service';
+import { LocationcheckService } from './../../services/locationcheck.service';
+import { NgProgress } from 'ngx-progressbar';
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, Router, ParamMap} from '@angular/router';
 
 @Component({
   selector: 'app-companies-list',
@@ -10,36 +15,52 @@ export class CompaniesListComponent implements OnInit {
     public innerWidth: any;
     public hideText: string;
     public hD = 'h3';
-    compalists: any[];
-    constructor(private router: Router, private route: ActivatedRoute) { }
+    tour_companies: Array<Object> = [];
+    constructor(
+        private router: Router,
+        private route: ActivatedRoute,
+        public ngProgress: NgProgress,
+        private locationService: LocationcheckService,
+        private allService: AllService
+    ) {
+        this.ngProgress.start();
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(position => {
+              const lat = position.coords.latitude;
+              const lng = position.coords.longitude;
+              const subscript: Subscription = this.locationService.getLocalWeater(lat, lng).subscribe((res) => {
+                const api_data = res.json();
+                const comSubscript: Subscription = this.allService.getTourCompanies(
+                    api_data[''],
+                    lat + ',' + lng
+                ).subscribe((com_res) => {
+                  this.tour_companies = com_res.json()['data'];
+                  this.ngProgress.done();
+                  comSubscript.unsubscribe();
+                }, (att_error) => {
+                  this.ngProgress.done();
+                  comSubscript.unsubscribe();
+                });
+                subscript.unsubscribe();
+              }, (error) => {
+                this.ngProgress.done();
+                subscript.unsubscribe();
+              });
+            });
+          } else {
+            const comSubscript: Subscription = this.allService.getTourCompanies('CTC', '0,0')
+            .subscribe((com_res) => {
+                this.tour_companies = com_res.json()['data'];
+                this.ngProgress.done();
+                comSubscript.unsubscribe();
+            }, (att_error) => {
+                this.ngProgress.done();
+                comSubscript.unsubscribe();
+            });
+          }
+     }
 
     ngOnInit() {
-                this.compalists = [
-                    {
-                        id: 1,
-                        name: 'ບໍລິສັດທ່ຽວນາປີ',
-                        detail: 'ນ້ຳຕົກຕາດ ນ້ຳຕົກຕາດ ນ້ຳຕົກຕາດ ນ້ຳຕົກຕາດ ນ້ຳຕົກຕາດ ນ້ຳຕົກຕາດ ນ້ຳຕົກຕາດ',
-                        img: 'assets/1240x720.png'
-                    },
-                    {
-                        id: 2,
-                        name: 'ບໍລິສັດທ່ຽວນາປີ',
-                        detail: 'ວັດວັດວັດ ວັດວັດວັດ ວັດວັດວັດ ວັດວັດວັດ ວັດວັດວັດ',
-                        img: 'assets/1280x720.jpg'
-                    },
-                    {
-                        id: 3,
-                        name: 'ບໍລິສັດທ່ຽວພອນທິບ',
-                        detail: 'ພີ່ມາກ ພີ່ມາກ ພີມາກຈາ ພີ່ມາກ ພີ່ມາກ ພີມາກຈາ',
-                        img: 'assets/1240x720.png'
-                    },
-                    {
-                        id: 4,
-                        name: 'ບໍລິສັດທ່ຽວສີວັນ',
-                        detail: 'ວັດວັດວັດ ວັດວັດວັດ ວັດວັດວັດ ວັດວັດວັດ ວັດວັດວັດ',
-                        img: 'assets/1000x540.jpg'
-                    }
-                ];
 
         this.innerWidth = window.innerWidth;
         if (this.innerWidth <= 560) {
@@ -49,6 +70,6 @@ export class CompaniesListComponent implements OnInit {
 
     }
     showCompadetail(compaid) {
-        this.router.navigate(['company/detail', compaid]);
+        this.router.navigate(['/company', 'detail', compaid]);
     }
 }

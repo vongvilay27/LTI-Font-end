@@ -12,12 +12,12 @@
     &q=Space+Needle,Seattle+WA" allowfullscreen>
     </iframe>
   </tr>
-  <tr class="card" *ngFor="let shelt of sheltlists">
-    <td (click)="showShelterdetail(shelt.id)">
+  <tr class="card" *ngFor="let shelter of shelters">
+    <td (click)="showShelterdetail(shelter['_id'])">
       <img [src]="shelt.img" width="30%" class="rounded float-right" alt="">
-      <h5 class="{{hD}}"><b>{{shelt.name}}</b></h5>
-      <p class="card-subtitle">ປະເພດ: <b>{{shelt.type}}</b></p>
-      <p class="{{hideText}}">{{shelt.story}}</p>
+      <h5 class="{{hD}}"><b>{{shelter['name']}}</b></h5>
+      <p class="card-subtitle">ປະເພດ: <b>{{shelter['shelter_type']['name']}}</b></p>
+      <p class="{{hideText}}">{{shelter['detail']}}</p>
     </td>
   </tr>
 

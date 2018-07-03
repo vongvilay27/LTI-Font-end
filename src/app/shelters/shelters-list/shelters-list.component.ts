@@ -34,10 +34,10 @@ export class SheltersListComponent implements OnInit {
                       const lat = position.coords.latitude;
                       const lng = position.coords.longitude;
                       const subscript: Subscription = this.locationService.getLocalWeater(lat, lng).subscribe((res) => {
-                        const api_data = res.json();
+                        const api_data = res.json()['current_observation']['observation_location'];
                         const sheltSubscript: Subscription = this.typeService.getTypeShelters(
                             this.typeid,
-                            api_data[''],
+                            api_data['country'],
                             lat + ',' + lng
                         ).subscribe((shelt_res) => {
                           this.shelters = shelt_res.json()['data'];
@@ -52,10 +52,9 @@ export class SheltersListComponent implements OnInit {
                         this.ngProgress.done();
                         subscript.unsubscribe();
                       });
-                    });
-                  } else {
-                    const sheltSubscript: Subscription = this.typeService.getTypeShelters(this.typeid, 'CTC', '0,0')
-                    .subscribe((shelt_res) => {
+                    }, () => {
+                      const sheltSubscript: Subscription = this.typeService.getTypeShelters(this.typeid, 'CTC', '0,0')
+                      .subscribe((shelt_res) => {
                         this.shelters = shelt_res.json()['data'];
                         this.ngProgress.done();
                         sheltSubscript.unsubscribe();
@@ -63,6 +62,7 @@ export class SheltersListComponent implements OnInit {
                         this.ngProgress.done();
                         sheltSubscript.unsubscribe();
                       });
+                    });
                   }
             } else {
                 if (navigator.geolocation) {
@@ -70,9 +70,9 @@ export class SheltersListComponent implements OnInit {
                       const lat = position.coords.latitude;
                       const lng = position.coords.longitude;
                       const subscript: Subscription = this.locationService.getLocalWeater(lat, lng).subscribe((res) => {
-                        const api_data = res.json();
+                        const api_data = res.json()['current_observation']['observation_location'];
                         const sheltSubscript: Subscription = this.allService.getShelters(
-                            api_data[''],
+                            api_data['country'],
                             lat + ',' + lng
                         ).subscribe((shelt_res) => {
                             this.shelters = shelt_res.json()['data'];
@@ -87,10 +87,9 @@ export class SheltersListComponent implements OnInit {
                         this.ngProgress.done();
                         subscript.unsubscribe();
                       });
-                    });
-                  } else {
-                    const sheltSubscript: Subscription = this.allService.getShelters('CTC', '0,0')
-                    .subscribe((shelt_res) => {
+                    }, () => {
+                      const sheltSubscript: Subscription = this.allService.getShelters('CTC', '0,0')
+                      .subscribe((shelt_res) => {
                         this.shelters = shelt_res.json()['data'];
                         this.ngProgress.done();
                         sheltSubscript.unsubscribe();
@@ -98,6 +97,7 @@ export class SheltersListComponent implements OnInit {
                         this.ngProgress.done();
                         sheltSubscript.unsubscribe();
                       });
+                    });
                   }
             }
         });

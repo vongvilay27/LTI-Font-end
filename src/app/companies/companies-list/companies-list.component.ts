@@ -46,16 +46,16 @@ export class CompaniesListComponent implements OnInit {
                 this.ngProgress.done();
                 subscript.unsubscribe();
               });
-            });
-          } else {
-            const comSubscript: Subscription = this.allService.getTourCompanies('CTC', '0,0')
-            .subscribe((com_res) => {
-                this.tour_companies = com_res.json()['data'];
-                this.ngProgress.done();
-                comSubscript.unsubscribe();
-            }, (att_error) => {
-                this.ngProgress.done();
-                comSubscript.unsubscribe();
+            }, () => {
+                const comSubscript: Subscription = this.allService.getTourCompanies('CTC', '0,0')
+                .subscribe((com_res) => {
+                    this.tour_companies = com_res.json()['data'];
+                    this.ngProgress.done();
+                    comSubscript.unsubscribe();
+                }, (att_error) => {
+                    this.ngProgress.done();
+                    comSubscript.unsubscribe();
+                });
             });
           }
      }

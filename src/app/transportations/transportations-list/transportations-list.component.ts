@@ -34,10 +34,10 @@ export class TransportationsListComponent implements OnInit {
                       const lat = position.coords.latitude;
                       const lng = position.coords.longitude;
                       const subscript: Subscription = this.locationService.getLocalWeater(lat, lng).subscribe((res) => {
-                        const api_data = res.json();
+                        const api_data = res.json()['current_observation']['observation_location'];
                         const tranSubscript: Subscription = this.typeService.getTypeTransportations(
                             this.typeid,
-                            api_data[''],
+                            api_data['country'],
                             lat + ',' + lng
                         ).subscribe((tran_res) => {
                           this.transportations = tran_res.json()['data'];
@@ -52,10 +52,9 @@ export class TransportationsListComponent implements OnInit {
                         this.ngProgress.done();
                         subscript.unsubscribe();
                       });
-                    });
-                  } else {
-                    const tranSubscript: Subscription = this.typeService.getTypeTransportations(this.typeid, 'CTC', '0,0')
-                    .subscribe((tran_res) => {
+                    }, () => {
+                      const tranSubscript: Subscription = this.typeService.getTypeTransportations(this.typeid, 'CTC', '0,0')
+                      .subscribe((tran_res) => {
                         this.transportations = tran_res.json()['data'];
                         this.ngProgress.done();
                         tranSubscript.unsubscribe();
@@ -63,34 +62,19 @@ export class TransportationsListComponent implements OnInit {
                         this.ngProgress.done();
                         tranSubscript.unsubscribe();
                       });
+                    });
                   }
             } else {
-                if (navigator.geolocation) {
-                    navigator.geolocation.getCurrentPosition(position => {
-                      const lat = position.coords.latitude;
-                      const lng = position.coords.longitude;
-                      const subscript: Subscription = this.locationService.getLocalWeater(lat, lng).subscribe((res) => {
-                        const api_data = res.json();
-                        const tranSubscript: Subscription = this.allService.getTransportations(
-                            api_data[''],
-                            lat + ',' + lng
-                        ).subscribe((tran_res) => {
-                            this.transportations = tran_res.json()['data'];
-                            this.ngProgress.done();
-                            tranSubscript.unsubscribe();
-                          }, (shelt_error) => {
-                            this.ngProgress.done();
-                            tranSubscript.unsubscribe();
-                          });
-                        subscript.unsubscribe();
-                      }, (error) => {
-                        this.ngProgress.done();
-                        subscript.unsubscribe();
-                      });
-                    });
-                  } else {
-                    const tranSubscript: Subscription = this.allService.getShelters('CTC', '0,0')
-                    .subscribe((tran_res) => {
+              if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(position => {
+                  const lat = position.coords.latitude;
+                  const lng = position.coords.longitude;
+                  const subscript: Subscription = this.locationService.getLocalWeater(lat, lng).subscribe((res) => {
+                    const api_data = res.json()['current_observation']['observation_location'];
+                    const tranSubscript: Subscription = this.allService.getTransportations(
+                        api_data['country'],
+                        lat + ',' + lng
+                    ).subscribe((tran_res) => {
                         this.transportations = tran_res.json()['data'];
                         this.ngProgress.done();
                         tranSubscript.unsubscribe();
@@ -98,7 +82,23 @@ export class TransportationsListComponent implements OnInit {
                         this.ngProgress.done();
                         tranSubscript.unsubscribe();
                       });
-                  }
+                    subscript.unsubscribe();
+                  }, (error) => {
+                    this.ngProgress.done();
+                    subscript.unsubscribe();
+                  });
+                }, () => {
+                  const tranSubscript: Subscription = this.allService.getShelters('CTC', '0,0')
+                  .subscribe((tran_res) => {
+                    this.transportations = tran_res.json()['data'];
+                    this.ngProgress.done();
+                    tranSubscript.unsubscribe();
+                  }, (shelt_error) => {
+                    this.ngProgress.done();
+                    tranSubscript.unsubscribe();
+                  });
+                });
+              }
             }
         });
      }

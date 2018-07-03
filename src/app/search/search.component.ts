@@ -35,7 +35,7 @@ export class SearchComponent implements OnInit {
           const lng = position.coords.longitude;
           this.lat = lat;
           this.lng = lng;
-          console.log(lat,lng);
+          console.log(lat, lng);
 
           // this.LocaService.getLocaWeater(this.lat, this.lng).subscribe(res => {
           //   this.locaData = res.current_observation;
@@ -47,6 +47,8 @@ export class SearchComponent implements OnInit {
             .subscribe((res:any)=>{
             console.log(res)
           })*/
+        }, () => {
+          console.log('block or not allow access location search logic code goes here...');
         });
       }
 

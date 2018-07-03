@@ -18,6 +18,8 @@ export class AttractionsDetailComponent implements OnInit {
     id: any;
     attractions: Object = {};
     weather: Object = {};
+    info_near_by: Object = {};
+    zoom = 10;
 
     lat: number;
     lng: number;
@@ -41,13 +43,27 @@ export class AttractionsDetailComponent implements OnInit {
                 const attSubscript: Subscription = this.detailService.getAttractions(this.id).subscribe((att_res) => {
                     this.attractions = att_res.json()['data'];
                     this.ngProgress.done();
+                    const nearSubscript: Subscription = this.detailService.getInfoNearby(
+                        this.attractions['_id'],
+                        this.attractions['location']['lat']
+                        + ',' +
+                        this.attractions['location']['long']
+                    )
+                    .subscribe((near_res) => {
+                        this.info_near_by = near_res.json()['data'];
+                        console.log(this.info_near_by);
+                        nearSubscript.unsubscribe();
+                    }, (near_error) => {
+                        nearSubscript.unsubscribe();
+                    });
                     const apiSubscript: Subscription = this.locationService.getLocalWeater(
                         this.attractions['location']['lat'],
                         this.attractions['location']['long']
                     ).subscribe((api_res) => {
                         this.weather = api_res.json()['current_observation'];
-                        console.log(this.weather);
+                        apiSubscript.unsubscribe();
                     }, (api_error) => {
+                        apiSubscript.unsubscribe();
                     });
                     for (let i = 0; i < this.attractions['images'].length; i++) {
                         this.imageData[i] = {

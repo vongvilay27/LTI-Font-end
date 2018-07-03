@@ -80,4 +80,15 @@ export class DetailService {
     return this.http.get(environment.SERVER_ADDRESS
       + '/api/client/detail/internet/' + internet_id, option);
   }
+
+  getInfoNearby(id: string, latlng: string) {
+    // console.log(bcrypt.hashSync(environment.ANONYMOUS_SECRET, 10));
+    const header: Headers = new Headers();
+    header.append('lttoken',  environment.RAMDOM_KEY );
+    // header.append('lttoken',  bcrypt.hashSync(environment.ANONYMOUS_SECRET, 10) );
+    const option: RequestOptions = new RequestOptions({headers: header});
+    return this.http.get(environment.SERVER_ADDRESS
+      + '/api/client/near/' + id + '/' + latlng, option);
+  }
+
 }

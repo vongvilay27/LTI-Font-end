@@ -4,7 +4,6 @@ import {RestaurantsComponent} from './restaurants.component';
 
 import {RestaurantsListComponent} from './restaurants-list/restaurants-list.component';
 import {RestaurantsDetailComponent} from './restaurants-detail/restaurants-detail.component';
-;
 
 
 const routes: Routes = [{

@@ -17,6 +17,9 @@ export class AttractionsListComponent implements OnInit {
     public hD = 'h3';
     attractionses: Array<Object> = [];
     typeid: any;
+    latitude: number;
+    longitude: number;
+    zoom = 10;
   constructor(
       private router: Router,
       private route: ActivatedRoute,
@@ -32,6 +35,8 @@ export class AttractionsListComponent implements OnInit {
                   navigator.geolocation.getCurrentPosition(position => {
                     const lat = position.coords.latitude;
                     const lng = position.coords.longitude;
+                    this.latitude = lat;
+                    this.longitude = lng;
                     const subscript: Subscription = this.locationService.getLocalWeater(lat, lng).subscribe((res) => {
                       const api_data = res.json()['current_observation']['observation_location'];
                       const attSubscript: Subscription = this.typeService.getTypeAttractionses(
@@ -51,15 +56,15 @@ export class AttractionsListComponent implements OnInit {
                       this.ngProgress.done();
                       subscript.unsubscribe();
                     });
-                  });
-                } else {
-                  const subscript: Subscription = this.typeService.getTypeAttractionses(this.typeid, 'CTC', '0,0').subscribe((res) => {
-                    this.attractionses = res.json()['data'];
-                    this.ngProgress.done();
-                    subscript.unsubscribe();
-                  }, (error) => {
-                    this.ngProgress.done();
-                    subscript.unsubscribe();
+                  }, () => {
+                    const subscript: Subscription = this.typeService.getTypeAttractionses(this.typeid, 'CTC', '0,0').subscribe((res) => {
+                      this.attractionses = res.json()['data'];
+                      this.ngProgress.done();
+                      subscript.unsubscribe();
+                    }, (error) => {
+                      this.ngProgress.done();
+                      subscript.unsubscribe();
+                    });
                   });
                 }
             } else {
@@ -67,6 +72,7 @@ export class AttractionsListComponent implements OnInit {
                 navigator.geolocation.getCurrentPosition(position => {
                   const lat = position.coords.latitude;
                   const lng = position.coords.longitude;
+
                   const subscript: Subscription = this.locationService.getLocalWeater(lat, lng).subscribe((res) => {
                     const api_data = res.json()['current_observation']['observation_location'];
                     const attSubscript: Subscription = this.allService.getAttractionses(
@@ -85,15 +91,15 @@ export class AttractionsListComponent implements OnInit {
                     this.ngProgress.done();
                     subscript.unsubscribe();
                   });
-                });
-              } else {
-                const subscript: Subscription = this.allService.getAttractionses('CTC', '0,0').subscribe((res) => {
-                  this.attractionses = res.json()['data'];
-                  this.ngProgress.done();
-                  subscript.unsubscribe();
-                }, (error) => {
-                  this.ngProgress.done();
-                  subscript.unsubscribe();
+                }, () => {
+                  const subscript: Subscription = this.allService.getAttractionses('CTC', '0,0').subscribe((res) => {
+                    this.attractionses = res.json()['data'];
+                    this.ngProgress.done();
+                    subscript.unsubscribe();
+                  }, (error) => {
+                    this.ngProgress.done();
+                    subscript.unsubscribe();
+                  });
                 });
               }
             }

@@ -42,15 +42,15 @@ export class HomeComponent implements OnInit {
           this.ngProgress.done();
           subscript.unsubscribe();
         });
-      });
-    } else {
-      const subscript: Subscription = this.mainService.getMainPageData('CTC', '0,0').subscribe((res) => {
-        this.data = res.json()['data'];
-        this.ngProgress.done();
-        subscript.unsubscribe();
-      }, (error) => {
-        this.ngProgress.done();
-        subscript.unsubscribe();
+      }, () => {
+        const subscript: Subscription = this.mainService.getMainPageData('CTC', '0,0').subscribe((res) => {
+          this.data = res.json()['data'];
+          this.ngProgress.done();
+          subscript.unsubscribe();
+        }, (error) => {
+          this.ngProgress.done();
+          subscript.unsubscribe();
+        });
       });
     }
   }

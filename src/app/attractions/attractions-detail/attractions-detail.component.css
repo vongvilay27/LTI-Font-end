@@ -1,4 +1,15 @@
 
+#pic1{
+    height: 50%;
+    background: url(../../../assets/mpic/mdesign1.jpg) no-repeat center center fixed;
+    /*background-color: #ffeb3b;*/
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
+}
+
 .carousel {
     background: #EEE;
 }
@@ -17,6 +28,10 @@
 .gallery-slide {
     height: 500px;
     z-index: 0;
+}
+
+agm-map {
+    height: 500px;
 }
 
 

@@ -30,8 +30,7 @@ import { DetailService } from './services/detail.service';
     ReactiveFormsModule,
     NgProgressModule,
     AppRoutingModule,
-    HomeModule,
-
+    HomeModule
   ],
   providers: [
       {provide: APP_BASE_HREF, useValue: '/'},

@@ -34,10 +34,10 @@ export class RestaurantsListComponent implements OnInit {
                       const lat = position.coords.latitude;
                       const lng = position.coords.longitude;
                       const subscript: Subscription = this.locationService.getLocalWeater(lat, lng).subscribe((res) => {
-                        const api_data = res.json();
+                        const api_data = res.json()['current_observation']['observation_location'];
                         const resSubscript: Subscription = this.typeService.getTypeRestaurants(
                             this.typeid,
-                            api_data[''],
+                            api_data['country'],
                             lat + ',' + lng
                         ).subscribe((res_res) => {
                           this.restaurants = res_res.json()['data'];
@@ -52,10 +52,9 @@ export class RestaurantsListComponent implements OnInit {
                         this.ngProgress.done();
                         subscript.unsubscribe();
                       });
-                    });
-                  } else {
-                    const subscript: Subscription = this.typeService.getTypeRestaurants(this.typeid, 'CTC', '0,0')
-                    .subscribe((res_res) => {
+                    }, () => {
+                      const subscript: Subscription = this.typeService.getTypeRestaurants(this.typeid, 'CTC', '0,0')
+                      .subscribe((res_res) => {
                         this.restaurants = res_res.json()['data'];
                         this.ngProgress.done();
                         subscript.unsubscribe();
@@ -63,6 +62,7 @@ export class RestaurantsListComponent implements OnInit {
                         this.ngProgress.done();
                         subscript.unsubscribe();
                       });
+                    });
                   }
             } else {
                 if (navigator.geolocation) {
@@ -70,9 +70,9 @@ export class RestaurantsListComponent implements OnInit {
                       const lat = position.coords.latitude;
                       const lng = position.coords.longitude;
                       const subscript: Subscription = this.locationService.getLocalWeater(lat, lng).subscribe((res) => {
-                        const api_data = res.json();
+                        const api_data = res.json()['current_observation']['observation_location'];
                         const comSubscript: Subscription = this.allService.getRestaurants(
-                            api_data[''],
+                            api_data['country'],
                             lat + ',' + lng
                         ).subscribe((res_res) => {
                             this.restaurants = res_res.json()['data'];
@@ -87,17 +87,17 @@ export class RestaurantsListComponent implements OnInit {
                         this.ngProgress.done();
                         subscript.unsubscribe();
                       });
+                    }, () => {
+                      const subscript: Subscription = this.allService.getRestaurants('CTC', '0,0')
+                      .subscribe((res_res) => {
+                          this.restaurants = res_res.json()['data'];
+                          this.ngProgress.done();
+                          subscript.unsubscribe();
+                        }, (res_error) => {
+                          this.ngProgress.done();
+                          subscript.unsubscribe();
+                        });
                     });
-                  } else {
-                    const subscript: Subscription = this.allService.getRestaurants('CTC', '0,0')
-                    .subscribe((res_res) => {
-                        this.restaurants = res_res.json()['data'];
-                        this.ngProgress.done();
-                        subscript.unsubscribe();
-                      }, (res_error) => {
-                        this.ngProgress.done();
-                        subscript.unsubscribe();
-                      });
                   }
             }
         });

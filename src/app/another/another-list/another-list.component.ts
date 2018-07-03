@@ -33,9 +33,9 @@ export class AnotherListComponent implements OnInit {
               const lat = position.coords.latitude;
               const lng = position.coords.longitude;
               const subscript: Subscription = this.locationService.getLocalWeater(lat, lng).subscribe((res) => {
-                const api_data = res.json();
+                const api_data = res.json()['current_observation']['observation_location'];
                 const anoSubscript: Subscription = this.typeService.getAnothers(
-                    api_data[''],
+                    api_data['country'],
                     lat + ',' + lng
                 ).subscribe((ano_res) => {
                   this.anothers = ano_res.json()['data'];
@@ -50,16 +50,16 @@ export class AnotherListComponent implements OnInit {
                 this.ngProgress.done();
                 subscript.unsubscribe();
               });
-            });
-          } else {
-            const anoSubscript: Subscription = this.typeService.getAnothers('CTC', '0,0')
-            .subscribe((ano_res) => {
-              this.anothers = ano_res.json()['data'];
-              this.ngProgress.done();
-              anoSubscript.unsubscribe();
-            }, (ano_error) => {
-              this.ngProgress.done();
-              anoSubscript.unsubscribe();
+            }, () => {
+              const anoSubscript: Subscription = this.typeService.getAnothers('CTC', '0,0')
+              .subscribe((ano_res) => {
+                this.anothers = ano_res.json()['data'];
+                this.ngProgress.done();
+                anoSubscript.unsubscribe();
+              }, (ano_error) => {
+                this.ngProgress.done();
+                anoSubscript.unsubscribe();
+              });
             });
           }
         } else {
@@ -75,9 +75,9 @@ export class AnotherListComponent implements OnInit {
             const lat = position.coords.latitude;
             const lng = position.coords.longitude;
             const subscript: Subscription = this.locationService.getLocalWeater(lat, lng).subscribe((res) => {
-              const api_data = res.json();
+              const api_data = res.json()['current_observation']['observation_location'];
               const anoSubscript: Subscription = this.allService.getAnothers(
-                  api_data[''],
+                  api_data['country'],
                   lat + ',' + lng
               ).subscribe((ano_res) => {
                 const another_respone = ano_res.json()['data'];
@@ -94,18 +94,18 @@ export class AnotherListComponent implements OnInit {
               this.ngProgress.done();
               subscript.unsubscribe();
             });
-          });
-        } else {
-          const anoSubscript: Subscription = this.allService.getAnothers('CTC', '0,0')
-          .subscribe((ano_res) => {
-            const another_respone = ano_res.json()['data'];
-            this.anothers = another_respone['anothers'];
-            this.internets = another_respone['internets'];
-            this.ngProgress.done();
-            anoSubscript.unsubscribe();
-          }, (ano_error) => {
-            this.ngProgress.done();
-            anoSubscript.unsubscribe();
+          }, () => {
+            const anoSubscript: Subscription = this.allService.getAnothers('CTC', '0,0')
+            .subscribe((ano_res) => {
+              const another_respone = ano_res.json()['data'];
+              this.anothers = another_respone['anothers'];
+              this.internets = another_respone['internets'];
+              this.ngProgress.done();
+              anoSubscript.unsubscribe();
+            }, (ano_error) => {
+              this.ngProgress.done();
+              anoSubscript.unsubscribe();
+            });
           });
         }
       }

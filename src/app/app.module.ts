@@ -16,6 +16,7 @@ import { ContactComponent } from './contact/contact.component';
 import { AppComponent } from './app.component';
 import {SearchComponent} from './search/search.component';
 import { DetailService } from './services/detail.service';
+import {SearchService} from './services/search.service';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { DetailService } from './services/detail.service';
       LocationcheckService,
       TypeService,
       AllService,
-      DetailService
+      DetailService,
+      SearchService
   ],
   bootstrap: [AppComponent]
 })

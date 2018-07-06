@@ -26,12 +26,12 @@ const Restaurants_component = [
       LightboxModule.forRoot(),
       GallerizeModule,
       AgmCoreModule.forRoot({
-        apiKey: 'AIzaSyBXoeOmRRzSl0b4iUBadAz8M-_Zva0DpfQ'
+          apiKey: 'AIzaSyBXoeOmRRzSl0b4iUBadAz8M-_Zva0DpfQ'
       })
   ],
   declarations: [
       ...Restaurants_component
   ],
-    exports: []
+    exports: [RestaurantsComponent]
 })
 export class RestaurantsModule { }

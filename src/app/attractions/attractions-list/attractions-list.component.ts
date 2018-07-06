@@ -41,7 +41,7 @@ export class AttractionsListComponent implements OnInit {
                       const api_data = res.json()['current_observation']['observation_location'];
                       const attSubscript: Subscription = this.typeService.getTypeAttractionses(
                           this.typeid,
-                          api_data['country'],
+                          api_data['country_iso3166'],
                           lat + ',' + lng
                       ).subscribe((att_res) => {
                         this.attractionses = att_res.json()['data'];
@@ -76,7 +76,7 @@ export class AttractionsListComponent implements OnInit {
                   const subscript: Subscription = this.locationService.getLocalWeater(lat, lng).subscribe((res) => {
                     const api_data = res.json()['current_observation']['observation_location'];
                     const attSubscript: Subscription = this.allService.getAttractionses(
-                        api_data['country'],
+                        api_data['country_iso3166'],
                         lat + ',' + lng
                     ).subscribe((att_res) => {
                       this.attractionses = att_res.json()['data'];

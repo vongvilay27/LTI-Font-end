@@ -1,3 +1,7 @@
 .tableList {
     cursor: pointer;
 }
+
+agm-map {
+    height: 500px;
+}

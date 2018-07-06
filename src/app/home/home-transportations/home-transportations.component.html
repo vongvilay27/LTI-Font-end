@@ -6,16 +6,16 @@
 <div class="container mb-5">
   <div class="row d-flex justify-content-center">
 
-    <div class="card companyCard" *ngFor="let transpotation of transpotations">
+    <div class="card companyCard" *ngFor="let transpotation of transportations">
       <img class="card-img-top" [src]="transpotation['images'][0]" alt="Card image cap">
       <div class="card-body">
         <h5 class="card-subtitle">{{transpotation['name']}}</h5>
-        <a class="btn btn-primary float-right bg-secondary text-white" [routerLink]="['/transpotation','detail',transpotation['_id']]">ອ່ານເພີ່ມ</a>
+        <a class="btn btn-primary float-right bg-secondary text-white" [routerLink]="['/transportation','detail',transpotation['_id']]">ອ່ານເພີ່ມ</a>
       </div>
     </div>
 
   </div>
-  <div class="row d-flex justify-content-end">
+<!--  <div class="row d-flex justify-content-end">
     <a [routerLink]="['/transportation']" class="btn btn-raised btn-secondary"><i class="fa fa-caret-right"></i> ເພີ່ມເຕີມ</a>
-  </div>
+  </div>-->
 </div>

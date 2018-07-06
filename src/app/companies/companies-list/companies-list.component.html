@@ -1,16 +1,36 @@
-
 <table class="table table-hover tableList">
   <thead>
-  <th><button class="btn btn-info" data-toggle="collapse" data-target="#collapse-map"><i class="fa fa-map"></i></button></th>
+  <th><button class="btn btn-info" data-toggle="collapse" title="ຈຸດທີ່ຢູ່ຂອງເຈົ້າ" data-target="#collapse-map"><i class="fa fa-map"></i></button></th>
   </thead>
   <tr class="collapse" id="collapse-map">
-    <iframe
-            width="600"
-            height="450"
-            frameborder="0" style="border:0"
-            src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBYBMMN0dbUiPgZvbvevJg23HRvTjdjIB0
-    &q=Space+Needle,Seattle+WA" allowfullscreen>
-    </iframe>
+    <div class="map">
+      <agm-map
+              [latitude]="latitude"
+              [longitude]="longitude"
+              [zoom]="zoom"
+              [disableDefaultUI]="false"
+              [zoomControl]="true">
+
+        <agm-marker *ngFor="let com of tour_companies
+"
+                    [latitude]="com['location']['lat']"
+                    [longitude]="com['location']['long']">
+          <agm-info-window>
+            <a [routerLink]="['/shelter', 'detail', com['_id']]">{{com['name']}}</a>
+          </agm-info-window>
+        </agm-marker>
+
+
+        <agm-circle
+                [latitude]="latitude"
+                [longitude]="longitude"
+                [radius]="2000"
+                [fillColor]="'green'"
+                [circleDraggable]="true"
+                [editable]="true">
+        </agm-circle>
+      </agm-map>
+    </div>
   </tr>
   <tr class="card" *ngFor="let company of tour_companies">
     <td (click)="showCompadetail(company['_id'])">

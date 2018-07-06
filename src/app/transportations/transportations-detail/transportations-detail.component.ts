@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Gallery, GalleryRef, ImageItem, VideoItem, YoutubeItem , GalleryItem} from '@ngx-gallery/core';
 import { Lightbox } from '@ngx-gallery/lightbox';
-import {ActivatedRoute, Params} from '@angular/router';
+import {ActivatedRoute, Params, Router} from '@angular/router';
+import {LocationcheckService} from '../../services/locationcheck.service';
+import {DetailService} from '../../services/detail.service';
+import {NgProgress} from 'ngx-progressbar';
+import {DomSanitizer} from '@angular/platform-browser';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-transportations-detail',
@@ -10,36 +15,88 @@ import {ActivatedRoute, Params} from '@angular/router';
 })
 export class TransportationsDetailComponent implements OnInit {
     items: GalleryItem[];
+
     id: any;
+    transportations: Object = {};
+    services: Object = {};
+    weather: Object = {};
+    info_near_by: Object = {};
+    zoom = 10;
+
+    lat: number;
+    lng: number;
+
+    public imageData: Array<{srcUrl: string, previewUrl: string}> = [];
+
     public innerWidth: any;
     public hideText: string;
     public cTainer = 'container';
     public hD = 'h2';
     public hE = 'h3';
     public hF = 'h4'
-    constructor(public gallery: Gallery, public lightbox: Lightbox, public route: ActivatedRoute) {
-    }
-    public imageData = [
-        {
-            srcUrl: 'assets/1240x720.png',
-            previewUrl: 'assets/1240x720.png'
-        },
-        {
-            srcUrl: 'assets/1280x720.jpg',
-            previewUrl: 'assets/1280x720.jpg'
-        },
-        {
-            srcUrl: 'assets/1240x720.png',
-            previewUrl: 'assets/1240x720.png'
-        }
-        // ... more items
-    ];
-    ngOnInit() {
-
+    constructor(
+        public gallery: Gallery,
+        public lightbox: Lightbox,
+        public ngProgress: NgProgress,
+        private route: ActivatedRoute,
+        private router: Router,
+        private safeSanitizer: DomSanitizer,
+        private locationService: LocationcheckService,
+        private detailService: DetailService
+    ) {
+        this.ngProgress.start();
         this.route.params.subscribe((params: Params) => {
             this.id = params['id'];
-            console.log(this.id);
+            if (this.id) {
+                const tranSubscript: Subscription = this.detailService.getTransportation(this.id).subscribe((res) => {
+                    this.transportations = res.json()['data'];
+/*                    this.services = this.transportations['']*/
+                    console.log(this.transportations)
+                    /*console.log(this.services)*/
+                    this.ngProgress.done();
+                    const nearSubscript: Subscription = this.detailService.getInfoNearby(
+                        this.transportations['_id'],
+                        this.transportations['location']['lat']
+                        + ',' +
+                        this.transportations['location']['long']
+                    )
+                        .subscribe((near_res) => {
+                            this.info_near_by = near_res.json()['data'];
+                            console.log(this.info_near_by);
+                            nearSubscript.unsubscribe();
+                        }, (near_error) => {
+                            nearSubscript.unsubscribe();
+                        });
+                    const apiSubscript: Subscription = this.locationService.getLocalWeater(
+                        this.transportations['location']['lat'],
+                        this.transportations['location']['long']
+                    ).subscribe((api_res) => {
+                        this.weather = api_res.json()['current_observation'];
+                        apiSubscript.unsubscribe();
+                    }, (api_error) => {
+                        apiSubscript.unsubscribe();
+                    });
+                    for (let i = 0; i < this.transportations['images'].length; i++) {
+                        this.imageData[i] = {
+                            srcUrl: this.transportations['images'][i],
+                            previewUrl: this.transportations['images'][i]
+                        };
+                    };
+
+                    this.items = this.imageData.map(item => new ImageItem(item.srcUrl, item.previewUrl));
+                    this.gallery.ref('tranlightbox').load(this.items);
+
+                }, (shel_error) => {
+                    this.ngProgress.done();
+                    tranSubscript.unsubscribe();
+                    console.log(this.transportations)
+                    this.router.navigate(['/home']);
+                });
+            }
         });
+    }
+
+    ngOnInit() {
         this.innerWidth = window.innerWidth;
         if (this.innerWidth <= 560) {
             this.cTainer = '';
@@ -48,10 +105,6 @@ export class TransportationsDetailComponent implements OnInit {
             this.hF = '';
         }
 
-        /*Transportations*/
-        this.items = this.imageData.map(item => new ImageItem(item.srcUrl, item.previewUrl));
-        console.log(this.items);
-        this.gallery.ref('tranlightbox').load(this.items);
 
 
     }

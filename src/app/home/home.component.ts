@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
         const subscript: Subscription = this.locationService.getLocalWeater(lat, lng).subscribe((res) => {
           const api_data = res.json()['current_observation']['observation_location'];
           console.log(api_data);
-          const mainSubscript = this.mainService.getMainPageData(api_data['country'], lat + ',' + lng).subscribe((main_res) => {
+          const mainSubscript = this.mainService.getMainPageData(api_data['country_iso3166'], lat + ',' + lng).subscribe((main_res) => {
             this.data = main_res.json()['data'];
             this.ngProgress.done();
             mainSubscript.unsubscribe();

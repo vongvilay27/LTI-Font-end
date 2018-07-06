@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {NgProgress} from 'ngx-progressbar';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-transportations',
@@ -7,8 +8,9 @@ import {NgProgress} from 'ngx-progressbar';
   styleUrls: ['./transportations.component.css']
 })
 export class TransportationsComponent implements OnInit {
-
-    constructor(public ngProgress: NgProgress) { }
+    public id: any;
+    public typeid: any;
+    constructor(public ngProgress: NgProgress,public route: ActivatedRoute) { }
 
   ngOnInit() {
       /*Progressstatus*/

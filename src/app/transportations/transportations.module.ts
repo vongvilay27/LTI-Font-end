@@ -11,6 +11,7 @@ import { LightboxModule } from '@ngx-gallery/lightbox';
 import { GallerizeModule } from '@ngx-gallery/gallerize';
 import 'hammerjs';
 import 'rxjs';
+import {AgmCoreModule} from '@agm/core';
 const Transportations_component = [
     TransportationsComponent,
     TransportationsListComponent,
@@ -23,11 +24,14 @@ const Transportations_component = [
       TransportationsRoutingModule,
       GalleryModule.forRoot(),
       LightboxModule.forRoot(),
-      GallerizeModule
+      GallerizeModule,
+      AgmCoreModule.forRoot({
+          apiKey: 'AIzaSyBXoeOmRRzSl0b4iUBadAz8M-_Zva0DpfQ'
+      })
   ],
   declarations: [
       ...Transportations_component
   ],
-    exports: []
+    exports: [TransportationsComponent]
 })
 export class TransportationsModule { }

@@ -113,7 +113,8 @@
       <span class="m-1"></span>
       <h5><b>ວີດີໂອ</b></h5>
       <div class="row">
-        <iframe class="col-12 mt-3" height="540px" [src]="safeVideoUrl()" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen *ngIf="safeVideoUrl()"></iframe>
+        <embed class="col-12 mt-3" *ngIf="attractions['video_url']" style="width: 100%" height="440px"
+               [src]="safeVideoUrl()">
       </div>
     </div>
     <div class="tab-pane fade mb-3" id="aboutT" role="tabpanel" aria-labelledby="contact-tab">

@@ -16,7 +16,7 @@
                     [latitude]="shelter['location']['lat']"
                     [longitude]="shelter['location']['long']">
           <agm-info-window>
-            <a [routerLink]="['/attraction', 'detail', shelter['_id']]">{{shelter['name']}}</a>
+            <a [routerLink]="['/shelter', 'detail', shelter['_id']]">{{shelter['name']}}</a>
           </agm-info-window>
         </agm-marker>
 

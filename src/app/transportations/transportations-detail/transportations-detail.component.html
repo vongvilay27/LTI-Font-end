@@ -1,18 +1,11 @@
-<!--<div class="carousel"
-     data-flickity='{ "imagesLoaded": true, "percentPosition": false }'>
-  <img src="../../../assets/1240x720.png" alt="" />
-  <img src="../../../assets/1280x720.jpg" alt="" />
-  <img src="../../../assets/1240x720.png" alt="" />
-  <img src="../../../assets/1000x540.jpg" alt="" />
-</div>-->
-
+<div *ngIf="transportations['name']">
 <gallery class="gallery-slide img-fluid" [items]="items" [thumb]="false"></gallery>
 <!--<gallery id="{{galleryId}}"></gallery>-->
 <div>
   <div class="card text-white bg-primary">
     <div class="card-header mt-3">
-      <h1 class="card-title">ຊື່ຮ້ານອາຫານ</h1>
-      <p class="card-subtitle">ປະເພດ: <b>ຮ້ານອາຫານປະຈຳຊາດ</b></p>
+      <h1 class="card-title">{{transportations['name']}}</h1>
+      <p class="card-subtitle">ປະເພດ: <b>{{transportations['transportation_type']['name']}}</b></p>
     </div>
   </div>
   <ul class="nav nav-tabs nav-pills nav-justified bg-primary" id="transportTab" role="tablist">
@@ -162,5 +155,7 @@
       </div>
     </div>
   </div>
+
+</div>
 
 </div>

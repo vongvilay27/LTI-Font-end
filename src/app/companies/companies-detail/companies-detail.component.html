@@ -1,10 +1,10 @@
-
+<div *ngIf="tourcompanies['name']">
 <gallery class="gallery-slide img-fluid" id="ex1" [items]="items" [thumb]="false"></gallery>
 <!--<gallery id="{{galleryId}}"></gallery>-->
 <div>
   <div class="card text-white bg-primary">
     <div class="card-header mt-3">
-      <h1 class="card-title">ຊື່ບໍລິສັດນຳທ່ຽວ</h1>
+      <h1 class="card-title">{{tourcompanies['name']}}</h1>
     </div>
   </div>
   <ul class="nav nav-tabs nav-pills nav-justified bg-primary" id="companiesTab" role="tablist">
@@ -21,58 +21,83 @@
   <div class="tab-content" id="companiesContent">
     <div class="tab-pane fade show active mb-3" id="overviewT" role="tabpanel" aria-labelledby="overviewT">
       <div class="row d-flex justify-content-center">
-        <button class="col-5 btn btn-primary btn-lg p-3">
+        <a *ngIf="tourcompanies['location']" href="https://www.google.com/maps/dir/{{lat}},{{lng}}/{{tourcompanies['location']['lat']}},{{tourcompanies['location']['long']}}" target="_blank" class="col-5 btn btn-primary btn-lg p-3">
           <i class="fa fa-map-pin"></i> ນຳທາງ
-        </button>
+        </a>
         <button class="col-5 btn btn-primary btn-lg 9-3" data-toggle="modal" data-target="#sheareModal">
           <i class="fa fa-share"></i> ແຊ
         </button>
       </div>
-      <h5>ສື່ອອນລາຍ</h5>
-      <table class="table table-hover">
-        <tr>
-          <td><i class="fa fa-facebook"></i> </td>
-          <td><a href="#">Facebook.com/ddddd</a></td>
-        </tr>
-        <tr>
-          <td><i class="fa fa-twitter"></i></td>
-          <td><a href="#">twitter.com/dsfjkdjf</a></td>
-        </tr>
-      </table>
+      <div *ngIf="tourcompanies['socials'].length">
+        <h5>ສື່ອອນລາຍ</h5>
+        <table class="table">
+          <tr *ngFor="let social of tourcompanies['socials']">
+            <td><a href="{{social['url']}}">{{social['name']}}</a></td>
+            <td><a href="{{social['url']}}">{{social['url']}}</a></td>
+          </tr>
+        </table>
+        <span ></span>
+      </div>
       <h5>ຕິດຕໍ່</h5>
       <table class="table">
         <tr>
           <td><i class="fa fa-phone"></i> </td>
-          <td>020 545458485</td>
+          <td>{{tourcompanies['tel']}}</td>
         </tr>
         <tr>
-          <td><i class="fa fa-file-text"></i></td>
-          <td>adsf@gmail.com</td>
+          <td><i class="fa fa-envelope"></i></td>
+          <td>{{tourcompanies['email']}}</td>
         </tr>
       </table>
       <h5>ທີ່ຢູ່</h5>
       <table class="table">
         <tr>
-          <td><i class="fa fa-address-card"></i> ບ້ານ : <b>ມາເສຍໝາ</b></td>
+          <td><i class="fa fa-address-card"></i> ບ້ານ{{tourcompanies['address']['village']}}</td>
 
         </tr>
         <tr>
-          <td><i class="fa fa-map-signs"></i> ເມືອງ : <b>ມາເສຍໝາ</b></td>
+          <td><i class="fa fa-map-signs"></i> ເມືອງ{{tourcompanies['address']['district']['district']}}</td>
 
         </tr>
         <tr>
-          <td><i class="fa fa-map-marker"></i> ແຂວງ : <b>ມາເສຍໝາ</b></td>
+          <td><i class="fa fa-map-marker"></i> ແຂວງ{{tourcompanies['address']['district']['province']['province']}}</td>
 
         </tr>
       </table>
+      <h5 *ngIf="weather['temp_c']">ອຸນຫະພູມ</h5>
+      <div class="row"  *ngIf="weather['temp_c']">
+        <div class="col-md-12">
+          <div class="weather">
+            <div class="current">
+              <div class="info">
+                <div>&nbsp;</div>
+                <span class="display-1">{{weather['temp_c']}}&deg;<small>C</small></span> <sup><img [src]="weather['icon_url']" alt="weather icon"></sup> <small>{{weather['weather']}}</small>
+                <div class="h3"><small><small>ແຮງລົມ:</small></small> {{weather['wind_string']}}</div>
+                <div>&nbsp;</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <h5>Map</h5>
-      <iframe class="col-12"
-              width="600"
-              height="450"
-              frameborder="0" style="border:0"
-              src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBYBMMN0dbUiPgZvbvevJg23HRvTjdjIB0
-    &q=Space+Needle,Seattle+WA" allowfullscreen>
-      </iframe>
+      <div class="map">
+        <agm-map
+                [latitude]="tourcompanies['location']['lat']"
+                [longitude]="tourcompanies['location']['long']"
+                [zoom]="zoom"
+                [disableDefaultUI]="false"
+                [zoomControl]="true">
+
+          <agm-marker
+                  [latitude]="tourcompanies['location']['lat']"
+                  [longitude]="tourcompanies['location']['long']">
+            <agm-info-window>
+              <strong>{{tourcompanies['name']}}</strong>
+            </agm-info-window>
+          </agm-marker>
+
+        </agm-map>
+      </div>
     </div>
     <div class="tab-pane fade mb-3 m-1" id="photoT" role="tabpanel" aria-labelledby="contact-tab">
       <span class="m-1"></span>
@@ -81,21 +106,21 @@
         <div class="grid-item col-md-4 col-sm-6"
              *ngFor="let item of items; let i = index"
              (click)="openLightbox(i)">
-          <img [src]="item.data.src" class="img-fluid m-1">
+          <img [src]="item['data']['src']" class="img-fluid m-1">
         </div>
       </div>
       <span class="m-1"></span>
       <h5><b>ວີດີໂອ</b></h5>
       <div class="row">
-        <iframe class="col-12 mt-3" height="540px" src="https://www.youtube.com/embed/IYhMgDA-KGg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <embed class="col-12 mt-3" *ngIf="tourcompanies['video_url']" style="width: 100%" height="440px"
+               [src]="safeVideoUrl()">
       </div>
     </div>
     <div class="tab-pane fade mb-3" id="aboutT" role="tabpanel" aria-labelledby="contact-tab">
       <span class="m-1"></span>
-      <h5><b>ປະຫວັດຄວາມເປັນມາ</b></h5>
+      <h5><b>ກ່ຽວກັບບໍລິສັດນຳທ່ຽວ</b></h5>
       <div class="m-1">
-        <p class="col-12">ຕາມຂໍ້ມູນຈາກສື່ທາງການ ໜັງສືພິມປະຊາຊົນ ແລະໜັງສືພິມວຽງຈັນໃໝ່ໂດຍອ້າງອີງຂໍ້ມູນຈາກຄະນະກວດກາສູນກາງພັກໃຫ້ຮູ້ວ່າ: ໃນປີ 2017 ຄະນະກວດກາສູນກາງພັກ ສາມາດກວດເຫັນ ການເອົາທີ່ດິນລັດແລກປ່ຽນ ແລະຊຳລະ ໂຄງການພື້ນຖານໂຄງລ່າງໂດຍບໍ່ມີການປະເມີນລາຄາເຮັດໃຫ້ລັດເສຍຫາຍ ຈຳນວນ 266 ຕື້ກີບ.</p>
-      </div>
+        <p class="col-12"> {{tourcompanies['about']}}</p></div>
     </div>
   </div>
 
@@ -111,11 +136,10 @@
           </button>
         </div>
         <div class="modal-body d-flex justify-content-center">
-          <a href="http://www.facebook.com" class="btn bmd-btn-fab fa fa-facebook fa-facebookc faShares" target="_blank"></a>
-          <a href="#" class="btn bmd-btn-fab fa fa-twitter fa-twitterc faShares" target="_blank"></a>
-          <a href="#" class="btn bmd-btn-fab fa fa-youtube fa-youtubec faShares" target="_blank"></a>
+          <a href="http://www.facebook.com/sharer.php?u=https://laotour-info.firebaseapp.com//#/attraction/detail/{{tourcompanies['_id']}}" class="btn bmd-btn-fab fa fa-facebook fa-facebookc faShares" target="_blank"></a>
+          <a href="http://twitter.com/share?text={{tourcompanies['name']}}&url=https://laotour-info.firebaseapp.com//#/attraction/detail/{{tourcompanies['_id']}}" class="btn bmd-btn-fab fa fa-twitter fa-twitterc faShares" target="_blank"></a>
           <a href="#" class="btn bmd-btn-fab fa fa-instagram fa-instagramc faShares" target="_blank"></a>
-          <a href="#" class="btn bmd-btn-fab fa fa-google fa-googlec faShares" target="_blank"></a>
+          <a href="https://plus.google.com/share?url=https://laotour-info.firebaseapp.com//#/attraction/detail/{{tourcompanies['_id']}}" class="btn bmd-btn-fab fa fa-google fa-googlec faShares" target="_blank"></a>
           <a href="#" class="btn bmd-btn-fab fa fa-skype fa-skypec faShares" target="_blank"></a>
         </div>
       </div>
@@ -123,3 +147,76 @@
   </div>
 
 </div>
+
+  <div id="pic1" *ngIf="info_near_by['attractionses']">
+    <div class="text-center p-4 mt-5">
+      <h1><b>ສະຖານທີ່ຕ່າງໆທີ່ຢູ່ໃກ້ຄຽງ</b></h1>
+    </div>
+    <div class="container">
+      <div class="row mb-5">
+        <div class="col-md-4" *ngFor="let restaurant of info_near_by['restaurants']">
+          <div class="card mb-3">
+            <img class="card-img-top" [src]="restaurant['images'][0]" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">{{restaurant['name']}}</h5>
+              <p class="card-text"></p>
+              <a class="btn btn-primary btnIfo" [routerLink]="['/restaurant', 'detail', restaurant['_id']]">ລາຍລະອຽດ</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4" *ngFor="let shelter of info_near_by['shelters']">
+          <div class="card mb-3">
+            <img class="card-img-top" [src]="shelter['images'][0]" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">{{shelter['name']}}</h5>
+              <p class="card-text"></p>
+              <a class="btn btn-primary btnIfo" [routerLink]="['/shelter', 'detail', shelter['_id']]">ລາຍລະອຽດ</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4" *ngFor="let transportation of info_near_by['transportations']">
+          <div class="card mb-3">
+            <img class="card-img-top" [src]="transportation['images'][0]" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">{{transportation['name']}}</h5>
+              <p class="card-text"></p>
+              <a class="btn btn-primary btnIfo" [routerLink]="['/transportation', 'detail', transportation['_id']]">ລາຍລະອຽດ</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4" *ngFor="let att of info_near_by['attractionses']">
+          <div class="card mb-3">
+            <img class="card-img-top" [src]="att['images'][0]" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">{{att['name']}}</h5>
+              <p class="card-text"></p>
+              <a class="btn btn-primary btnIfo" [routerLink]="['/attraction', 'detail', att['_id']]">ລາຍລະອຽດ</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4" *ngFor="let another of info_near_by['another_places']['anothers']">
+          <div class="card mb-3">
+            <img class="card-img-top" [src]="another['images'][0]" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">{{another['name']}}</h5>
+              <p class="card-text"></p>
+              <button class="btn btn-primary btnIfo" [routerLink]="['/another', 'detail', another['_id']]">ລາຍລະອຽດ</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4" *ngFor="let internet of info_near_by['another_places']['internets']">
+          <div class="card mb-3">
+            <img class="card-img-top" [src]="internet['images'][0]" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">{{internet['name']}}</h5>
+              <p class="card-text"></p>
+              <button class="btn btn-primary btnIfo" [routerLink]="['/another', 'internet', 'detail', internet['_id']]">ລາຍລະອຽດ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+

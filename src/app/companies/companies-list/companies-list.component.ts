@@ -16,6 +16,10 @@ export class CompaniesListComponent implements OnInit {
     public hideText: string;
     public hD = 'h3';
     tour_companies: Array<Object> = [];
+    typeid: any;
+    latitude: number;
+    longitude: number;
+    zoom = 10;
     constructor(
         private router: Router,
         private route: ActivatedRoute,
@@ -28,6 +32,8 @@ export class CompaniesListComponent implements OnInit {
             navigator.geolocation.getCurrentPosition(position => {
               const lat = position.coords.latitude;
               const lng = position.coords.longitude;
+              this.latitude = lat;
+              this.longitude = lng;
               const subscript: Subscription = this.locationService.getLocalWeater(lat, lng).subscribe((res) => {
                 const api_data = res.json();
                 const comSubscript: Subscription = this.allService.getTourCompanies(

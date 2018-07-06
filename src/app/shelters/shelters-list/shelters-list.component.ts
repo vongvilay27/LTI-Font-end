@@ -17,6 +17,9 @@ export class SheltersListComponent implements OnInit {
     public hD = 'h3';
     shelters: Array<Object> = [];
     typeid: any;
+    latitude: number;
+    longitude: number;
+    zoom = 10;
     constructor(
       private router: Router,
       private route: ActivatedRoute,
@@ -33,11 +36,13 @@ export class SheltersListComponent implements OnInit {
                     navigator.geolocation.getCurrentPosition(position => {
                       const lat = position.coords.latitude;
                       const lng = position.coords.longitude;
+                        this.latitude = lat;
+                        this.longitude = lng;
                       const subscript: Subscription = this.locationService.getLocalWeater(lat, lng).subscribe((res) => {
                         const api_data = res.json()['current_observation']['observation_location'];
                         const sheltSubscript: Subscription = this.typeService.getTypeShelters(
                             this.typeid,
-                            api_data['country'],
+                            api_data['country_iso3166'],
                             lat + ',' + lng
                         ).subscribe((shelt_res) => {
                           this.shelters = shelt_res.json()['data'];
@@ -69,10 +74,12 @@ export class SheltersListComponent implements OnInit {
                     navigator.geolocation.getCurrentPosition(position => {
                       const lat = position.coords.latitude;
                       const lng = position.coords.longitude;
+                        this.latitude = lat;
+                        this.longitude = lng;
                       const subscript: Subscription = this.locationService.getLocalWeater(lat, lng).subscribe((res) => {
                         const api_data = res.json()['current_observation']['observation_location'];
                         const sheltSubscript: Subscription = this.allService.getShelters(
-                            api_data['country'],
+                            api_data['country_iso3166'],
                             lat + ',' + lng
                         ).subscribe((shelt_res) => {
                             this.shelters = shelt_res.json()['data'];

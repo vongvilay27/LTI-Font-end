@@ -72,7 +72,8 @@ export class AttractionsListComponent implements OnInit {
                 navigator.geolocation.getCurrentPosition(position => {
                   const lat = position.coords.latitude;
                   const lng = position.coords.longitude;
-
+                    this.latitude = lat;
+                    this.longitude = lng;
                   const subscript: Subscription = this.locationService.getLocalWeater(lat, lng).subscribe((res) => {
                     const api_data = res.json()['current_observation']['observation_location'];
                     const attSubscript: Subscription = this.allService.getAttractionses(

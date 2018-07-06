@@ -11,6 +11,7 @@ import { LightboxModule } from '@ngx-gallery/lightbox';
 import { GallerizeModule } from '@ngx-gallery/gallerize';
 import 'hammerjs';
 import 'rxjs';
+import {AgmCoreModule} from '@agm/core';
 
 const Shelters_component = [
     SheltersComponent,
@@ -24,11 +25,14 @@ const Shelters_component = [
       // BrowserAnimationsModule,
       GalleryModule.forRoot(),
       LightboxModule.forRoot(),
-      GallerizeModule
+      GallerizeModule,
+      AgmCoreModule.forRoot({
+          apiKey: 'AIzaSyBXoeOmRRzSl0b4iUBadAz8M-_Zva0DpfQ'
+      })
   ],
   declarations: [
       ...Shelters_component
   ],
-    exports: []
+    exports: [SheltersComponent]
 })
 export class SheltersModule { }

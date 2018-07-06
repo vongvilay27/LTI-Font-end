@@ -9,7 +9,7 @@
         <div class="card-body">
           <h5 class="card-title">{{internet['name']}}</h5>
           <p class="card-text"></p>
-          <button class="btn btn-primary btnIfo" >ລາຍລະອຽດ</button>
+          <button class="btn btn-primary btnIfo" [routerLink]="['/another/internet',internet['_id']]">ລາຍລະອຽດ</button>
         </div>
       </div>
     </div>
@@ -19,7 +19,7 @@
         <div class="card-body">
           <h5 class="card-title">{{another['name']}}</h5>
           <p class="card-text"></p>
-          <button class="btn btn-primary btnIfo">ລາຍລະອຽດ</button>
+          <button class="btn btn-primary btnIfo" [routerLink]="['/another/detail',another['_id']]">ລາຍລະອຽດ</button>
         </div>
       </div>
     </div>

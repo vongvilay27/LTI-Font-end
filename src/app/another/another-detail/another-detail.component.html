@@ -1,3 +1,217 @@
-<p>
-  another-detail works!
-</p>
+<div *ngIf="anothers['name']">
+  <gallery class="gallery-slide img-fluid" [items]="items" [thumb]="false"></gallery>
+  <div>
+    <div class="card text-white bg-primary">
+      <div class="card-header mt-3">
+        <h1 class="card-title">{{anothers['name']}}</h1>
+      </div>
+    </div>
+    <ul class="nav nav-tabs nav-pills nav-justified bg-primary" id="attractionsTab" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="att-overview" data-toggle="tab" href="#overviewT" role="tab" aria-controls="overviewT" aria-selected="true">Overview</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="att-photo" data-toggle="tab" href="#photoT" role="tab" aria-controls="photoT" aria-selected="false">ຮູບພາບ</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="att-about" data-toggle="tab" href="#aboutT" role="tab" aria-controls="aboutT" aria-selected="false">ກ່ຽວກັບ</a>
+      </li>
+    </ul>
+    <div class="tab-content" id="attractionsContent">
+      <div class="tab-pane fade show active mb-3" id="overviewT" role="tabpanel" aria-labelledby="overviewT">
+        <div class="row d-flex justify-content-center">
+          <a *ngIf="anothers['location']" href="https://www.google.com/maps/dir/{{lat}},{{lng}}/{{anothers['location']['lat']}},{{anothers['location']['long']}}" target="_blank" class="col-5 btn btn-primary btn-lg p-3">
+            <i class="fa fa-map-pin"></i> ນຳທາງ
+          </a>
+          <button class="col-5 btn btn-primary btn-lg 9-3" data-toggle="modal" data-target="#sheareModal">
+            <i class="fa fa-share"></i> ແຊ
+          </button>
+        </div>
+        <div *ngIf="anothers['socials'].length">
+          <h5>ສື່ອອນລາຍ</h5>
+          <table class="table">
+            <tr *ngFor="let social of anothers['socials']">
+              <td><a href="{{social['url']}}">{{social['name']}}</a></td>
+              <td><a href="{{social['url']}}">{{social['url']}}</a></td>
+            </tr>
+          </table>
+          <span ></span>
+        </div>
+        <h5>ຕິດຕໍ່</h5>
+        <table class="table">
+          <tr>
+            <td><i class="fa fa-phone"></i> </td>
+            <td>{{anothers['tel']}}</td>
+          </tr>
+          <tr>
+            <td><i class="fa fa-envelope"></i></td>
+            <td>{{anothers['email']}}</td>
+          </tr>
+        </table>
+        <h5>ທີ່ຢູ່</h5>
+        <table class="table">
+          <tr>
+            <td><i class="fa fa-address-card"></i> ບ້ານ{{anothers['address']['village']}}</td>
+
+          </tr>
+          <tr>
+            <td><i class="fa fa-map-signs"></i> ເມືອງ{{anothers['address']['district']['district']}}</td>
+
+          </tr>
+          <tr>
+            <td><i class="fa fa-map-marker"></i> ແຂວງ{{anothers['address']['district']['province']['province']}}</td>
+
+          </tr>
+        </table>
+        <h5 *ngIf="weather['temp_c']">ອຸນຫະພູມ</h5>
+        <div class="row"  *ngIf="weather['temp_c']">
+          <div class="col-md-12">
+            <div class="weather">
+              <div class="current">
+                <div class="info">
+                  <div>&nbsp;</div>
+                  <span class="display-1">{{weather['temp_c']}}&deg;<small>C</small></span> <sup><img [src]="weather['icon_url']" alt="weather icon"></sup> <small>{{weather['weather']}}</small>
+                  <div class="h3"><small><small>ແຮງລົມ:</small></small> {{weather['wind_string']}}</div>
+                  <div>&nbsp;</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <h5>Map</h5>
+        <div class="map">
+          <agm-map
+                  [latitude]="anothers['location']['lat']"
+                  [longitude]="anothers['location']['long']"
+                  [zoom]="zoom"
+                  [disableDefaultUI]="false"
+                  [zoomControl]="true">
+
+            <agm-marker
+                    [latitude]="anothers['location']['lat']"
+                    [longitude]="anothers['location']['long']">
+              <agm-info-window>
+                <strong>{{anothers['name']}}</strong>
+              </agm-info-window>
+            </agm-marker>
+
+          </agm-map>
+        </div>
+      </div>
+      <div class="tab-pane fade mb-3 m-1" id="photoT" role="tabpanel" aria-labelledby="contact-tab">
+        <span class="m-1"></span>
+        <h5><b>ຮູບພາບ</b></h5>
+        <div class="grid row mt-3">
+          <div class="grid-item col-md-4 col-sm-6"
+               *ngFor="let item of items; let i = index"
+               (click)="openLightbox(i)">
+            <img [src]="item['data']['src']" class="img-fluid m-1">
+          </div>
+        </div>
+        <span class="m-1"></span>
+
+
+      </div>
+      <div class="tab-pane fade mb-3" id="aboutT" role="tabpanel" aria-labelledby="contact-tab">
+        <span class="m-1"></span>
+        <h5 *ngIf="anothers['detail']"><b>ກ່ຽວກັບສະຖານທີ່</b></h5>
+        <div class="m-1" *ngIf="anothers['detail']">
+          <p class="col-12"> {{anothers['detail']}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Sheare Social Modal-->
+  <div class="modal fade" id="sheareModal" tabindex="-1" role="dialog" aria-labelledby="sheareModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="sheareModalLabel">ແຊອອນລາຍ</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body d-flex justify-content-center">
+          <a href="http://www.facebook.com/sharer.php?u=https://laotour-info.firebaseapp.com//#/attraction/detail/{{anothers['_id']}}" class="btn bmd-btn-fab fa fa-facebook fa-facebookc faShares" target="_blank"></a>
+          <a href="http://twitter.com/share?text={{anothers['name']}}&url=https://laotour-info.firebaseapp.com//#/attraction/detail/{{anothers['_id']}}" class="btn bmd-btn-fab fa fa-twitter fa-twitterc faShares" target="_blank"></a>
+          <a href="#" class="btn bmd-btn-fab fa fa-instagram fa-instagramc faShares" target="_blank"></a>
+          <a href="https://plus.google.com/share?url=https://laotour-info.firebaseapp.com//#/attraction/detail/{{anothers['_id']}}" class="btn bmd-btn-fab fa fa-google fa-googlec faShares" target="_blank"></a>
+          <a href="#" class="btn bmd-btn-fab fa fa-skype fa-skypec faShares" target="_blank"></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<div id="pic1" *ngIf="info_near_by['attractionses']">
+  <div class="text-center p-4 mt-5">
+    <h1><b>ສະຖານທີ່ຕ່າງໆທີ່ຢູ່ໃກ້ຄຽງ</b></h1>
+  </div>
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-md-4" *ngFor="let restaurant of info_near_by['restaurants']">
+        <div class="card mb-3">
+          <img class="card-img-top" [src]="restaurant['images'][0]" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">{{restaurant['name']}}</h5>
+            <p class="card-text"></p>
+            <a class="btn btn-primary btnIfo" [routerLink]="['/restaurant', 'detail', restaurant['_id']]">ລາຍລະອຽດ</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4" *ngFor="let shelter of info_near_by['shelters']">
+        <div class="card mb-3">
+          <img class="card-img-top" [src]="shelter['images'][0]" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">{{shelter['name']}}</h5>
+            <p class="card-text"></p>
+            <a class="btn btn-primary btnIfo" [routerLink]="['/shelter', 'detail', shelter['_id']]">ລາຍລະອຽດ</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4" *ngFor="let transportation of info_near_by['transportations']">
+        <div class="card mb-3">
+          <img class="card-img-top" [src]="transportation['images'][0]" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">{{transportation['name']}}</h5>
+            <p class="card-text"></p>
+            <a class="btn btn-primary btnIfo" [routerLink]="['/transportation', 'detail', transportation['_id']]">ລາຍລະອຽດ</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4" *ngFor="let att of info_near_by['attractionses']">
+        <div class="card mb-3">
+          <img class="card-img-top" [src]="att['images'][0]" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">{{att['name']}}</h5>
+            <p class="card-text"></p>
+            <a class="btn btn-primary btnIfo" [routerLink]="['/attraction', 'detail', att['_id']]">ລາຍລະອຽດ</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4" *ngFor="let another of info_near_by['another_places']['anothers']">
+        <div class="card mb-3">
+          <img class="card-img-top" [src]="another['images'][0]" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">{{another['name']}}</h5>
+            <p class="card-text"></p>
+            <button class="btn btn-primary btnIfo" [routerLink]="['/another', 'detail', another['_id']]">ລາຍລະອຽດ</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4" *ngFor="let internet of info_near_by['another_places']['internets']">
+        <div class="card mb-3">
+          <img class="card-img-top" [src]="internet['images'][0]" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">{{internet['name']}}</h5>
+            <p class="card-text"></p>
+            <button class="btn btn-primary btnIfo" [routerLink]="['/another', 'internet', 'detail', internet['_id']]">ລາຍລະອຽດ</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

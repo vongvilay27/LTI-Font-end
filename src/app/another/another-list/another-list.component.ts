@@ -12,7 +12,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./another-list.component.css']
 })
 export class AnotherListComponent implements OnInit {
-
+    public innerWidth: any;
+    public hideText: string;
+    public hD = 'h3';
+    typeid: any;
+    latitude: number;
+    longitude: number;
+    zoom = 10;
   internets: Array<Object> = [];
   anothers: Array<Object> = [];
   constructor(
@@ -32,10 +38,12 @@ export class AnotherListComponent implements OnInit {
             navigator.geolocation.getCurrentPosition(position => {
               const lat = position.coords.latitude;
               const lng = position.coords.longitude;
+              this.latitude = lat;
+              this.longitude = lng;
               const subscript: Subscription = this.locationService.getLocalWeater(lat, lng).subscribe((res) => {
                 const api_data = res.json()['current_observation']['observation_location'];
                 const anoSubscript: Subscription = this.typeService.getAnothers(
-                    api_data['country'],
+                    api_data['country_iso3166'],
                     lat + ',' + lng
                 ).subscribe((ano_res) => {
                   this.anothers = ano_res.json()['data'];
@@ -74,6 +82,8 @@ export class AnotherListComponent implements OnInit {
           navigator.geolocation.getCurrentPosition(position => {
             const lat = position.coords.latitude;
             const lng = position.coords.longitude;
+              this.latitude = lat;
+              this.longitude = lng;
             const subscript: Subscription = this.locationService.getLocalWeater(lat, lng).subscribe((res) => {
               const api_data = res.json()['current_observation']['observation_location'];
               const anoSubscript: Subscription = this.allService.getAnothers(

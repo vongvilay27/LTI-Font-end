@@ -28,7 +28,8 @@ export class AttractionsListComponent implements OnInit {
       private typeService: TypeService,
       private allService: AllService
     ) {
-        this.route.params.subscribe((params: Params) => {
+      this.ngProgress.start();
+      this.route.params.subscribe((params: Params) => {
             this.typeid = params['typeid'];
             if (this.typeid) {
                 if (navigator.geolocation) {

@@ -13,13 +13,15 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 export class SearchComponent implements OnInit {
     public innerWidth: any;
     public hideText: string;
-    public hD = 'h3';
+    public hD = 'h1';
     laoChecked:boolean = false;
 
     lat:number;
     lng:number;
     keyword:string;
+    typeS_key:string;
     data: Object = {};
+    typeData: Object = {};
     attractions: Array<Object> = [];
     restaurants: Array<Object> = [];
     shelters: Array<Object> = [];
@@ -28,13 +30,13 @@ export class SearchComponent implements OnInit {
     anothers: Array<Object> = [];
     internets: Array<Object> = [];
     menulist: Array<Object> = [
-        {'id':1,'name':'ສະຖານທີ່ທ່ອງທ່ຽວ','path': 'attraction'},
-        {'id':2,'name':'ຮ້ານອາຫານ','path': 'restaurant'},
-        {'id':3,'name':'ທີ່ພັກແຮມ','path': 'shelter'},
-        {'id':4,'name':'ສະຖານີຂົນສົ່ງໂດຍສານ','path': 'transportation'},
-        {'id':5,'name':'ບໍລິສັດນຳທ່ຽວ','path': 'company'},
-        {'id':6,'name':'ສູນບໍລິການອິນເຕີເນັດ','path': 'internet'},
-        {'id':7,'name':'ສະຖານທີ່ອື່ນໆ','path': 'another'},
+        {'id':'01','name':'ສະຖານທີ່ທ່ອງທ່ຽວ','path': 'attraction'},
+        {'id':'02','name':'ຮ້ານອາຫານ','path': 'restaurant'},
+        {'id':'03','name':'ທີ່ພັກແຮມ','path': 'shelter'},
+        {'id':'04','name':'ສະຖານີຂົນສົ່ງໂດຍສານ','path': 'transportation'},
+        {'id':'05','name':'ບໍລິສັດນຳທ່ຽວ','path': 'company'},
+        {'id':'06','name':'ສູນບໍລິການອິນເຕີເນັດ','path': 'internet'},
+        {'id':'07','name':'ສະຖານທີ່ອື່ນໆ','path': 'another'},
     ];
     showmenuTitle: string = 'ປະເພດການຄົ້ນຫາ';
 
@@ -44,19 +46,7 @@ export class SearchComponent implements OnInit {
         public searchService: SearchService,
         private route: ActivatedRoute,
         private router: Router
-    ) { }
-    ngOnInit() {
-      /*Progressstatus*/
-      /** request started */
-      this.ngProgress.start();
-
-      this.innerWidth = window.innerWidth;
-      if (this.innerWidth <= 560) {
-        this.hideText = 'text-hide';
-        this.hD = 'h5';
-      }
-
-
+    ) {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(position => {
                 this.lat = position.coords.latitude;
@@ -129,6 +119,20 @@ export class SearchComponent implements OnInit {
                 });
             });
         }
+    }
+    ngOnInit() {
+      /*Progressstatus*/
+      /** request started */
+      this.ngProgress.start();
+
+      this.innerWidth = window.innerWidth;
+      if (this.innerWidth <= 560) {
+        this.hideText = 'text-hide';
+        this.hD = 'h5';
+      }
+
+
+
       }
     showAttraction(attid){
         this.router.navigate(['/attraction', 'detail', attid]);
@@ -149,7 +153,7 @@ export class SearchComponent implements OnInit {
         this.router.navigate(['/another', 'detail', anoid]);
     }
     showInternet(intid){
-        this.router.navigate(['/internet', 'detail', intid]);
+        this.router.navigate(['/another', 'internet', intid]);
     }
 
     checkLao(){
@@ -196,6 +200,58 @@ export class SearchComponent implements OnInit {
     }
 
     showmenu(list){
-        this.showmenuTitle =list['name'];
+        this.showmenuTitle = list['name'];
+        this.typeS_key = list['id']
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(position => {
+                this.lat = position.coords.latitude;
+                this.lng = position.coords.longitude;
+
+                const subscript: Subscription = this.locationService.getLocalWeater(this.lat, this.lng).subscribe((res) => {
+                    const api_data = res.json()['current_observation']['observation_location'];
+                    /*console.log(api_data);*/
+                    this.route.queryParams.subscribe(params => {
+                        this.keyword = params.q;
+                        const searchSubscript = this.searchService.getSearchTypeData(api_data['country_iso3166'], this.lat + ',' + this.lng, this.keyword,this.typeS_key).subscribe((search_res) => {
+                            this.typeData = res.json()['data'];
+                            this.ngProgress.done();
+                            searchSubscript.unsubscribe();
+                        }, (search_error) => {
+                            this.ngProgress.done();
+                            searchSubscript.unsubscribe();
+                        });
+                        subscript.unsubscribe();
+                    });
+
+                }, (error) => {
+                    this.ngProgress.done();
+                    subscript.unsubscribe();
+                });
+            }, () => {
+                this.route.queryParams.subscribe(params => {
+                    this.keyword = params.q;
+                    const subscript: Subscription = this.searchService.getSearchTypeData('CTC', '0,0', this.keyword,this.typeS_key).subscribe((res) => {
+                        this.typeData = res.json()['data'];
+                        this.ngProgress.done();
+                        subscript.unsubscribe();
+                    }, (error) => {
+                        this.ngProgress.done();
+                        subscript.unsubscribe();
+                    });
+                });
+            });
+        }else {
+            this.route.queryParams.subscribe(params => {
+                this.keyword = params.q;
+                const subscript: Subscription = this.searchService.getSearchTypeData('CTC', '0,0', this.keyword,this.typeS_key).subscribe((res) => {
+                    this.typeData = res.json()['data'];
+                    this.ngProgress.done();
+                    subscript.unsubscribe();
+                }, (error) => {
+                    this.ngProgress.done();
+                    subscript.unsubscribe();
+                });
+            });
+        }
     }
 }

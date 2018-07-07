@@ -36,7 +36,7 @@
     <td (click)="showCompadetail(company['_id'])">
       <img [src]="company['images'][0]" width="30%" class="rounded float-right" alt="">
       <h5 class="{{hD}}"><b>{{company['name']}}</b></h5>
-      <p class="{{hideText}}">{{company['about']}}</p>
+      <p class="{{hideText}}">{{company['about']| slice:0:220}}...</p>
     </td>
   </tr>
 

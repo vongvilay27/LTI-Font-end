@@ -22,8 +22,8 @@
   </div>
   <span class="m-1"></span>
 
-<!--List-->
-  <div class="container mt-5 mb-5">
+  <!--List 1-->
+  <div class="container mt-5 mb-5" *ngIf="data">
     <div class="row ml-1 d-block">
       <table class="table table-hover tableList" *ngIf="attractions.length" >
         <tr class="card" *ngFor="let att of attractions">
@@ -31,7 +31,7 @@
             <img [src]="att['images'][0]" width="30%" class="rounded float-right" alt="">
             <h5 class="{{hD}}"><b>{{att['name']}}</b></h5>
             <p class="card-subtitle">ປະເພດ: <b>{{att['attractions_type']['name']}}</b></p>
-            <p class="{{hideText}}">{{att['details']}}</p>
+            <p class="{{hideText}}">{{att['details'] | slice:0:220}}...</p>
           </td>
         </tr>
       </table>
@@ -41,27 +41,29 @@
             <img [src]="res['images'][0]" width="30%" class="rounded float-right" alt="">
             <h5 class="{{hD}}"><b>{{res['name']}}</b></h5>
             <p class="card-subtitle">ປະເພດ: <b>{{res['restaurant_type']['name']}}</b></p>
-            <p class="{{hideText}}">{{res['details']}}</p>
+            <p class="{{hideText}}">{{res['detail'] | slice:0:220}}...</p>
+
+
           </td>
         </tr>
       </table>
       <table class="table table-hover tableList" *ngIf="shelters.length" >
-      <tr class="card" *ngFor="let shel of shelters">
-        <td (click)="showShelter(shel['_id'])">
-          <img [src]="shel['images'][0]" width="30%" class="rounded float-right" alt="">
-          <h5 class="{{hD}}"><b>{{shel['name']}}</b></h5>
-          <p class="card-subtitle">ປະເພດ: <b>{{shel['shelter_type']['name']}}</b></p>
-          <p class="{{hideText}}">{{shel['detail']}}</p>
-        </td>
-      </tr>
-    </table>
+        <tr class="card" *ngFor="let shel of shelters">
+          <td (click)="showShelter(shel['_id'])">
+            <img [src]="shel['images'][0]" width="30%" class="rounded float-right" alt="">
+            <h5 class="{{hD}}"><b>{{shel['name']}}</b></h5>
+            <p class="card-subtitle">ປະເພດ: <b>{{shel['shelter_type']['name']}}</b></p>
+            <p class="{{hideText}}">{{shel['detail'] | slice:0:220}}...</p>
+          </td>
+        </tr>
+      </table>
       <table class="table table-hover tableList" *ngIf="transportations.length" >
         <tr class="card" *ngFor="let tran of transportations">
           <td (click)="showTransportation(tran['_id'])">
             <img [src]="tran['images'][0]" width="30%" class="rounded float-right" alt="">
             <h5 class="{{hD}}"><b>{{tran['name']}}</b></h5>
             <p class="card-subtitle">ປະເພດ: <b>{{tran['transportation_type']['name']}}</b></p>
-            <p class="{{hideText}}">{{tran['detail']}}</p>
+            <p class="{{hideText}}">{{tran['detail'] | slice:0:220}}...</p>
           </td>
         </tr>
       </table>
@@ -70,29 +72,105 @@
           <td (click)="showCompany(com['_id'])">
             <img [src]="com['images'][0]" width="30%" class="rounded float-right" alt="">
             <h5 class="{{hD}}"><b>{{com['name']}}</b></h5>
-            <p class="{{hideText}}">{{com['about']}}</p>
+            <p class="{{hideText}}">{{com['about'] | slice:0:220}}...</p>
           </td>
         </tr>
       </table>
       <table class="table table-hover tableList" *ngIf="internets.length" >
-      <tr class="card" *ngFor="let int of internets">
-        <td (click)="showInternet(int['_id'])">
-          <img [src]="int['images'][0]" width="30%" class="rounded float-right" alt="">
-          <h5 class="{{hD}}"><b>{{int['name']}}</b></h5>
-          <p class="{{hideText}}">{{int['detail']}}</p>
-        </td>
-      </tr>
-    </table>
+        <tr class="card" *ngFor="let int of internets">
+          <td (click)="showInternet(int['_id'])">
+            <img [src]="int['images'][0]" width="30%" class="rounded float-right" alt="">
+            <h5 class="{{hD}}"><b>{{int['name']}}</b></h5>
+            <p class="{{hideText}}">{{int['detail'] | slice:0:220}}...</p>
+          </td>
+        </tr>
+      </table>
       <table class="table table-hover tableList" *ngIf="anothers.length" >
         <tr class="card" *ngFor="let ano of anothers">
           <td (click)="showAnother(ano['_id'])">
             <img [src]="ano['images'][0]" width="30%" class="rounded float-right" alt="">
             <h5 class="{{hD}}"><b>{{ano['name']}}</b></h5>
-            <p class="{{hideText}}">{{ano['detail']}}</p>
+            <p class="{{hideText}}">{{ano['detail'] | slice:0:220}}...</p>
           </td>
         </tr>
       </table>
     </div>
   </div>
+
+<!--List 2-->
+  <div class="container mt-5 mb-5" *ngIf="typeData">
+    <div class="row ml-1 d-block">
+      <table class="table table-hover tableList" *ngIf="typeData['attractions'].length" >
+        <tr class="card" *ngFor="let att of typeData['attractions']">
+          <td (click)="showAttraction(att['_id'])">
+            <img [src]="att['images'][0]" width="30%" class="rounded float-right" alt="">
+            <h5 class="{{hD}}"><b>{{att['name']}}</b></h5>
+            <p class="card-subtitle">ປະເພດ: <b>{{att['attractions_type']['name']}}</b></p>
+            <p class="{{hideText}}">{{att['details'] | slice:0:220}}...</p>
+          </td>
+        </tr>
+      </table>
+      <table class="table table-hover tableList" *ngIf="typeData['restaurants'].length" >
+        <tr class="card" *ngFor="let res of typeData['restaurants']">
+          <td (click)="showRestaurant(res['_id'])">
+            <img [src]="res['images'][0]" width="30%" class="rounded float-right" alt="">
+            <h5 class="{{hD}}"><b>{{res['name']}}</b></h5>
+            <p class="card-subtitle">ປະເພດ: <b>{{res['restaurant_type']['name']}}</b></p>
+            <p class="{{hideText}}">{{res['detail'] | slice:0:220}}...</p>
+
+
+          </td>
+        </tr>
+      </table>
+      <table class="table table-hover tableList" *ngIf="typeData['shelters'].length" >
+      <tr class="card" *ngFor="let shel of typeData['shelters']">
+        <td (click)="showShelter(shel['_id'])">
+          <img [src]="shel['images'][0]" width="30%" class="rounded float-right" alt="">
+          <h5 class="{{hD}}"><b>{{shel['name']}}</b></h5>
+          <p class="card-subtitle">ປະເພດ: <b>{{shel['shelter_type']['name']}}</b></p>
+          <p class="{{hideText}}">{{shel['detail'] | slice:0:220}}...</p>
+        </td>
+      </tr>
+    </table>
+      <table class="table table-hover tableList" *ngIf="typeData['transportations'].length" >
+        <tr class="card" *ngFor="let tran of typeData['transportations']">
+          <td (click)="showTransportation(tran['_id'])">
+            <img [src]="tran['images'][0]" width="30%" class="rounded float-right" alt="">
+            <h5 class="{{hD}}"><b>{{tran['name']}}</b></h5>
+            <p class="card-subtitle">ປະເພດ: <b>{{tran['transportation_type']['name']}}</b></p>
+            <p class="{{hideText}}">{{tran['detail'] | slice:0:220}}...</p>
+          </td>
+        </tr>
+      </table>
+      <table class="table table-hover tableList" *ngIf="typeData['tourcompanies'].length" >
+        <tr class="card" *ngFor="let com of typeData['tourcompanies']">
+          <td (click)="showCompany(com['_id'])">
+            <img [src]="com['images'][0]" width="30%" class="rounded float-right" alt="">
+            <h5 class="{{hD}}"><b>{{com['name']}}</b></h5>
+            <p class="{{hideText}}">{{com['about'] | slice:0:220}}...</p>
+          </td>
+        </tr>
+      </table>
+      <table class="table table-hover tableList" *ngIf="typeData['internets'].length" >
+      <tr class="card" *ngFor="let int of typeData['internets']">
+        <td (click)="showInternet(int['_id'])">
+          <img [src]="int['images'][0]" width="30%" class="rounded float-right" alt="">
+          <h5 class="{{hD}}"><b>{{int['name']}}</b></h5>
+          <p class="{{hideText}}">{{int['detail'] | slice:0:220}}...</p>
+        </td>
+      </tr>
+    </table>
+      <table class="table table-hover tableList" *ngIf="typeData['anothers'].length" >
+        <tr class="card" *ngFor="let ano of typeData['anothers']">
+          <td (click)="showAnother(ano['_id'])">
+            <img [src]="ano['images'][0]" width="30%" class="rounded float-right" alt="">
+            <h5 class="{{hD}}"><b>{{ano['name']}}</b></h5>
+            <p class="{{hideText}}">{{ano['detail'] | slice:0:220}}...</p>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
 
 

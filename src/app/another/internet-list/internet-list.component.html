@@ -36,7 +36,7 @@
     <td (click)="showInternetDetail(internet['_id'])">
       <img [src]="internet['images'][0]" width="30%" class="rounded float-right" alt="">
       <h5 class="{{hD}}"><b>{{internet['name']}}</b></h5>
-      <p class="{{hideText}}">{{internet['detail']}}</p>
+      <p class="{{hideText}}">{{internet['detail']| slice:0:220}}...</p>
     </td>
   </tr>
 

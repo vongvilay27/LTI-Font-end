@@ -37,7 +37,7 @@
       <img [src]="shelter['images'][0]" width="30%" class="rounded float-right" alt="">
       <h5 class="{{hD}}"><b>{{shelter['name']}}</b></h5>
       <p class="card-subtitle">ປະເພດ: <b>{{shelter['shelter_type']['name']}}</b></p>
-      <p class="{{hideText}}">{{shelter['detail']}}</p>
+      <p class="{{hideText}}">{{shelter['detail']| slice:0:220}}...</p>
     </td>
   </tr>
 

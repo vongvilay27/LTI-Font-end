@@ -10,7 +10,7 @@
           <img class="card-img-top" [src]="shelters[0]['images'][0]" alt="Card image cap">
           <div class="card-body">
             <h5 class="card-title">{{shelters[0]['name']}}</h5>
-            <p class="card-text">{{shelters[0]['detail']}}</p>
+            <p class="card-text">{{shelters[0]['detail']| slice:0:220}}...</p>
             <p class="card-text"><small class="text-muted">{{shelters[0]['shelter_type']['name']}}</small></p>
             <button class="btn btn-raised btn-primary float-right mb-5" [routerLink]="['/shelter','detail', shelters[0]['_id']]">ລາຍລະອຽດ</button>
           </div>

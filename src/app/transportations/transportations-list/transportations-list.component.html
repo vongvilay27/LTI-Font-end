@@ -36,7 +36,7 @@
       <img [src]="tran['images'][0]" width="30%" class="rounded float-right" alt="">
       <h5 class="{{hD}}"><b>{{tran['name']}}</b></h5>
       <p class="card-subtitle">ປະເພດ: <b>{{tran['transportation_type']['name']}}</b></p>
-      <p class="{{hideText}}">{{tran['detail']}}</p>
+      <p class="{{hideText}}">{{tran['detail']| slice:0:220}}...</p>
     </td>
   </tr>
 

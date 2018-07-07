@@ -43,14 +43,14 @@
     <td (click)="showAnotherDetail(another['_id'])">
       <img [src]="another['images'][0]" width="30%" class="rounded float-right" alt="">
       <h5 class="{{hD}}"><b>{{another['name']}}</b></h5>
-      <p class="{{hideText}}">{{another['detail']}}</p>
+      <p class="{{hideText}}">{{another['detail']| slice:0:220}}...</p>
     </td>
   </tr>
   <tr class="card" *ngFor="let internet of internets">
     <td (click)="showAnotherDetail(internet['_id'])">
       <img [src]="internet['images'][0]" width="30%" class="rounded float-right" alt="">
       <h5 class="{{hD}}"><b>{{internet['name']}}</b></h5>
-      <p class="{{hideText}}">{{internet['detail']}}</p>
+      <p class="{{hideText}}">{{internet['detail']| slice:0:220}}...</p>
     </td>
   </tr>
 

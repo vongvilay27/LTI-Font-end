@@ -21,6 +21,7 @@
     "@angular/http": "^6.0.0",
     "@angular/platform-browser": "^6.0.0",
     "@angular/platform-browser-dynamic": "^6.0.0",
+    "@angular/pwa": "^0.6.8",
     "@angular/router": "^6.0.0",
     "@ngx-gallery/core": "^2.1.1",
     "@ngx-gallery/gallerize": "^2.1.1",

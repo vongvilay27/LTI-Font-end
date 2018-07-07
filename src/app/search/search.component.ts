@@ -55,7 +55,7 @@ export class SearchComponent implements OnInit {
         this.hideText = 'text-hide';
         this.hD = 'h5';
       }
-        console.log(this.laoChecked)
+
 
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(position => {
@@ -64,7 +64,7 @@ export class SearchComponent implements OnInit {
 
                 const subscript: Subscription = this.locationService.getLocalWeater(this.lat, this.lng).subscribe((res) => {
                     const api_data = res.json()['current_observation']['observation_location'];
-                    console.log(api_data);
+                    /*console.log(api_data);*/
                     this.route.queryParams.subscribe(params => {
                         this.keyword = params.q;
                         const searchSubscript = this.searchService.getSearchData(api_data['country_iso3166'], this.lat + ',' + this.lng, this.keyword).subscribe((search_res) => {
@@ -157,7 +157,7 @@ export class SearchComponent implements OnInit {
         if(this.laoChecked ==false){
             const subscript: Subscription = this.locationService.getLocalWeater(this.lat, this.lng).subscribe((res) => {
                 const api_data = res.json()['current_observation']['observation_location'];
-                console.log(api_data);
+               /* console.log(api_data);*/
             const searchSubscript = this.searchService.getSearchData(api_data['country_iso3166'], this.lat + ',' + this.lng, this.keyword).subscribe((search_res) => {
                 this.data = search_res.json()['data'];
                 this.attractions = this.data['attractionses'];

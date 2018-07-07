@@ -5,7 +5,7 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 import {LocationcheckService} from '../../services/locationcheck.service';
 import {DetailService} from '../../services/detail.service';
 import {NgProgress} from 'ngx-progressbar';
-import {DomSanitizer} from '@angular/platform-browser';
+import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 import {Subscription} from 'rxjs';
 
 @Component({
@@ -50,9 +50,9 @@ export class TransportationsDetailComponent implements OnInit {
             if (this.id) {
                 const tranSubscript: Subscription = this.detailService.getTransportation(this.id).subscribe((res) => {
                     this.transportations = res.json()['data'];
-/*                    this.services = this.transportations['']*/
-                    console.log(this.transportations)
-                    /*console.log(this.services)*/
+                    this.services = this.transportations['services']
+                   /* console.log(this.transportations)
+                    console.log(this.services)*/
                     this.ngProgress.done();
                     const nearSubscript: Subscription = this.detailService.getInfoNearby(
                         this.transportations['_id'],
@@ -62,7 +62,7 @@ export class TransportationsDetailComponent implements OnInit {
                     )
                         .subscribe((near_res) => {
                             this.info_near_by = near_res.json()['data'];
-                            console.log(this.info_near_by);
+                            /*console.log(this.info_near_by);*/
                             nearSubscript.unsubscribe();
                         }, (near_error) => {
                             nearSubscript.unsubscribe();
@@ -89,7 +89,6 @@ export class TransportationsDetailComponent implements OnInit {
                 }, (shel_error) => {
                     this.ngProgress.done();
                     tranSubscript.unsubscribe();
-                    console.log(this.transportations)
                     this.router.navigate(['/home']);
                 });
             }
@@ -104,9 +103,29 @@ export class TransportationsDetailComponent implements OnInit {
             this.hE = '';
             this.hF = '';
         }
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(position => {
+                this.lat = position.coords.latitude;
+                this.lng = position.coords.longitude;
+            });
+        }
 
+    }
 
-
+    safeVideoUrl(): SafeResourceUrl {
+        let url = '';
+        if (this.transportations['video_url']) {
+            url = this.transportations['video_url'];
+        }
+        const new_url = url.split('&')[0];
+        const urlArray = new_url.split('=');
+        if (urlArray[0] === 'https://www.youtube.com/watch?v') {
+            const youtube_id = urlArray[1];
+            const youtube_domain = urlArray[0].split('watch')[0];
+            const youtube_embed_url = youtube_domain + 'embed/' + youtube_id;
+            return this.safeSanitizer.bypassSecurityTrustResourceUrl(youtube_embed_url);
+        }
+        return this.safeSanitizer.bypassSecurityTrustResourceUrl(url);
     }
     openLightbox(index: number) {
         this.lightbox.open(index, 'tranlightbox', {

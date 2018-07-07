@@ -50,8 +50,8 @@ export class RestaurantsDetailComponent implements OnInit {
                 const resSubscript: Subscription = this.detailService.getRestaurant(this.id).subscribe((res) => {
                     this.restaurants = res.json()['data'];
                     this.foods = this.restaurants['foods']
-                    console.log(this.restaurants)
-                    console.log(this.foods)
+/*                    console.log(this.restaurants)
+                    console.log(this.foods)*/
 
                     this.ngProgress.done();
                     const nearSubscript: Subscription = this.detailService.getInfoNearby(
@@ -62,7 +62,7 @@ export class RestaurantsDetailComponent implements OnInit {
                     )
                         .subscribe((near_res) => {
                             this.info_near_by = near_res.json()['data'];
-                            console.log(this.info_near_by);
+/*                            console.log(this.info_near_by);*/
                             nearSubscript.unsubscribe();
                         }, (near_error) => {
                             nearSubscript.unsubscribe();
@@ -110,6 +110,12 @@ export class RestaurantsDetailComponent implements OnInit {
             this.cTainer = '';
             this.hD = 'h5';
             this.hP = '';
+        }
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(position => {
+                this.lat = position.coords.latitude;
+                this.lng = position.coords.longitude;
+            });
         }
 
     }

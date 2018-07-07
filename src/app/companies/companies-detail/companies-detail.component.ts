@@ -52,7 +52,7 @@ export class CompaniesDetailComponent implements OnInit {
                     )
                         .subscribe((near_res) => {
                             this.info_near_by = near_res.json()['data'];
-                            console.log(this.info_near_by);
+                           /* console.log(this.info_near_by);*/
                             nearSubscript.unsubscribe();
                         }, (near_error) => {
                             nearSubscript.unsubscribe();
@@ -85,7 +85,12 @@ export class CompaniesDetailComponent implements OnInit {
     }
 
     ngOnInit() {
-
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(position => {
+                this.lat = position.coords.latitude;
+                this.lng = position.coords.longitude;
+            });
+        }
     }
     safeVideoUrl(): SafeResourceUrl {
         let url = '';

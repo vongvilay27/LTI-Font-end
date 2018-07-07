@@ -50,8 +50,8 @@ export class SheltersDetailComponent implements OnInit {
                 const shelSubscript: Subscription = this.detailService.getShelter(this.id).subscribe((res) => {
                     this.shelters = res.json()['data'];
                     this.roomsT = this.shelters['rooms']
-                    console.log(this.shelters)
-                    console.log(this.roomsT)
+                  /*  console.log(this.shelters)
+                    console.log(this.roomsT)*/
 
                     this.ngProgress.done();
                     const nearSubscript: Subscription = this.detailService.getInfoNearby(
@@ -62,7 +62,7 @@ export class SheltersDetailComponent implements OnInit {
                     )
                         .subscribe((near_res) => {
                             this.info_near_by = near_res.json()['data'];
-                            console.log(this.info_near_by);
+                        /*    console.log(this.info_near_by);*/
                             nearSubscript.unsubscribe();
                         }, (near_error) => {
                             nearSubscript.unsubscribe();
@@ -111,6 +111,12 @@ export class SheltersDetailComponent implements OnInit {
             this.cTainer = '';
             this.hD = 'h5';
             this.hP = '';
+        }
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(position => {
+                this.lat = position.coords.latitude;
+                this.lng = position.coords.longitude;
+            });
         }
     }
 

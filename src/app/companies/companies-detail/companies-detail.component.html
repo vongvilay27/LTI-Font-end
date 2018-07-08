@@ -111,8 +111,8 @@
       </div>
       <span class="m-1"></span>
       <h5><b>ວີດີໂອ</b></h5>
-      <div class="row">
-        <embed class="col-12 mt-3" *ngIf="tourcompanies['video_url']" style="width: 100%" height="440px"
+      <div class="row embed-responsive embed-responsive-16by9">
+        <embed class="col-12 mt-3 embed-responsive-item" *ngIf="tourcompanies['video_url']" allowfullscreen
                [src]="safeVideoUrl()">
       </div>
     </div>

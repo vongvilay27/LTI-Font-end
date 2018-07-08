@@ -18,10 +18,11 @@ export class SearchComponent implements OnInit {
 
     lat:number;
     lng:number;
+    chooseTS: boolean = false;
     keyword:string;
     typeS_key:string;
     data: Object = {};
-    typeData: Object = {};
+    typeData: Array<Object> = [];
     attractions: Array<Object> = [];
     restaurants: Array<Object> = [];
     shelters: Array<Object> = [];
@@ -57,6 +58,7 @@ export class SearchComponent implements OnInit {
                     /*console.log(api_data);*/
                     this.route.queryParams.subscribe(params => {
                         this.keyword = params.q;
+                        this.chooseTS = false;
                         const searchSubscript = this.searchService.getSearchData(api_data['country_iso3166'], this.lat + ',' + this.lng, this.keyword).subscribe((search_res) => {
                             this.data = search_res.json()['data'];
                             this.attractions = this.data['attractionses'];
@@ -66,6 +68,7 @@ export class SearchComponent implements OnInit {
                             this.tourcompanies = this.data['tourcompanies'];
                             this.anothers = this.data['another_places']['anothers'];
                             this.internets = this.data['another_places']['internets'];
+
                             this.ngProgress.done();
                             searchSubscript.unsubscribe();
                         }, (search_error) => {
@@ -82,6 +85,7 @@ export class SearchComponent implements OnInit {
             }, () => {
                 this.route.queryParams.subscribe(params => {
                     this.keyword = params.q;
+                    this.chooseTS = false;
                     const subscript: Subscription = this.searchService.getSearchData('CTC', '0,0', this.keyword).subscribe((res) => {
                         this.data = res.json()['data'];
                         this.attractions = this.data['attractionses'];
@@ -102,6 +106,7 @@ export class SearchComponent implements OnInit {
         }else {
             this.route.queryParams.subscribe(params => {
                 this.keyword = params.q;
+                this.chooseTS = false;
                 const subscript: Subscription = this.searchService.getSearchData('CTC', '0,0', this.keyword).subscribe((res) => {
                     this.data = res.json()['data'];
                     this.attractions = this.data['attractionses'];
@@ -158,6 +163,7 @@ export class SearchComponent implements OnInit {
 
     checkLao(){
         this.laoChecked = !this.laoChecked;
+        this.chooseTS = false;
         if(this.laoChecked ==false){
             const subscript: Subscription = this.locationService.getLocalWeater(this.lat, this.lng).subscribe((res) => {
                 const api_data = res.json()['current_observation']['observation_location'];
@@ -201,7 +207,7 @@ export class SearchComponent implements OnInit {
 
     showmenu(list){
         this.showmenuTitle = list['name'];
-        this.typeS_key = list['id']
+        this.typeS_key = list['id'];
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(position => {
                 this.lat = position.coords.latitude;
@@ -213,7 +219,8 @@ export class SearchComponent implements OnInit {
                     this.route.queryParams.subscribe(params => {
                         this.keyword = params.q;
                         const searchSubscript = this.searchService.getSearchTypeData(api_data['country_iso3166'], this.lat + ',' + this.lng, this.keyword,this.typeS_key).subscribe((search_res) => {
-                            this.typeData = res.json()['data'];
+                            this.typeData = search_res.json()['data'];
+                            this.chooseTS = true;
                             this.ngProgress.done();
                             searchSubscript.unsubscribe();
                         }, (search_error) => {
@@ -232,6 +239,7 @@ export class SearchComponent implements OnInit {
                     this.keyword = params.q;
                     const subscript: Subscription = this.searchService.getSearchTypeData('CTC', '0,0', this.keyword,this.typeS_key).subscribe((res) => {
                         this.typeData = res.json()['data'];
+                        this.chooseTS = true;
                         this.ngProgress.done();
                         subscript.unsubscribe();
                     }, (error) => {
@@ -245,6 +253,7 @@ export class SearchComponent implements OnInit {
                 this.keyword = params.q;
                 const subscript: Subscription = this.searchService.getSearchTypeData('CTC', '0,0', this.keyword,this.typeS_key).subscribe((res) => {
                     this.typeData = res.json()['data'];
+                    this.chooseTS = true;
                     this.ngProgress.done();
                     subscript.unsubscribe();
                 }, (error) => {
@@ -254,4 +263,16 @@ export class SearchComponent implements OnInit {
             });
         }
     }
+
+    ifnodata(){
+        return this.attractions.length ||
+            this.restaurants.length ||
+            this.shelters.length ||
+            this.transportations.length ||
+            this.tourcompanies.length ||
+            this.anothers.length ||
+            this.internets.length ||
+            this.typeData.length;
+    }
+
 }

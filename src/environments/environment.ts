@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   ANONYMOUS_SECRET: 'laotourapi@nuol.fns.edu.la',
-  RAMDOM_KEY: '$2a$10$FRmkcpBT2UQ.exuudkPHXOWXo.4kzX4YrwZfW7fwkgGOlJb0Arg8e',
+  RAMDOM_KEY: '$2a$10$7k7ZXt5daANtxIU4sYIbl.rn6Iewhx5KNPRMbtgByvpn1dPhmfqXi',
   SERVER_ADDRESS: 'http://localhost:3000',
   API_ADDRESS: 'https://api.wunderground.com//api/b7e4ea3b9ecdbe54/conditions/q/'
 };

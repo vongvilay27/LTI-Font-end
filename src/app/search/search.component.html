@@ -11,7 +11,7 @@
           </label>
         </div>
         <div class="dropdown-divider"></div>
-        <div *ngFor="let list of menulist;let index of index">
+        <div *ngFor="let list of menulist;let i of index">
           <button class="dropdown-item" type="button" (click)="showmenu(list)">{{list['name']}}</button>
         </div>
       </div>
@@ -23,7 +23,7 @@
   <span class="m-1"></span>
 
   <!--List 1-->
-  <div class="container mt-5 mb-5" *ngIf="data">
+  <div class="container mt-5 mb-5" *ngIf="chooseTS == false">
     <div class="row ml-1 d-block">
       <table class="table table-hover tableList" *ngIf="attractions.length" >
         <tr class="card" *ngFor="let att of attractions">
@@ -62,7 +62,7 @@
           <td (click)="showTransportation(tran['_id'])">
             <img [src]="tran['images'][0]" width="30%" class="rounded float-right" alt="">
             <h5 class="{{hD}}"><b>{{tran['name']}}</b></h5>
-            <p class="card-subtitle">ປະເພດ: <b>{{tran['transportation_type']['name']}}</b></p>
+<!--            <p class="card-subtitle">ປະເພດ: <b>{{tran['transportation_type']['name']}}</b></p>-->
             <p class="{{hideText}}">{{tran['detail'] | slice:0:220}}...</p>
           </td>
         </tr>
@@ -98,10 +98,10 @@
   </div>
 
 <!--List 2-->
-  <div class="container mt-5 mb-5" *ngIf="typeData">
+  <div class="container mt-5 mb-5" *ngIf="chooseTS == true">
     <div class="row ml-1 d-block">
-      <table class="table table-hover tableList" *ngIf="typeData['attractions'].length" >
-        <tr class="card" *ngFor="let att of typeData['attractions']">
+      <table class="table table-hover tableList" *ngIf="typeS_key == '01'" >
+        <tr class="card" *ngFor="let att of typeData">
           <td (click)="showAttraction(att['_id'])">
             <img [src]="att['images'][0]" width="30%" class="rounded float-right" alt="">
             <h5 class="{{hD}}"><b>{{att['name']}}</b></h5>
@@ -110,40 +110,40 @@
           </td>
         </tr>
       </table>
-      <table class="table table-hover tableList" *ngIf="typeData['restaurants'].length" >
-        <tr class="card" *ngFor="let res of typeData['restaurants']">
+      <table class="table table-hover tableList" *ngIf="typeS_key == '03'">
+        <tr class="card" *ngFor="let res of typeData">
           <td (click)="showRestaurant(res['_id'])">
             <img [src]="res['images'][0]" width="30%" class="rounded float-right" alt="">
-            <h5 class="{{hD}}"><b>{{res['name']}}</b></h5>
-            <p class="card-subtitle">ປະເພດ: <b>{{res['restaurant_type']['name']}}</b></p>
+            <h5 class="{{hD}}"><b>{{res['name']}}</b></h5><!--
+            <p class="card-subtitle">ປະເພດ: <b>{{res['restaurant_type']['name']}}</b></p>-->
             <p class="{{hideText}}">{{res['detail'] | slice:0:220}}...</p>
 
 
           </td>
         </tr>
       </table>
-      <table class="table table-hover tableList" *ngIf="typeData['shelters'].length" >
-      <tr class="card" *ngFor="let shel of typeData['shelters']">
+      <table class="table table-hover tableList" *ngIf="typeS_key == '02'">
+      <tr class="card" *ngFor="let shel of typeData">
         <td (click)="showShelter(shel['_id'])">
           <img [src]="shel['images'][0]" width="30%" class="rounded float-right" alt="">
-          <h5 class="{{hD}}"><b>{{shel['name']}}</b></h5>
-          <p class="card-subtitle">ປະເພດ: <b>{{shel['shelter_type']['name']}}</b></p>
+          <h5 class="{{hD}}"><b>{{shel['name']}}</b></h5><!--
+          <p class="card-subtitle">ປະເພດ: <b>{{shel['shelter_type']['name']}}</b></p>-->
           <p class="{{hideText}}">{{shel['detail'] | slice:0:220}}...</p>
         </td>
       </tr>
     </table>
-      <table class="table table-hover tableList" *ngIf="typeData['transportations'].length" >
-        <tr class="card" *ngFor="let tran of typeData['transportations']">
+      <table class="table table-hover tableList" *ngIf="typeS_key == '04'" >
+        <tr class="card" *ngFor="let tran of typeData">
           <td (click)="showTransportation(tran['_id'])">
             <img [src]="tran['images'][0]" width="30%" class="rounded float-right" alt="">
-            <h5 class="{{hD}}"><b>{{tran['name']}}</b></h5>
-            <p class="card-subtitle">ປະເພດ: <b>{{tran['transportation_type']['name']}}</b></p>
+            <h5 class="{{hD}}"><b>{{tran['name']}}</b></h5><!--
+            <p class="card-subtitle">ປະເພດ: <b>{{tran['transportation_type']['name']}}</b></p>-->
             <p class="{{hideText}}">{{tran['detail'] | slice:0:220}}...</p>
           </td>
         </tr>
       </table>
-      <table class="table table-hover tableList" *ngIf="typeData['tourcompanies'].length" >
-        <tr class="card" *ngFor="let com of typeData['tourcompanies']">
+      <table class="table table-hover tableList" *ngIf="typeS_key == '05'">
+        <tr class="card" *ngFor="let com of typeData">
           <td (click)="showCompany(com['_id'])">
             <img [src]="com['images'][0]" width="30%" class="rounded float-right" alt="">
             <h5 class="{{hD}}"><b>{{com['name']}}</b></h5>
@@ -151,8 +151,8 @@
           </td>
         </tr>
       </table>
-      <table class="table table-hover tableList" *ngIf="typeData['internets'].length" >
-      <tr class="card" *ngFor="let int of typeData['internets']">
+      <table class="table table-hover tableList" *ngIf="typeS_key == '06'" >
+      <tr class="card" *ngFor="let int of typeData">
         <td (click)="showInternet(int['_id'])">
           <img [src]="int['images'][0]" width="30%" class="rounded float-right" alt="">
           <h5 class="{{hD}}"><b>{{int['name']}}</b></h5>
@@ -160,8 +160,8 @@
         </td>
       </tr>
     </table>
-      <table class="table table-hover tableList" *ngIf="typeData['anothers'].length" >
-        <tr class="card" *ngFor="let ano of typeData['anothers']">
+      <table class="table table-hover tableList" *ngIf="typeS_key == '07'">
+        <tr class="card" *ngFor="let ano of typeData">
           <td (click)="showAnother(ano['_id'])">
             <img [src]="ano['images'][0]" width="30%" class="rounded float-right" alt="">
             <h5 class="{{hD}}"><b>{{ano['name']}}</b></h5>
@@ -171,6 +171,15 @@
       </table>
     </div>
   </div>
+
+<div *ngIf="!ifnodata()" class="d-flex justify-content-center">
+    <div class="text-center card col-6  pt-3 pb-3 mt-3 mb-3">
+      <h1 class="h1"><b>404</b></h1>
+      <h1 class="h2"><b>ບໍພົບຂໍ້ມູນທີ່ທ່ານຄົ້ນຫາ</b></h1>
+    </div>
+</div>
+
+
 
 
 

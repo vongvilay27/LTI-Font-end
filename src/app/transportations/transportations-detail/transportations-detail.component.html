@@ -134,9 +134,9 @@
       </div>
       <span class="m-1"></span>
       <h5><b>ວີດີໂອ</b></h5>
-      <div class="row">
+      <div class="row embed-responsive embed-responsive-16by9">
 
-        <embed *ngIf="transportations['video_url']" style="width: 100%" height="440px"
+        <embed class="embed-responsive-item" *ngIf="transportations['video_url']" allowfullscreen
                [src]="safeVideoUrl()">
       </div>
     </div>
@@ -161,11 +161,10 @@
           </button>
         </div>
         <div class="modal-body d-flex justify-content-center">
-          <a href="http://www.facebook.com" class="btn bmd-btn-fab fa fa-facebook fa-facebookc faShares" target="_blank"></a>
-          <a href="#" class="btn bmd-btn-fab fa fa-twitter fa-twitterc faShares" target="_blank"></a>
-          <a href="#" class="btn bmd-btn-fab fa fa-youtube fa-youtubec faShares" target="_blank"></a>
+          <a href="http://www.facebook.com/sharer.php?u=https://laotour-info.firebaseapp.com//#/attraction/detail/{{transportations['_id']}}" class="btn bmd-btn-fab fa fa-facebook fa-facebookc faShares" target="_blank"></a>
+          <a href="http://twitter.com/share?text={{transportations['name']}}&url=https://laotour-info.firebaseapp.com//#/attraction/detail/{{transportations['_id']}}" class="btn bmd-btn-fab fa fa-twitter fa-twitterc faShares" target="_blank"></a>
           <a href="#" class="btn bmd-btn-fab fa fa-instagram fa-instagramc faShares" target="_blank"></a>
-          <a href="#" class="btn bmd-btn-fab fa fa-google fa-googlec faShares" target="_blank"></a>
+          <a href="https://plus.google.com/share?url=https://laotour-info.firebaseapp.com//#/attraction/detail/{{transportations['_id']}}" class="btn bmd-btn-fab fa fa-google fa-googlec faShares" target="_blank"></a>
           <a href="#" class="btn bmd-btn-fab fa fa-skype fa-skypec faShares" target="_blank"></a>
         </div>
       </div>
@@ -174,4 +173,74 @@
 
 </div>
 
+</div>
+
+<div id="pic1" *ngIf="info_near_by['transportations']">
+  <div class="text-center p-4 mt-5">
+    <h1><b>ສະຖານທີ່ຕ່າງໆທີ່ຢູ່ໃກ້ຄຽງ</b></h1>
+  </div>
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-md-4" *ngFor="let restaurant of info_near_by['restaurants']">
+        <div class="card mb-3">
+          <img class="card-img-top" [src]="restaurant['images'][0]" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">{{restaurant['name']}}</h5>
+            <p class="card-text"></p>
+            <a class="btn btn-primary btnIfo" [routerLink]="['/restaurant', 'detail', restaurant['_id']]">ລາຍລະອຽດ</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4" *ngFor="let shelter of info_near_by['shelters']">
+        <div class="card mb-3">
+          <img class="card-img-top" [src]="shelter['images'][0]" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">{{shelter['name']}}</h5>
+            <p class="card-text"></p>
+            <a class="btn btn-primary btnIfo" [routerLink]="['/shelter', 'detail', shelter['_id']]">ລາຍລະອຽດ</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4" *ngFor="let transportation of info_near_by['transportations']">
+        <div class="card mb-3">
+          <img class="card-img-top" [src]="transportation['images'][0]" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">{{transportation['name']}}</h5>
+            <p class="card-text"></p>
+            <a class="btn btn-primary btnIfo" [routerLink]="['/transportation', 'detail', transportation['_id']]">ລາຍລະອຽດ</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4" *ngFor="let att of info_near_by['attractionses']">
+        <div class="card mb-3">
+          <img class="card-img-top" [src]="att['images'][0]" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">{{att['name']}}</h5>
+            <p class="card-text"></p>
+            <a class="btn btn-primary btnIfo" [routerLink]="['/attraction', 'detail', att['_id']]">ລາຍລະອຽດ</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4" *ngFor="let another of info_near_by['another_places']['anothers']">
+        <div class="card mb-3">
+          <img class="card-img-top" [src]="another['images'][0]" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">{{another['name']}}</h5>
+            <p class="card-text"></p>
+            <button class="btn btn-primary btnIfo" [routerLink]="['/another', 'detail', another['_id']]">ລາຍລະອຽດ</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4" *ngFor="let internet of info_near_by['another_places']['internets']">
+        <div class="card mb-3">
+          <img class="card-img-top" [src]="internet['images'][0]" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">{{internet['name']}}</h5>
+            <p class="card-text"></p>
+            <button class="btn btn-primary btnIfo" [routerLink]="['/another', 'internet', 'detail', internet['_id']]">ລາຍລະອຽດ</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

@@ -12,7 +12,7 @@
     z-index: 10;
     top: 0;
     left: 0;
-    background-color: #1A237E;
+    background-color: #009688;
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
@@ -28,7 +28,7 @@
     padding: 8px 8px 8px 32px;
     text-decoration: none;
     font-size: 28px;
-    color: #818181;
+    color: #212121;
     display: block;
     transition: 0.3s;
 }

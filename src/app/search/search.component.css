@@ -12,3 +12,7 @@
 .tableList {
     cursor: pointer;
 }
+
+.emtrySpec{
+    height: 20em;
+}

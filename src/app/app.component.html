@@ -53,7 +53,10 @@
 <div *ngIf="mySidenav" class="sidenav">
   <a class="closebtn" (click)="opencNav()">&times;</a>
   <a routerLink="['/home']" (click)="opencNav()">ໜ້າຫຼັັກ</a>
-<!--  <a [routerLink]="['/attractionmain']" (click)="opencNav()">ສະຖານທີ່ທ່ອງທ່ຽວ</a>-->
+  <a data-toggle="collapse" data-target="#dropmenu" aria-expanded="false">ສະຖານທີ່ທ່ອງທ່ຽວ <i class="fa fa-sort-down"></i></a>
+  <div class="collapse" id="dropmenu">
+    <a *ngFor="let type of types" [routerLink]="['/attraction','type',type['_id']]" (click)="opencNav()">&nbsp;&nbsp;<small>{{type['name']}}</small></a>
+  </div>
   <a [routerLink]="['/allinfo']" (click)="opencNav()">ຂໍ້ມູນທັງໝົດ</a>
   <a [routerLink]="['/contact']" (click)="opencNav()">ຕິດຕໍ່</a>
   <a [routerLink]="['/about']" (click)="opencNav()">ກ່ຽວກັບ</a>
@@ -83,7 +86,6 @@
             <a [routerLink]="['home']" class="list-group-item">
               ໜັາຫຼັກ
             </a>
-            <a [routerLink]="['attractionmain']" class="list-group-item">ສະຖານທີ່ທ່ອງທ່ຽວ</a>
             <a [routerLink]="['allinfo']" class="list-group-item">ຂໍ້ມູນທັງໝົດ</a>
             <a [routerLink]="['about']" class="list-group-item">ກ່ຽວກັບ</a>
             <a [routerLink]="['contact']" class="list-group-item">ຕິດຕໍ່</a>

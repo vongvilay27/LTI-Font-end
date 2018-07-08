@@ -29,9 +29,9 @@
         <li class="nav-item" routerLinkActive="active">
           <a class="nav-link" [routerLink]="['/allinfo']">ຂໍ້ມູນທັງໝົດ</a>
         </li>
-        <li class="nav-item" routerLinkActive="active">
+<!--        <li class="nav-item" routerLinkActive="active">
           <a class="nav-link" [routerLink]="['/contact']">ຕິດຕໍ່</a>
-        </li>
+        </li>-->
         <li class="nav-item" routerLinkActive="active">
           <a class="nav-link" [routerLink]="['/about']">ກ່ຽວກັບ</a>
         </li>
@@ -58,7 +58,7 @@
     <a *ngFor="let type of types" [routerLink]="['/attraction','type',type['_id']]" (click)="opencNav()">&nbsp;&nbsp;<small>{{type['name']}}</small></a>
   </div>
   <a [routerLink]="['/allinfo']" (click)="opencNav()">ຂໍ້ມູນທັງໝົດ</a>
-  <a [routerLink]="['/contact']" (click)="opencNav()">ຕິດຕໍ່</a>
+<!--  <a [routerLink]="['/contact']" (click)="opencNav()">ຕິດຕໍ່</a>-->
   <a [routerLink]="['/about']" (click)="opencNav()">ກ່ຽວກັບ</a>
 </div>
 
@@ -87,8 +87,8 @@
               ໜັາຫຼັກ
             </a>
             <a [routerLink]="['allinfo']" class="list-group-item">ຂໍ້ມູນທັງໝົດ</a>
-            <a [routerLink]="['about']" class="list-group-item">ກ່ຽວກັບ</a>
-            <a [routerLink]="['contact']" class="list-group-item">ຕິດຕໍ່</a>
+            <a [routerLink]="['about']" class="list-group-item">ກ່ຽວກັບ</a><!--
+            <a [routerLink]="['contact']" class="list-group-item">ຕິດຕໍ່</a>-->
           </div>
         </div>
         <!--/.Second column-->

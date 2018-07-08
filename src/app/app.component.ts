@@ -25,9 +25,15 @@ export class AppComponent {
         });
         const subscription: Subscription = this.typeService.getAttractionsTypes().subscribe((res) => {
             this.types = res.json()['data'];
+            localStorage.setItem('att_types', JSON.stringify(this.types));
             this.ngProgress.done();
             subscription.unsubscribe();
           }, (error) => {
+            if (error.status >= 500) {
+                if (localStorage.getItem('att_types')) {
+                    this.types = JSON.parse(localStorage.getItem('att_types'));
+                }
+            }
             this.ngProgress.done();
             subscription.unsubscribe();
           });

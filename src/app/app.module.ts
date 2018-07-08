@@ -17,6 +17,9 @@ import { AppComponent } from './app.component';
 import {SearchComponent} from './search/search.component';
 import { DetailService } from './services/detail.service';
 import {SearchService} from './services/search.service';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
+import {AgmCoreModule} from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -31,7 +34,11 @@ import {SearchService} from './services/search.service';
     ReactiveFormsModule,
     NgProgressModule,
     AppRoutingModule,
-    HomeModule
+    HomeModule,
+      AgmCoreModule.forRoot({
+          apiKey: 'AIzaSyBXoeOmRRzSl0b4iUBadAz8M-_Zva0DpfQ'
+      }),
+    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
       {provide: APP_BASE_HREF, useValue: '/'},

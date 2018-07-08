@@ -5,3 +5,59 @@
     <p class="p-2">&nbsp;ເປັນອົງກອນໜຶ່ງທີ່ໃຫ້ບໍລິການສັງຄົມ ດ້ານເທັກໂນໂລຢີ ແລະການສື່ສານ. ພວກເຮົາເລີ່ມຕົ້ນຈາກສູນ ເລີ່ມຈາກຄົນກຸ່ມໜຶ່ງທີ່ມີຄວາມຝັນຄ້າຍຄືກັນ ທີ່ຕ້ອງການ “ເຮັດໃນສິ່ງທີ່ຮັກ”. ຫຼັງຈາກລວມຕົວກັນໃນຕົ້ນປີ 2017 ຈຶ່ງໄດ້ເລີ່ມສັນສ້າງຜົນງານຕາມຄວາມຖະໜັດ ເຊັ່ນ: ສ້າງເວັບໄຊ້, ຂຽນແອັບພລິເຄຊັ່ນ ແລະໃຫ້ການບໍລິການດ້ານສື່ໂຄສະນາຕ່າງໆ. ທຸກຢ່າງທີ່ພວກເຮົາເຮັດຂຶ້ນມາ ແມ່ນເພື່ອເປັນການຕອບໂຈດບັນຫາສັງຄົມ ໃຫ້ສັງຄົມໄດ້ຮັບຄວາມສະດວກສະບາຍ ແລະແກ້ໄຂຊີວິດການເປັນຢູ່ໃຫ້ສອດຄ່ອງກັບຍຸກສະໄໝ.</p>
   </div>
 </div>
+
+
+<div class="container contact">
+  <div class="row">
+    <div class="col-md-6 col-lg-6">
+      <h1><b>ຕິດຕໍ່ເຮົາ</b></h1>
+      <p>ທີ່ຢູ່: <b>ບ້ານດົງໂດກ ເມືອງໄຊທານີ ແຂວງນະຄອນຫຼວງວຽງຈັນ</b></p>
+      <p>ເບີໂທລະສັບ: <b>020 542 928 88, 020 998 332 66, 020 556 645 92</b></p>
+      <p>ອີເມວ: <b>laotourinfo@laotour.com</b></p>
+      <div>
+        <div class="map">
+          <agm-map
+                  [latitude]="lat"
+                  [longitude]="lng"
+                  [zoom]="zoom"
+                  [disableDefaultUI]="false"
+                  [zoomControl]="true">
+
+            <agm-marker
+                    [latitude]="lat"
+                    [longitude]="lng">
+              <agm-info-window>
+                <strong>Laos Tourism Information</strong>
+              </agm-info-window>
+            </agm-marker>
+
+          </agm-map>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 col-lg-6">
+      <form novalidate [formGroup]="contactForm" class="card pt-4 p-3">
+        <div class="form-group">
+          <label for="nameText" class="bmd-label-floating">ຊື່ ແລະ ນາມສະກຸນ</label>
+          <input type="text" class="form-control" id="nameText">
+        </div>
+        <div class="form-group">
+          <label for="emailText" class="bmd-label-floating">ອີເມວ</label>
+          <input type="email" class="form-control" id="emailText">
+        </div>
+        <div class="form-group">
+          <label for="titleText" class="bmd-label-floating">ຊື່ເລື່ອງ</label>
+          <input type="text" class="form-control" id="titleText">
+        </div>
+        <div class="form-group">
+          <label for="storyTextarea" class="bmd-label-floating">ເນື້ອໃນ</label>
+          <textarea class="form-control" id="storyTextarea" rows="8"></textarea>
+        </div>
+        <div class="d-flex justify-content-end">
+          <button class="btn btn-default">ຍົກເລີກ</button>
+          <button type="submit" class="btn btn-info btn-raised">ສົ່ງຂໍ້ມູນ</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

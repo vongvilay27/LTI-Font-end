@@ -31,6 +31,7 @@ export class HomeComponent implements OnInit {
           /*console.log(api_data);*/
           const mainSubscript = this.mainService.getMainPageData(api_data['country_iso3166'], lat + ',' + lng).subscribe((main_res) => {
             this.data = main_res.json()['data'];
+              localStorage.setItem('data', JSON.stringify(this.data));
             this.ngProgress.done();
             mainSubscript.unsubscribe();
           }, (main_error) => {
@@ -39,15 +40,27 @@ export class HomeComponent implements OnInit {
           });
           subscript.unsubscribe();
         }, (error) => {
+            if (error.status >= 500) {
+                if (localStorage.getItem('data')) {
+                    this.data = JSON.parse(localStorage.getItem('data'));
+                }
+            }
           this.ngProgress.done();
           subscript.unsubscribe();
         });
       }, () => {
         const subscript: Subscription = this.mainService.getMainPageData('CTC', '0,0').subscribe((res) => {
           this.data = res.json()['data'];
+            localStorage.setItem('data', JSON.stringify(this.data));
           this.ngProgress.done();
           subscript.unsubscribe();
         }, (error) => {
+
+            if (error.status >= 500) {
+                if (localStorage.getItem('data')) {
+                    this.data = JSON.parse(localStorage.getItem('data'));
+                }
+            }
           this.ngProgress.done();
           subscript.unsubscribe();
         });

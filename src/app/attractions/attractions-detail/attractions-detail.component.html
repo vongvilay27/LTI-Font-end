@@ -72,7 +72,7 @@
               <div class="current">
                 <div class="info">
                   <div>&nbsp;</div>
-                  <span class="display-1">{{weather['temp_c']}}&deg;<small>C</small></span> <sup><img [src]="weather['icon_url']" alt="weather icon"></sup> <small>{{weather['weather']}}</small>
+                  <span class="display-1">{{weather['temp_c']}}&deg;<small>C</small></span> <sup><img src="https://icons.wxug.com/i/c/k/{{weather['icon']}}.gif" alt="weather icon"></sup> <small>{{weather['weather']}}</small>
                   <div class="h3"><small><small>ແຮງລົມ:</small></small> {{weather['wind_string']}}</div>
                   <div>&nbsp;</div>
                 </div>
@@ -111,7 +111,7 @@
         </div>
       </div>
       <span class="m-1"></span>
-      <h5><b>ວີດີໂອ</b></h5>
+      <h5 *ngIf="attractions['video_url']"><b>ວີດີໂອ</b></h5>
       <div class="row embed-responsive embed-responsive-16by9">
         <embed class="col-12 mt-3 embed-responsive-item" allowfullscreen *ngIf="attractions['video_url']" style="width: 100%" height="440px"
                [src]="safeVideoUrl()">

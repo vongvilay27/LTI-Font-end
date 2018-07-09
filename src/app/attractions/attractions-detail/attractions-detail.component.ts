@@ -61,6 +61,7 @@ export class AttractionsDetailComponent implements OnInit {
                         this.attractions['location']['long']
                     ).subscribe((api_res) => {
                         this.weather = api_res.json()['current_observation'];
+                        console.log(this.weather)
                         apiSubscript.unsubscribe();
                     }, (api_error) => {
                         apiSubscript.unsubscribe();

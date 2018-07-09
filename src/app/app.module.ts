@@ -12,7 +12,6 @@ import { NgProgressModule } from 'ngx-progressbar';
 // Components
 import { APP_BASE_HREF } from '@angular/common';
 import { AboutComponent } from './about/about.component';
-import { ContactComponent } from './contact/contact.component';
 import { AppComponent } from './app.component';
 import {SearchComponent} from './search/search.component';
 import { DetailService } from './services/detail.service';
@@ -25,7 +24,6 @@ import {AgmCoreModule} from '@agm/core';
   declarations: [
     AppComponent,
     SearchComponent,
-    ContactComponent,
     AboutComponent,
   ],
   imports: [

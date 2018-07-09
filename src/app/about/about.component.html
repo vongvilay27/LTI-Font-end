@@ -36,25 +36,31 @@
       </div>
     </div>
     <div class="col-md-6 col-lg-6">
-      <form novalidate [formGroup]="contactForm" class="card pt-4 p-3">
+      <div class="alert alert-success" *ngIf="sentMsuccess" role="alert">
+        ການສົ່ງຂໍ້ມູນສຳເລັດແລ້ວ
+      </div>
+      <div class="alert alert-danger" *ngIf="sentMfalse" role="alert">
+        ການສົ່ງຂໍ້ມູນລົ້ມເຫຼວ
+      </div>
+      <form novalidate [formGroup]="contactForm" class="card pt-4 p-3" (ngSubmit)="sentEmail()">
         <div class="form-group">
           <label for="nameText" class="bmd-label-floating">ຊື່ ແລະ ນາມສະກຸນ</label>
-          <input type="text" class="form-control" id="nameText">
+          <input type="text" class="form-control" id="nameText" formControlName="name">
         </div>
         <div class="form-group">
           <label for="emailText" class="bmd-label-floating">ອີເມວ</label>
-          <input type="email" class="form-control" id="emailText">
+          <input type="email" class="form-control" id="emailText" formControlName="email">
         </div>
         <div class="form-group">
           <label for="titleText" class="bmd-label-floating">ຊື່ເລື່ອງ</label>
-          <input type="text" class="form-control" id="titleText">
+          <input type="text" class="form-control" id="titleText" formControlName="title">
         </div>
         <div class="form-group">
           <label for="storyTextarea" class="bmd-label-floating">ເນື້ອໃນ</label>
-          <textarea class="form-control" id="storyTextarea" rows="8"></textarea>
+          <textarea class="form-control" id="storyTextarea" rows="8" formControlName="message"></textarea>
         </div>
         <div class="d-flex justify-content-end">
-          <button class="btn btn-default">ຍົກເລີກ</button>
+          <button type="reset" class="btn btn-default">ຍົກເລີກ</button>
           <button type="submit" class="btn btn-info btn-raised">ສົ່ງຂໍ້ມູນ</button>
         </div>
       </form>

@@ -33,7 +33,7 @@
         <table class="table">
           <tr *ngFor="let social of tourcompanies['socials']">
             <td><a href="{{social['url']}}">{{social['name']}}</a></td>
-            <td><a href="{{social['url']}}">{{social['url']}}</a></td>
+            <td><a href="{{social['url']}}">{{social['url'] | slice:0:30}}...</a></td>
           </tr>
         </table>
         <span ></span>
@@ -136,10 +136,10 @@
           </button>
         </div>
         <div class="modal-body d-flex justify-content-center">
-          <a href="http://www.facebook.com/sharer.php?u=https://laotour-info.firebaseapp.com//#/attraction/detail/{{tourcompanies['_id']}}" class="btn bmd-btn-fab fa fa-facebook fa-facebookc faShares" target="_blank"></a>
-          <a href="http://twitter.com/share?text={{tourcompanies['name']}}&url=https://laotour-info.firebaseapp.com//#/attraction/detail/{{tourcompanies['_id']}}" class="btn bmd-btn-fab fa fa-twitter fa-twitterc faShares" target="_blank"></a>
+          <a href="http://www.facebook.com/sharer.php?u=https://laotourinfo-1526194679741.firebaseapp.com//#/attraction/detail/{{tourcompanies['_id']}}" class="btn bmd-btn-fab fa fa-facebook fa-facebookc faShares" target="_blank"></a>
+          <a href="http://twitter.com/share?text={{tourcompanies['name']}}&url=https://laotourinfo-1526194679741.firebaseapp.com//#/attraction/detail/{{tourcompanies['_id']}}" class="btn bmd-btn-fab fa fa-twitter fa-twitterc faShares" target="_blank"></a>
           <a href="#" class="btn bmd-btn-fab fa fa-instagram fa-instagramc faShares" target="_blank"></a>
-          <a href="https://plus.google.com/share?url=https://laotour-info.firebaseapp.com//#/attraction/detail/{{tourcompanies['_id']}}" class="btn bmd-btn-fab fa fa-google fa-googlec faShares" target="_blank"></a>
+          <a href="https://plus.google.com/share?url=https://laotourinfo-1526194679741.firebaseapp.com//#/attraction/detail/{{tourcompanies['_id']}}" class="btn bmd-btn-fab fa fa-google fa-googlec faShares" target="_blank"></a>
           <a href="#" class="btn bmd-btn-fab fa fa-skype fa-skypec faShares" target="_blank"></a>
         </div>
       </div>

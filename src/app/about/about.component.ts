@@ -14,6 +14,7 @@ export class AboutComponent implements OnInit {
     contactForm: FormGroup;
     sentMsuccess: boolean = false;
     sentMfalse: boolean = false;
+    checksent: boolean = false;
     constructor(
         public ngProgress: NgProgress,
         private formBuilder: FormBuilder,
@@ -38,14 +39,17 @@ export class AboutComponent implements OnInit {
     }
     sentEmail(){
         if(this.contactForm.valid){
+            this.checksent = true;
             console.log(this.contactForm.value)
             const sentmSubscript= this.sentmail.sentEmailService(this.contactForm.value).subscribe( res =>{
                 this.contactForm.reset();
                 this.sentMsuccess = true;
+                this.checksent = false;
                 this.ngProgress.done();
                 sentmSubscript.unsubscribe();
             },(sent_err) =>{
                 this.sentMfalse = true;
+                this.checksent = false;
                 this.ngProgress.done();
                 sentmSubscript.unsubscribe();
             })

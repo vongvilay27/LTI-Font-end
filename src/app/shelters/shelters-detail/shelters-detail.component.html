@@ -175,36 +175,6 @@
     </div>
     <div class="container">
       <div class="row mb-5">
-        <div class="col-md-4" *ngFor="let restaurant of info_near_by['restaurants']">
-          <div class="card mb-3">
-            <img class="card-img-top" [src]="restaurant['images'][0]" alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title">{{restaurant['name']}}</h5>
-              <p class="card-text"></p>
-              <a class="btn btn-primary btnIfo" [routerLink]="['/restaurant', 'detail', restaurant['_id']]">ລາຍລະອຽດ</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4" *ngFor="let shelter of info_near_by['shelters']">
-          <div class="card mb-3">
-            <img class="card-img-top" [src]="shelter['images'][0]" alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title">{{shelter['name']}}</h5>
-              <p class="card-text"></p>
-              <a class="btn btn-primary btnIfo" [routerLink]="['/shelter', 'detail', shelter['_id']]">ລາຍລະອຽດ</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4" *ngFor="let transportation of info_near_by['transportations']">
-          <div class="card mb-3">
-            <img class="card-img-top" [src]="transportation['images'][0]" alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title">{{transportation['name']}}</h5>
-              <p class="card-text"></p>
-              <a class="btn btn-primary btnIfo" [routerLink]="['/transportation', 'detail', transportation['_id']]">ລາຍລະອຽດ</a>
-            </div>
-          </div>
-        </div>
         <div class="col-md-4" *ngFor="let att of info_near_by['attractionses']">
           <div class="card mb-3">
             <img class="card-img-top" [src]="att['images'][0]" alt="Card image cap">
@@ -215,6 +185,28 @@
             </div>
           </div>
         </div>
+        <div class="col-md-4" *ngFor="let restaurant of info_near_by['restaurants']">
+          <div class="card mb-3">
+            <img class="card-img-top" [src]="restaurant['images'][0]" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">{{restaurant['name']}}</h5>
+              <p class="card-text"></p>
+              <a class="btn btn-primary btnIfo" [routerLink]="['/restaurant', 'detail', restaurant['_id']]">ລາຍລະອຽດ</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4" *ngFor="let transportation of info_near_by['transportations']">
+          <div class="card mb-3">
+            <img class="card-img-top" [src]="transportation['images'][0]" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">{{transportation['name']}}</h5>
+              <p class="card-text"></p>
+              <a class="btn btn-primary btnIfo" [routerLink]="['/transportation', 'detail', transportation['_id']]">ລາຍລະອຽດ</a>
+            </div>
+          </div>
+        </div>
+
         <div class="col-md-4" *ngFor="let another of info_near_by['another_places']['anothers']">
           <div class="card mb-3">
             <img class="card-img-top" [src]="another['images'][0]" alt="Card image cap">
@@ -232,6 +224,16 @@
               <h5 class="card-title">{{internet['name']}}</h5>
               <p class="card-text"></p>
               <button class="btn btn-primary btnIfo" [routerLink]="['/another', 'internet', 'detail', internet['_id']]">ລາຍລະອຽດ</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4" *ngFor="let shelter of info_near_by['shelters']">
+          <div class="card mb-3">
+            <img class="card-img-top" [src]="shelter['images'][0]" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">{{shelter['name']}}</h5>
+              <p class="card-text"></p>
+              <a class="btn btn-primary btnIfo" [routerLink]="['/shelter', 'detail', shelter['_id']]">ລາຍລະອຽດ</a>
             </div>
           </div>
         </div>

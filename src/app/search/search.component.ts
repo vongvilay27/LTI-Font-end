@@ -265,14 +265,14 @@ export class SearchComponent implements OnInit {
     }
 
     ifnodata(){
-        return this.attractions.length ||
+        return (this.attractions.length ||
             this.restaurants.length ||
             this.shelters.length ||
             this.transportations.length ||
             this.tourcompanies.length ||
             this.anothers.length ||
             this.internets.length ||
-            this.typeData.length;
+            this.typeData.length);
     }
 
 }

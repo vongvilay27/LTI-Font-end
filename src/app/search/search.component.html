@@ -32,6 +32,7 @@
             <h5 class="{{hD}}"><b>{{att['name']}}</b></h5>
             <p class="card-subtitle">ປະເພດ: <b>{{att['attractions_type']['name']}}</b></p>
             <p class="{{hideText}}">{{att['details'] | slice:0:220}}...</p>
+            <p class="card-subtitle">ບ້ານ{{att['address']['village']}} ເມືອງ{{att['address']['district']}} ແຂວງ{{att['address']['province']}}</p>
           </td>
         </tr>
       </table>
@@ -42,7 +43,7 @@
             <h5 class="{{hD}}"><b>{{res['name']}}</b></h5>
             <p class="card-subtitle">ປະເພດ: <b>{{res['restaurant_type']['name']}}</b></p>
             <p class="{{hideText}}">{{res['detail'] | slice:0:220}}...</p>
-
+            <p class="card-subtitle">ບ້ານ{{res['address']['village']}} ເມືອງ{{res['address']['district']}} ແຂວງ{{res['address']['province']}}</p>
 
           </td>
         </tr>
@@ -54,6 +55,7 @@
             <h5 class="{{hD}}"><b>{{shel['name']}}</b></h5>
             <p class="card-subtitle">ປະເພດ: <b>{{shel['shelter_type']['name']}}</b></p>
             <p class="{{hideText}}">{{shel['detail'] | slice:0:220}}...</p>
+            <p class="card-subtitle">ບ້ານ{{shel['address']['village']}} ເມືອງ{{shel['address']['district']}} ແຂວງ{{shel['address']['province']}}</p>
           </td>
         </tr>
       </table>
@@ -64,6 +66,7 @@
             <h5 class="{{hD}}"><b>{{tran['name']}}</b></h5>
 <!--            <p class="card-subtitle">ປະເພດ: <b>{{tran['transportation_type']['name']}}</b></p>-->
             <p class="{{hideText}}">{{tran['detail'] | slice:0:220}}...</p>
+            <p class="card-subtitle">ບ້ານ{{tran['address']['village']}} ເມືອງ{{tran['address']['district']}} ແຂວງ{{tran['address']['province']}}</p>
           </td>
         </tr>
       </table>
@@ -73,6 +76,7 @@
             <img [src]="com['images'][0]" width="30%" class="rounded float-right" alt="">
             <h5 class="{{hD}}"><b>{{com['name']}}</b></h5>
             <p class="{{hideText}}">{{com['about'] | slice:0:220}}...</p>
+            <p class="card-subtitle">ບ້ານ{{com['address']['village']}} ເມືອງ{{com['address']['district']}} ແຂວງ{{com['address']['province']}}</p>
           </td>
         </tr>
       </table>
@@ -82,6 +86,7 @@
             <img [src]="int['images'][0]" width="30%" class="rounded float-right" alt="">
             <h5 class="{{hD}}"><b>{{int['name']}}</b></h5>
             <p class="{{hideText}}">{{int['detail'] | slice:0:220}}...</p>
+            <p class="card-subtitle">ບ້ານ{{int['address']['village']}} ເມືອງ{{int['address']['district']}} ແຂວງ{{int['address']['province']}}</p>
           </td>
         </tr>
       </table>
@@ -91,6 +96,7 @@
             <img [src]="ano['images'][0]" width="30%" class="rounded float-right" alt="">
             <h5 class="{{hD}}"><b>{{ano['name']}}</b></h5>
             <p class="{{hideText}}">{{ano['detail'] | slice:0:220}}...</p>
+            <p class="card-subtitle">ບ້ານ{{ano['address']['village']}} ເມືອງ{{ano['address']['district']}} ແຂວງ{{ano['address']['province']}}</p>
           </td>
         </tr>
       </table>
@@ -107,6 +113,7 @@
             <h5 class="{{hD}}"><b>{{att['name']}}</b></h5>
             <p class="card-subtitle">ປະເພດ: <b>{{att['attractions_type']['name']}}</b></p>
             <p class="{{hideText}}">{{att['details'] | slice:0:220}}...</p>
+            <p class="card-subtitle">ບ້ານ{{att['address']['village']}} ເມືອງ{{att['address']['district']}} ແຂວງ{{att['address']['province']}}</p>
           </td>
         </tr>
       </table>
@@ -117,7 +124,7 @@
             <h5 class="{{hD}}"><b>{{res['name']}}</b></h5><!--
             <p class="card-subtitle">ປະເພດ: <b>{{res['restaurant_type']['name']}}</b></p>-->
             <p class="{{hideText}}">{{res['detail'] | slice:0:220}}...</p>
-
+            <p class="card-subtitle">ບ້ານ{{res['address']['village']}} ເມືອງ{{res['address']['district']}} ແຂວງ{{res['address']['province']}}</p>
 
           </td>
         </tr>
@@ -129,6 +136,7 @@
           <h5 class="{{hD}}"><b>{{shel['name']}}</b></h5><!--
           <p class="card-subtitle">ປະເພດ: <b>{{shel['shelter_type']['name']}}</b></p>-->
           <p class="{{hideText}}">{{shel['detail'] | slice:0:220}}...</p>
+          <p class="card-subtitle">ບ້ານ{{shel['address']['village']}} ເມືອງ{{shel['address']['district']}} ແຂວງ{{shel['address']['province']}}</p>
         </td>
       </tr>
     </table>
@@ -139,6 +147,7 @@
             <h5 class="{{hD}}"><b>{{tran['name']}}</b></h5><!--
             <p class="card-subtitle">ປະເພດ: <b>{{tran['transportation_type']['name']}}</b></p>-->
             <p class="{{hideText}}">{{tran['detail'] | slice:0:220}}...</p>
+            <p class="card-subtitle">ບ້ານ{{tran['address']['village']}} ເມືອງ{{tran['address']['district']}} ແຂວງ{{tran['address']['province']}}</p>
           </td>
         </tr>
       </table>
@@ -148,6 +157,8 @@
             <img [src]="com['images'][0]" width="30%" class="rounded float-right" alt="">
             <h5 class="{{hD}}"><b>{{com['name']}}</b></h5>
             <p class="{{hideText}}">{{com['about'] | slice:0:220}}...</p>
+            <p class="card-subtitle">ບ້ານ{{com['address']['village']}} ເມືອງ{{com['address']['district']}} ແຂວງ{{com['address']['province']}}</p>
+
           </td>
         </tr>
       </table>
@@ -157,6 +168,8 @@
           <img [src]="int['images'][0]" width="30%" class="rounded float-right" alt="">
           <h5 class="{{hD}}"><b>{{int['name']}}</b></h5>
           <p class="{{hideText}}">{{int['detail'] | slice:0:220}}...</p>
+          <p class="card-subtitle">ບ້ານ{{int['address']['village']}} ເມືອງ{{int['address']['district']}} ແຂວງ{{int['address']['province']}}</p>
+
         </td>
       </tr>
     </table>
@@ -166,6 +179,7 @@
             <img [src]="ano['images'][0]" width="30%" class="rounded float-right" alt="">
             <h5 class="{{hD}}"><b>{{ano['name']}}</b></h5>
             <p class="{{hideText}}">{{ano['detail'] | slice:0:220}}...</p>
+            <p class="card-subtitle">ບ້ານ{{ano['address']['village']}} ເມືອງ{{ano['address']['district']}} ແຂວງ{{ano['address']['province']}}</p>
           </td>
         </tr>
       </table>

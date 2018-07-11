@@ -25,7 +25,7 @@
   <div class="tab-content" id="restaurantContent">
     <div class="tab-pane fade show active mb-3" id="overviewT" role="tabpanel" aria-labelledby="overviewT">
       <div class="row d-flex justify-content-center">
-        <a *ngIf="restaurants['location']" href="https://www.google.com/maps/dir/{{lat}},{{lng}}/{{restaurants['location']['lat']}},{{restaurants['location']['long']}}" target="_blank" class="col-5 btn btn-primary btn-lg p-3">
+        <a *ngIf="restaurants['location'] && lat" href="https://www.google.com/maps/dir/{{lat}},{{lng}}/{{restaurants['location']['lat']}},{{restaurants['location']['long']}}" target="_blank" class="col-5 btn btn-primary btn-lg p-3">
           <i class="fa fa-map-pin"></i> ນຳທາງ
         </a>
         <button class="col-5 btn btn-primary btn-lg 9-3" data-toggle="modal" data-target="#sheareModal">

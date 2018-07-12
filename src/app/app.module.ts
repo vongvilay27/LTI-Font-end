@@ -3,7 +3,7 @@ import { TypeService } from './services/type.service';
 import { LocationcheckService } from './services/locationcheck.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import {HomeModule} from './home/home.module';
@@ -28,6 +28,7 @@ import {AgmCoreModule} from '@agm/core';
   ],
   imports: [
     BrowserModule,
+      FormsModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
     NgProgressModule,

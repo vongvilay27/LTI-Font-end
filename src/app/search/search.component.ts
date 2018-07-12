@@ -52,36 +52,53 @@ export class SearchComponent implements OnInit {
             navigator.geolocation.getCurrentPosition(position => {
                 this.lat = position.coords.latitude;
                 this.lng = position.coords.longitude;
+                if(!this.laoChecked){
+                    const subscript: Subscription = this.locationService.getLocalWeater(this.lat, this.lng).subscribe((res) => {
+                        const api_data = res.json()['current_observation']['observation_location'];
+                        /*console.log(api_data);*/
+                        this.route.queryParams.subscribe(params => {
+                            this.keyword = params.q;
+                            this.chooseTS = false;
+                            const searchSubscript = this.searchService.getSearchData(api_data['country_iso3166'], this.lat + ',' + this.lng, this.keyword).subscribe((search_res) => {
+                                this.data = search_res.json()['data'];
+                                this.attractions = this.data['attractionses'];
+                                this.restaurants = this.data['restaurants'];
+                                this.shelters = this.data['shelters'];
+                                this.transportations = this.data['transportations'];
+                                this.tourcompanies = this.data['tourcompanies'];
+                                this.anothers = this.data['another_places']['anothers'];
+                                this.internets = this.data['another_places']['internets'];
 
-                const subscript: Subscription = this.locationService.getLocalWeater(this.lat, this.lng).subscribe((res) => {
-                    const api_data = res.json()['current_observation']['observation_location'];
-                    /*console.log(api_data);*/
-                    this.route.queryParams.subscribe(params => {
-                        this.keyword = params.q;
-                        this.chooseTS = false;
-                        const searchSubscript = this.searchService.getSearchData(api_data['country_iso3166'], this.lat + ',' + this.lng, this.keyword).subscribe((search_res) => {
-                            this.data = search_res.json()['data'];
-                            this.attractions = this.data['attractionses'];
-                            this.restaurants = this.data['restaurants'];
-                            this.shelters = this.data['shelters'];
-                            this.transportations = this.data['transportations'];
-                            this.tourcompanies = this.data['tourcompanies'];
-                            this.anothers = this.data['another_places']['anothers'];
-                            this.internets = this.data['another_places']['internets'];
-
-                            this.ngProgress.done();
-                            searchSubscript.unsubscribe();
-                        }, (search_error) => {
-                            this.ngProgress.done();
-                            searchSubscript.unsubscribe();
+                                this.ngProgress.done();
+                                searchSubscript.unsubscribe();
+                            }, (search_error) => {
+                                this.ngProgress.done();
+                                searchSubscript.unsubscribe();
+                            });
+                            subscript.unsubscribe();
                         });
+
+                    }, (error) => {
+                        this.ngProgress.done();
                         subscript.unsubscribe();
                     });
-
-                }, (error) => {
-                    this.ngProgress.done();
-                    subscript.unsubscribe();
-                });
+                } else {
+                    const subscript: Subscription = this.searchService.getSearchData('CTC', '0,0', this.keyword).subscribe((res) => {
+                        this.data = res.json()['data'];
+                        this.attractions = this.data['attractionses'];
+                        this.restaurants = this.data['restaurants'];
+                        this.shelters = this.data['shelters'];
+                        this.transportations = this.data['transportations'];
+                        this.tourcompanies = this.data['tourcompanies'];
+                        this.anothers = this.data['another_places']['anothers'];
+                        this.internets = this.data['another_places']['internets'];
+                        this.ngProgress.done();
+                        subscript.unsubscribe();
+                    }, (error) => {
+                        this.ngProgress.done();
+                        subscript.unsubscribe();
+                    });
+                }
             }, () => {
                 this.route.queryParams.subscribe(params => {
                     this.keyword = params.q;
@@ -164,7 +181,7 @@ export class SearchComponent implements OnInit {
     checkLao(){
         this.laoChecked = !this.laoChecked;
         this.chooseTS = false;
-        if(this.laoChecked ==false){
+        if(!this.laoChecked){
             const subscript: Subscription = this.locationService.getLocalWeater(this.lat, this.lng).subscribe((res) => {
                 const api_data = res.json()['current_observation']['observation_location'];
                /* console.log(api_data);*/

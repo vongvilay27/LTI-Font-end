@@ -62,7 +62,7 @@ export class TransportationsDetailComponent implements OnInit {
                     )
                         .subscribe((near_res) => {
                             this.info_near_by = near_res.json()['data'];
-                            /*console.log(this.info_near_by);*/
+                            console.log(this.info_near_by);
                             nearSubscript.unsubscribe();
                         }, (near_error) => {
                             nearSubscript.unsubscribe();

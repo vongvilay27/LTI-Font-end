@@ -65,6 +65,27 @@
 
         </tr>
       </table>
+      <h5>ຄ່າເຂົ້າຊົມ</h5>
+      <table class="table">
+        <tr>
+          <td><i class="fa fa-money"></i> ຜູ່ໃຫຍ່: {{attractions['price']['adult']}} ກີບ</td>
+          <td><i class="fa fa-money"></i> ເດັກນ້ອຍ: {{attractions['price']['kid']}} ກີບ</td>
+          <td><i class="fa fa-money"></i> ຕ່າງຊາດ: {{attractions['price']['foriegn']}} ກີບ</td>
+
+        </tr>
+      </table>
+      <h5>ວັນ ແລະ ເວລາໃຫ້ບໍລິການ</h5>
+      <table class="table">
+        <tr>
+          <td><i class="fa fa-calendar"></i> ວັນຈັນ - ວັນອາທິດ</td>
+          <td><i class="fa fa-clock-o"></i> ເວລາ: 8:00 AM - 5:30 PM</td>
+          <td><i class="fa fa-stack"></i>
+            ສະຖານະ:
+            <button *ngIf="serviceStatus" disabled class="btn btn-raised bg-success text-white">ເປີດໃຫ້ບໍລິການ <i class="fa fa-check"></i></button>
+            <button *ngIf="!serviceStatus" disabled class="btn btn-raised bg-danger text-white">ປິດບໍລິການ <i class="fa fa-times"></i></button>
+          </td>
+        </tr>
+      </table>
       <h5 *ngIf="weather['temp_c']">ອຸນຫະພູມ</h5>
         <div class="row"  *ngIf="weather['temp_c']">
           <div class="col-md-12">
@@ -99,6 +120,131 @@
   
         </agm-map>
       </div>
+      <h5 class="mt-3"><b>ສະແດງຄຳຄິດເຫັນ</b></h5>
+      <div class="comment p-3">
+        <div class="card commentDialog mt-1">
+          <div class="card-body">
+            <div class="row">
+              <i class="fa fa-user-circle fa-3x m-1 pl-1"></i>&nbsp;&nbsp;<!--
+              <img class="rounded-circle" src="../../../assets/profile.png" alt="profile">-->
+              <p class="h5">{{Date.toLocaleDateString()}} {{Date.toLocaleTimeString()}}</p>
+            </div>
+            <div class="row">
+              <p class="pl-3">ທາດຫລວງ (That Luang) ຫລື ພຣະທາດຫລວງ ປະຫວັດ ທາດຫຼວງ ທາດຫຼວງວຽງຈັນຕັ້ງຢູ່ສົ້ນສຸດທາງທິດຕາເວັນອອກຂອງຖະໜົນທາດຫຼວງ ບ້ານ ທາດຫຼວງ ເມືອງໄຊເສດຖາ ນະຄອນຫຼວງວຽງຈັນ </p>
+            </div>
+            <div class="row d-flex justify-content-end">
+              <button (click)="replyCom('commentId')" class="btn bg-info"><i class="fa fa-reply text-white"></i></button>
+            </div>
+
+            <!--Sub Reply comments-->
+            <div class="card-footer float-right">
+              <div class="row">
+                <div class="card-block">
+                  <div class="row">
+                    <i class="fa fa-user-circle-o fa-2x m-1 pl-1"></i>&nbsp;&nbsp;
+                    <p>{{Date.toLocaleDateString()}} {{Date.toLocaleTimeString()}}</p>
+                  </div>
+                  <div class="row">
+                    <p class="pl-3">ທາດຫລວງ (That Luang) ຫລື ພຣະທາດຫລວງ ປະຫວັດ ທາດຫຼວງ ທາດຫຼວງວຽງຈັນຕັ້ງຢູ່ສົ້ນສຸດທາງທິດຕາເວັນອອກຂອງຖະໜົນທາດຫຼວງ ບ້ານ ທາດຫຼວງ ເມືອງໄຊເສດຖາ ນະຄອນຫຼວງວຽງຈັນ </p>
+                  </div>
+                  <div class="row d-flex justify-content-end">
+                    <button (click)="replyCom('commentId')" class="btn bg-info"><i class="fa fa-reply text-white"></i></button>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="card-block">
+                  <div class="row">
+                    <i class="fa fa-user-circle-o fa-2x m-1 pl-1"></i>&nbsp;&nbsp;
+                    <p>{{Date.toLocaleDateString()}} {{Date.toLocaleTimeString()}}</p>
+                  </div>
+                  <div class="row">
+                    <p class="pl-3">ທາດຫລວງ (That Luang) ຫລື ພຣະທາດຫລວງ ປະຫວັດ ທາດຫຼວງ ທາດຫຼວງວຽງຈັນຕັ້ງຢູ່ສົ້ນສຸດທາງທິດຕາເວັນອອກຂອງຖະໜົນທາດຫຼວງ ບ້ານ ທາດຫຼວງ ເມືອງໄຊເສດຖາ ນະຄອນຫຼວງວຽງຈັນ </p>
+                  </div>
+                  <div class="row d-flex justify-content-end">
+                    <button (click)="replyCom('commentId')" class="btn bg-info"><i class="fa fa-reply text-white"></i></button>
+                  </div>
+                </div>
+              </div>
+
+
+
+
+            </div>
+
+
+
+          </div>
+        </div>
+        <div class="card commentDialog mt-1">
+          <div class="card-body">
+            <div class="row">
+              <i class="fa fa-user-circle fa-3x m-1 pl-1"></i>&nbsp;&nbsp;<!--
+              <img class="rounded-circle" src="../../../assets/profile.png" alt="profile">-->
+              <p class="h5">{{Date.toLocaleDateString()}} {{Date.toLocaleTimeString()}}</p>
+            </div>
+            <div class="row">
+              <p class="pl-3">ທາດຫລວງ (That Luang) ຫລື ພຣະທາດຫລວງ ປະຫວັດ ທາດຫຼວງ ທາດຫຼວງວຽງຈັນຕັ້ງຢູ່ສົ້ນສຸດທາງທິດຕາເວັນອອກຂອງຖະໜົນທາດຫຼວງ ບ້ານ ທາດຫຼວງ ເມືອງໄຊເສດຖາ ນະຄອນຫຼວງວຽງຈັນ </p>
+            </div>
+            <div class="row d-flex justify-content-end">
+              <button (click)="replyCom('commentId')" class="btn bg-info"><i class="fa fa-reply text-white"></i></button>
+            </div>
+
+            <!--Sub Reply comments-->
+            <div class="card-footer float-right">
+              <div class="row">
+                <div class="card-block">
+                  <div class="row">
+                    <i class="fa fa-user-circle-o fa-2x m-1 pl-1"></i>&nbsp;&nbsp;
+                    <p>{{Date.toLocaleDateString()}} {{Date.toLocaleTimeString()}}</p>
+                  </div>
+                  <div class="row">
+                    <p class="pl-3">ທາດຫລວງ (That Luang) ຫລື ພຣະທາດຫລວງ ປະຫວັດ ທາດຫຼວງ ທາດຫຼວງວຽງຈັນຕັ້ງຢູ່ສົ້ນສຸດທາງທິດຕາເວັນອອກຂອງຖະໜົນທາດຫຼວງ ບ້ານ ທາດຫຼວງ ເມືອງໄຊເສດຖາ ນະຄອນຫຼວງວຽງຈັນ </p>
+                  </div>
+                  <div class="row d-flex justify-content-end">
+                    <button (click)="replyCom('commentId')" class="btn bg-info"><i class="fa fa-reply text-white"></i></button>
+                  </div>
+                </div>
+              </div>
+
+
+
+
+            </div>
+
+
+
+          </div>
+        </div>
+        <div id="bottomCom"></div>
+      </div>
+      <div *ngIf="!replyBForm" class="card">
+        <form class="card-body" novalidate [formGroup]="commentForm" (ngSubmit)="commentText()">
+              <div class="form-group"><!--
+                <label for="commentBox" class="bmd-label-floating" >ສະແດງຄວາມຄິດເຫັນ</label>-->
+                <textarea class="form-control" id="commentBox" rows="4" placeholder="ສະແດງຄວາມຄິດເຫັນ" formControlName="message"></textarea>
+              </div>
+              <span class="d-flex justify-content-end">
+                <button type="submit" class="btn btn-raised btn-primary" *ngIf="!checksent">ສົ່ງຄວາມຄິດເຫັນ</button>
+                <button *ngIf="checkComment" disabled  class="btn btn-info btn-raised"><i class="fa fa-spinner"></i></button>
+
+              </span>
+        </form>
+      </div>
+      <div *ngIf="replyBForm" class="card">
+        <form class="card-body" novalidate [formGroup]="replyFrom" (ngSubmit)="replyText()">
+          <div class="form-group"><!--
+            <label for="replyBox" class="bmd-label-floating" >ຕອບຄວາມຄິດເຫັນ</label>-->
+            <textarea class="form-control" id="replyBox" rows="4" placeholder="ຕອບຄວາມຄິດເຫັນ"></textarea>
+          </div>
+          <span class="d-flex justify-content-end btn-group">
+                <button type="submit" class="btn btn-raised btn-info" *ngIf="!checksent">ຕອບກັບ</button>
+                <button *ngIf="checkComment" disabled  class="btn btn-info btn-raised"><i class="fa fa-spinner"></i></button>
+                <button (click)="cancelReply()" class="btn btn-raised btn-danger">ຍົກເລີກ</button>
+              </span>
+        </form>
+      </div>
+
     </div>
     <div class="tab-pane fade mb-3 m-1" id="photoT" role="tabpanel" aria-labelledby="contact-tab">
       <span class="m-1"></span>
@@ -107,7 +253,7 @@
         <div class="grid-item col-md-4 col-sm-6"
             *ngFor="let item of items; let i = index"
             (click)="openLightbox(i)">
-          <img [src]="item['data']['src']" class="img-fluid m-1">
+          <img [src]="item['data']['src']" class="img-fluid m-1" width="60px" height="60px">
         </div>
       </div>
       <span class="m-1"></span>

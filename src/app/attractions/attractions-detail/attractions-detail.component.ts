@@ -7,6 +7,7 @@ import { Lightbox } from '@ngx-gallery/lightbox';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import {EmailValidator, FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-attractions-detail',
@@ -23,6 +24,19 @@ export class AttractionsDetailComponent implements OnInit {
 
     lat: number;
     lng: number;
+/*
+    displayDate = new Date().toLocaleDateString();*/
+    Date = new Date();
+    replyBForm: boolean = false;
+
+    //Service Status
+    serviceStatus: boolean;
+
+    commentForm: FormGroup;
+    replyFrom: FormGroup;
+    comMentsuccess: boolean = false;
+    comMentfalse: boolean = false;
+    checkComment: boolean = false;
 
     public imageData: Array<{srcUrl: string, previewUrl: string}> = [];
 
@@ -34,9 +48,20 @@ export class AttractionsDetailComponent implements OnInit {
         private router: Router,
         private safeSanitizer: DomSanitizer,
         private locationService: LocationcheckService,
-        private detailService: DetailService
+        private detailService: DetailService,
+        private formBuilder: FormBuilder
     ) {
         this.ngProgress.start();
+        /*Comment Form*/
+        this.commentForm = this.formBuilder.group({
+            message: [null, [Validators.required, Validators.minLength(10)]]
+
+        });
+        this.replyFrom = this.formBuilder.group({
+            replymessage: [null, [Validators.required, Validators.minLength(10)]]
+
+        });
+
         this.route.params.subscribe((params: Params) => {
             this.id = params['id'];
             if (this.id) {
@@ -82,6 +107,7 @@ export class AttractionsDetailComponent implements OnInit {
                 });
             }
         });
+
     }
 
 
@@ -92,6 +118,13 @@ export class AttractionsDetailComponent implements OnInit {
               this.lng = position.coords.longitude;
             });
         }
+        if(this.Date.getHours() >= 8 && this.Date.getHours()<=18 ){
+            this.serviceStatus = true;
+        }else {
+            this.serviceStatus =false;
+        }
+
+
     }
     openLightbox(index: number) {
         this.lightbox.open(index, 'lightbox', {
@@ -115,5 +148,19 @@ export class AttractionsDetailComponent implements OnInit {
         return this.safeSanitizer.bypassSecurityTrustResourceUrl(url);
       }
 
+      commentText(){
+
+      }
+      replyText(){
+
+      }
+
+    replyCom(commentId){
+        this.replyBForm = true;
+    }
+
+    cancelReply(){
+        this.replyBForm = false;
+    }
 
 }

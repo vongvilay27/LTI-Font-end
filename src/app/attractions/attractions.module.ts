@@ -13,6 +13,7 @@ import { LightboxModule } from '@ngx-gallery/lightbox';
 import { GallerizeModule } from '@ngx-gallery/gallerize';
 import 'hammerjs';
 import 'rxjs';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 const Attractions_component = [
     AttractionsComponent,
@@ -22,6 +23,8 @@ const Attractions_component = [
 @NgModule({
   imports: [
     CommonModule,
+      FormsModule,
+      ReactiveFormsModule,
       AttractionsRoutingModule,
       GalleryModule.forRoot(),
       LightboxModule.forRoot(),

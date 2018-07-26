@@ -155,13 +155,13 @@ export class AttractionsDetailComponent implements OnInit {
         if(this.commentForm.valid){
             this.checkComment = true;
             const commentSubscript = this.detailService.attractionsComment(this.attractions['_id'],this.commentForm.value['message']).subscribe(res => {
+                this.checkComment = false;
                 this.attractions['comments'].push(
                     {_date: this.Date,
                         comment: this.commentForm.value['message'],
                         replies:[],
                         _id: this.attractions['_id']});
                 this.commentForm.reset();
-                this.checkComment = false;
                 commentSubscript.unsubscribe();
             }, (err) =>{
                 this.checkComment = false;
@@ -174,12 +174,12 @@ export class AttractionsDetailComponent implements OnInit {
               console.log(this.replyFrom.value['message'])
               this.checkComment = true;
               const replySubscript = this.detailService.attractionsReply(this.attractions['_id'],this.replyFrom.value['message'],this.comIdx).subscribe(res => {
+                  this.checkComment = false;
+                  this.replyBForm = false;
                   this.attractions['comments'][this.comIdx]['replies'].push(
                       {_date: this.Date,
                           reply: this.replyFrom.value['message']});
                   this.replyFrom.reset();
-                  this.checkComment = false;
-                  this.replyBForm = false;
                   replySubscript.unsubscribe();
               }, (err) =>{
                   this.checkComment = false;

@@ -20,7 +20,24 @@ export class DetailService {
     return this.http.get(environment.SERVER_ADDRESS
       + '/api/client/detail/attractions/' + attraction_id, option);
   }
-
+  attractionsComment(attraction_id: string, comment: string){
+      // console.log(bcrypt.hashSync(environment.ANONYMOUS_SECRET, 10));
+      const header: Headers = new Headers();
+      header.append('lttoken',  environment.RAMDOM_KEY );
+      // header.append('lttoken',  bcrypt.hashSync(environment.ANONYMOUS_SECRET, 10) );
+      const option: RequestOptions = new RequestOptions({headers: header});
+      return this.http.post(environment.SERVER_ADDRESS
+          + '/api/client/detail/attractions/comment' , {comment: comment,attractions_id: attraction_id} , option);
+  }
+    attractionsReply(attraction_id: string, reply: string, index: number){
+        // console.log(bcrypt.hashSync(environment.ANONYMOUS_SECRET, 10));
+        const header: Headers = new Headers();
+        header.append('lttoken',  environment.RAMDOM_KEY );
+        // header.append('lttoken',  bcrypt.hashSync(environment.ANONYMOUS_SECRET, 10) );
+        const option: RequestOptions = new RequestOptions({headers: header});
+        return this.http.post(environment.SERVER_ADDRESS
+            + '/api/client/detail/attractions/comment/reply' , {idx: index,reply: reply,attractions_id: attraction_id} , option);
+    }
   getRestaurant(restaurant_id: string) {
     // console.log(bcrypt.hashSync(environment.ANONYMOUS_SECRET, 10));
     const header: Headers = new Headers();

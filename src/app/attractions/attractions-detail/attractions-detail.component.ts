@@ -37,6 +37,7 @@ export class AttractionsDetailComponent implements OnInit {
     comMentsuccess: boolean = false;
     comMentfalse: boolean = false;
     checkComment: boolean = false;
+    comIdx: number;
 
     public imageData: Array<{srcUrl: string, previewUrl: string}> = [];
 
@@ -54,11 +55,11 @@ export class AttractionsDetailComponent implements OnInit {
         this.ngProgress.start();
         /*Comment Form*/
         this.commentForm = this.formBuilder.group({
-            message: [null, [Validators.required, Validators.minLength(10)]]
+            message: [null, [Validators.required, Validators.minLength(3)]]
 
         });
         this.replyFrom = this.formBuilder.group({
-            replymessage: [null, [Validators.required, Validators.minLength(10)]]
+            message: [null, [Validators.required, Validators.minLength(3)]]
 
         });
 
@@ -67,6 +68,7 @@ export class AttractionsDetailComponent implements OnInit {
             if (this.id) {
                 const attSubscript: Subscription = this.detailService.getAttractions(this.id).subscribe((att_res) => {
                     this.attractions = att_res.json()['data'];
+                    console.log(this.attractions)
                     this.ngProgress.done();
                     const nearSubscript: Subscription = this.detailService.getInfoNearby(
                         this.attractions['_id'],
@@ -125,6 +127,7 @@ export class AttractionsDetailComponent implements OnInit {
         }
 
 
+
     }
     openLightbox(index: number) {
         this.lightbox.open(index, 'lightbox', {
@@ -149,14 +152,47 @@ export class AttractionsDetailComponent implements OnInit {
       }
 
       commentText(){
-
+        if(this.commentForm.valid){
+            this.checkComment = true;
+            const commentSubscript = this.detailService.attractionsComment(this.attractions['_id'],this.commentForm.value['message']).subscribe(res => {
+                this.attractions['comments'].push(
+                    {_date: this.Date,
+                        comment: this.commentForm.value['message'],
+                        replies:[],
+                        _id: this.attractions['_id']});
+                this.commentForm.reset();
+                this.checkComment = false;
+                commentSubscript.unsubscribe();
+            }, (err) =>{
+                this.checkComment = false;
+                commentSubscript.unsubscribe();
+            })
+        }
       }
       replyText(){
-
+          if(this.replyFrom.valid){
+              console.log(this.replyFrom.value['message'])
+              this.checkComment = true;
+              const replySubscript = this.detailService.attractionsReply(this.attractions['_id'],this.replyFrom.value['message'],this.comIdx).subscribe(res => {
+                  this.attractions['comments'][this.comIdx]['replies'].push(
+                      {_date: this.Date,
+                          reply: this.replyFrom.value['message']});
+                  this.replyFrom.reset();
+                  this.checkComment = false;
+                  this.replyBForm = false;
+                  replySubscript.unsubscribe();
+              }, (err) =>{
+                  this.checkComment = false;
+                  this.replyBForm = false;
+                  replySubscript.unsubscribe();
+              })
+          }
       }
 
-    replyCom(commentId){
+    replyCom(comIdx){
         this.replyBForm = true;
+        this.comIdx = comIdx;
+        console.log(this.comIdx)
     }
 
     cancelReply(){

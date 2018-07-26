@@ -121,91 +121,36 @@
         </agm-map>
       </div>
       <h5 class="mt-3"><b>ສະແດງຄຳຄິດເຫັນ</b></h5>
-      <div class="comment p-3">
-        <div class="card commentDialog mt-1">
+      <div *ngIf="attractions['comments'].length" class="comment p-3">
+        <div class="card commentDialog mt-1" *ngFor="let attCom of attractions['comments']; let i = index">
           <div class="card-body">
             <div class="row">
               <i class="fa fa-user-circle fa-3x m-1 pl-1"></i>&nbsp;&nbsp;<!--
               <img class="rounded-circle" src="../../../assets/profile.png" alt="profile">-->
-              <p class="h5">{{Date.toLocaleDateString()}} {{Date.toLocaleTimeString()}}</p>
+              <p class="h5">{{attCom['_date'] | date:'dd/MM/yyyy HH:mm:ss'}}</p>
             </div>
             <div class="row">
-              <p class="pl-3">ທາດຫລວງ (That Luang) ຫລື ພຣະທາດຫລວງ ປະຫວັດ ທາດຫຼວງ ທາດຫຼວງວຽງຈັນຕັ້ງຢູ່ສົ້ນສຸດທາງທິດຕາເວັນອອກຂອງຖະໜົນທາດຫຼວງ ບ້ານ ທາດຫຼວງ ເມືອງໄຊເສດຖາ ນະຄອນຫຼວງວຽງຈັນ </p>
+              <p class="pl-3">{{attCom['comment']}}</p>
             </div>
             <div class="row d-flex justify-content-end">
-              <button (click)="replyCom('commentId')" class="btn bg-info"><i class="fa fa-reply text-white"></i></button>
+              <button (click)="replyCom(i)" class="btn bg-info"><i class="fa fa-reply text-white"></i></button>
             </div>
 
             <!--Sub Reply comments-->
-            <div class="card-footer float-right">
-              <div class="row">
+            <div class="card-footer pl-3" *ngFor="let reply of attCom['replies']">
+
                 <div class="card-block">
                   <div class="row">
                     <i class="fa fa-user-circle-o fa-2x m-1 pl-1"></i>&nbsp;&nbsp;
-                    <p>{{Date.toLocaleDateString()}} {{Date.toLocaleTimeString()}}</p>
+                    <p>{{reply['_date'] | date:'dd/MM/yyyy HH:mm:ss'}}</p>
                   </div>
                   <div class="row">
-                    <p class="pl-3">ທາດຫລວງ (That Luang) ຫລື ພຣະທາດຫລວງ ປະຫວັດ ທາດຫຼວງ ທາດຫຼວງວຽງຈັນຕັ້ງຢູ່ສົ້ນສຸດທາງທິດຕາເວັນອອກຂອງຖະໜົນທາດຫຼວງ ບ້ານ ທາດຫຼວງ ເມືອງໄຊເສດຖາ ນະຄອນຫຼວງວຽງຈັນ </p>
+                    <p class="pl-3">{{reply['reply']}}</p>
                   </div>
                   <div class="row d-flex justify-content-end">
-                    <button (click)="replyCom('commentId')" class="btn bg-info"><i class="fa fa-reply text-white"></i></button>
+                    <button (click)="replyCom(i)" class="btn bg-info"><i class="fa fa-reply text-white"></i></button>
                   </div>
                 </div>
-              </div>
-              <div class="row">
-                <div class="card-block">
-                  <div class="row">
-                    <i class="fa fa-user-circle-o fa-2x m-1 pl-1"></i>&nbsp;&nbsp;
-                    <p>{{Date.toLocaleDateString()}} {{Date.toLocaleTimeString()}}</p>
-                  </div>
-                  <div class="row">
-                    <p class="pl-3">ທາດຫລວງ (That Luang) ຫລື ພຣະທາດຫລວງ ປະຫວັດ ທາດຫຼວງ ທາດຫຼວງວຽງຈັນຕັ້ງຢູ່ສົ້ນສຸດທາງທິດຕາເວັນອອກຂອງຖະໜົນທາດຫຼວງ ບ້ານ ທາດຫຼວງ ເມືອງໄຊເສດຖາ ນະຄອນຫຼວງວຽງຈັນ </p>
-                  </div>
-                  <div class="row d-flex justify-content-end">
-                    <button (click)="replyCom('commentId')" class="btn bg-info"><i class="fa fa-reply text-white"></i></button>
-                  </div>
-                </div>
-              </div>
-
-
-
-
-            </div>
-
-
-
-          </div>
-        </div>
-        <div class="card commentDialog mt-1">
-          <div class="card-body">
-            <div class="row">
-              <i class="fa fa-user-circle fa-3x m-1 pl-1"></i>&nbsp;&nbsp;<!--
-              <img class="rounded-circle" src="../../../assets/profile.png" alt="profile">-->
-              <p class="h5">{{Date.toLocaleDateString()}} {{Date.toLocaleTimeString()}}</p>
-            </div>
-            <div class="row">
-              <p class="pl-3">ທາດຫລວງ (That Luang) ຫລື ພຣະທາດຫລວງ ປະຫວັດ ທາດຫຼວງ ທາດຫຼວງວຽງຈັນຕັ້ງຢູ່ສົ້ນສຸດທາງທິດຕາເວັນອອກຂອງຖະໜົນທາດຫຼວງ ບ້ານ ທາດຫຼວງ ເມືອງໄຊເສດຖາ ນະຄອນຫຼວງວຽງຈັນ </p>
-            </div>
-            <div class="row d-flex justify-content-end">
-              <button (click)="replyCom('commentId')" class="btn bg-info"><i class="fa fa-reply text-white"></i></button>
-            </div>
-
-            <!--Sub Reply comments-->
-            <div class="card-footer float-right">
-              <div class="row">
-                <div class="card-block">
-                  <div class="row">
-                    <i class="fa fa-user-circle-o fa-2x m-1 pl-1"></i>&nbsp;&nbsp;
-                    <p>{{Date.toLocaleDateString()}} {{Date.toLocaleTimeString()}}</p>
-                  </div>
-                  <div class="row">
-                    <p class="pl-3">ທາດຫລວງ (That Luang) ຫລື ພຣະທາດຫລວງ ປະຫວັດ ທາດຫຼວງ ທາດຫຼວງວຽງຈັນຕັ້ງຢູ່ສົ້ນສຸດທາງທິດຕາເວັນອອກຂອງຖະໜົນທາດຫຼວງ ບ້ານ ທາດຫຼວງ ເມືອງໄຊເສດຖາ ນະຄອນຫຼວງວຽງຈັນ </p>
-                  </div>
-                  <div class="row d-flex justify-content-end">
-                    <button (click)="replyCom('commentId')" class="btn bg-info"><i class="fa fa-reply text-white"></i></button>
-                  </div>
-                </div>
-              </div>
 
 
 
@@ -223,6 +168,7 @@
               <div class="form-group"><!--
                 <label for="commentBox" class="bmd-label-floating" >ສະແດງຄວາມຄິດເຫັນ</label>-->
                 <textarea class="form-control" id="commentBox" rows="4" placeholder="ສະແດງຄວາມຄິດເຫັນ" formControlName="message"></textarea>
+              <!--<input class="form-control"  type="text" placeholder="ສະແດງຄວາມຄິດເຫັນ" formControlName="message">-->
               </div>
               <span class="d-flex justify-content-end">
                 <button type="submit" class="btn btn-raised btn-primary" *ngIf="!checksent">ສົ່ງຄວາມຄິດເຫັນ</button>
@@ -235,7 +181,7 @@
         <form class="card-body" novalidate [formGroup]="replyFrom" (ngSubmit)="replyText()">
           <div class="form-group"><!--
             <label for="replyBox" class="bmd-label-floating" >ຕອບຄວາມຄິດເຫັນ</label>-->
-            <textarea class="form-control" id="replyBox" rows="4" placeholder="ຕອບຄວາມຄິດເຫັນ"></textarea>
+            <textarea class="form-control" id="replyBox" rows="4" placeholder="ຕອບຄວາມຄິດເຫັນ" formControlName="message"></textarea>
           </div>
           <span class="d-flex justify-content-end btn-group">
                 <button type="submit" class="btn btn-raised btn-info" *ngIf="!checksent">ຕອບກັບ</button>

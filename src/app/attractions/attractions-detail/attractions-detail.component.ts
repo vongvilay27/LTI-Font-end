@@ -34,9 +34,8 @@ export class AttractionsDetailComponent implements OnInit {
 
     commentForm: FormGroup;
     replyFrom: FormGroup;
-    comMentsuccess: boolean = false;
-    comMentfalse: boolean = false;
     checkComment: boolean = false;
+    checkReply: boolean = false;
     comIdx: number;
 
     public imageData: Array<{srcUrl: string, previewUrl: string}> = [];
@@ -155,12 +154,12 @@ export class AttractionsDetailComponent implements OnInit {
         if(this.commentForm.valid){
             this.checkComment = true;
             const commentSubscript = this.detailService.attractionsComment(this.attractions['_id'],this.commentForm.value['message']).subscribe(res => {
-                this.checkComment = false;
                 this.attractions['comments'].push(
                     {_date: this.Date,
                         comment: this.commentForm.value['message'],
                         replies:[],
                         _id: this.attractions['_id']});
+                this.checkComment = false;
                 this.commentForm.reset();
                 commentSubscript.unsubscribe();
             }, (err) =>{
@@ -172,17 +171,17 @@ export class AttractionsDetailComponent implements OnInit {
       replyText(){
           if(this.replyFrom.valid){
               console.log(this.replyFrom.value['message'])
-              this.checkComment = true;
+              this.checkReply = true;
               const replySubscript = this.detailService.attractionsReply(this.attractions['_id'],this.replyFrom.value['message'],this.comIdx).subscribe(res => {
-                  this.checkComment = false;
-                  this.replyBForm = false;
                   this.attractions['comments'][this.comIdx]['replies'].push(
                       {_date: this.Date,
                           reply: this.replyFrom.value['message']});
+                  this.checkReply = false;
+                  this.replyBForm = false;
                   this.replyFrom.reset();
                   replySubscript.unsubscribe();
               }, (err) =>{
-                  this.checkComment = false;
+                  this.checkReply = false;
                   this.replyBForm = false;
                   replySubscript.unsubscribe();
               })
@@ -197,6 +196,7 @@ export class AttractionsDetailComponent implements OnInit {
 
     cancelReply(){
         this.replyBForm = false;
+        this.replyFrom.reset();
     }
 
 }

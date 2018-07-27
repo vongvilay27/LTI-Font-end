@@ -171,8 +171,8 @@
               <!--<input class="form-control"  type="text" placeholder="ສະແດງຄວາມຄິດເຫັນ" formControlName="message">-->
               </div>
               <span class="d-flex justify-content-end">
-                <button type="submit" class="btn btn-raised btn-primary" *ngIf="!checksent">ສົ່ງຄວາມຄິດເຫັນ</button>
-                <button *ngIf="checkComment" disabled  class="btn btn-info btn-raised"><i class="fa fa-spinner"></i></button>
+                <button type="submit" class="btn btn-raised btn-primary" *ngIf="!checkComment">ສົ່ງຄວາມຄິດເຫັນ</button>
+                <button *ngIf="checkComment" disabled  class="btn btn-raised btn-primary"><i class="fa fa-spinner"></i></button>
 
               </span>
         </form>
@@ -184,10 +184,10 @@
             <textarea class="form-control" id="replyBox" rows="4" placeholder="ຕອບຄວາມຄິດເຫັນ" formControlName="message"></textarea>
           </div>
           <span class="d-flex justify-content-end btn-group">
-                <button type="submit" class="btn btn-raised btn-info" *ngIf="!checksent">ຕອບກັບ</button>
-                <button *ngIf="checkComment" disabled  class="btn btn-info btn-raised"><i class="fa fa-spinner"></i></button>
-                <button (click)="cancelReply()" class="btn btn-raised btn-danger">ຍົກເລີກ</button>
-              </span>
+                <button type="submit" class="btn btn-raised btn-info" *ngIf="!checkReply">ຕອບກັບ</button>
+                <button (click)="cancelReply()" class="btn btn-raised btn-danger" *ngIf="!checkReply">ຍົກເລີກ</button>
+          <button *ngIf="checkReply" disabled  class="btn btn-info btn-raised"><i class="fa fa-spinner"></i></button>
+          </span>
         </form>
       </div>
 
